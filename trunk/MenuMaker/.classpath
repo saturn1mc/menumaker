@@ -2,5 +2,18 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry kind="lib" path="src/lib/ant.jar"/>
+	<classpathentry kind="lib" path="src/lib/isorelax.jar"/>
+	<classpathentry kind="lib" path="src/lib/jakarta-regexp-1.1.jar"/>
+	<classpathentry kind="lib" path="src/lib/jaxen.jar"/>
+	<classpathentry kind="lib" path="src/lib/jdom-contrib.jar"/>
+	<classpathentry kind="lib" path="src/lib/jdom-test.jar"/>
+	<classpathentry kind="lib" path="src/lib/jdom.jar"/>
+	<classpathentry kind="lib" path="src/lib/junit.jar"/>
+	<classpathentry kind="lib" path="src/lib/optional.jar"/>
+	<classpathentry kind="lib" path="src/lib/saxpath.jar"/>
+	<classpathentry kind="lib" path="src/lib/xalan.jar"/>
+	<classpathentry kind="lib" path="src/lib/xerces.jar"/>
+	<classpathentry kind="lib" path="src/lib/xml-apis.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

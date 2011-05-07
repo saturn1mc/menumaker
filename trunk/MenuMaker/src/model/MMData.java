@@ -5,11 +5,23 @@ package model;
 
 import java.util.HashMap;
 
+import org.jdom.Document;
+import org.jdom.Element;
+
 /**
  * @author cmaurice2
  *
  */
 public class MMData {
+	
+	public static final String CONFIG_FILE = "mmdata.xml";
+	
+	public static final String NODE_NAME_ROOT = "menumaker";
+	public static final String NODE_NAME_BOOKS = "books";
+	public static final String NODE_NAME_SHOPS = "shops";
+	public static final String NODE_NAME_UNITS = "units";
+	public static final String NODE_NAME_RECIPES = "recipes";
+	
 	private HashMap<Integer, MMBook> books;
 	private HashMap<Integer, MMShopPoint> shopPoints;
 	private HashMap<Integer, MMUnit> units;
@@ -91,5 +103,9 @@ public class MMData {
 	
 	public void saveData(){
 		//TODO
+		Element rootNode = new Element(NODE_NAME_ROOT);
+		Document xmlDoc = new Document(rootNode);
+		
+		
 	}
 }

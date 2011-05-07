@@ -3,11 +3,20 @@
  */
 package model;
 
+import org.jdom.Attribute;
+import org.jdom.Element;
+
 /**
  * @author cmaurice2
  *
  */
 public class MMIngredient {
+	
+	public static final String NODE_NAME_INGREDIENT = "ingredient";
+	public static final String ATTR_NAME_ID = "id";
+	public static final String ATTR_NAME_NAME = "name";
+	public static final String ATTR_NAME_UNIT = "unit";
+	public static final String ATTR_NAME_SHOP = "shop";
 	
 	private static int currentID = 0;
 	
@@ -62,5 +71,16 @@ public class MMIngredient {
 	@Override
 	public String toString() {
 		return name;
+	}
+	
+	public Element toXML(){
+		Element ingredientElement = new Element(NODE_NAME_INGREDIENT);
+		
+		ingredientElement.setAttribute(new Attribute(ATTR_NAME_ID, Integer.toString(id)));
+		ingredientElement.setAttribute(new Attribute(ATTR_NAME_NAME, name));
+		ingredientElement.setAttribute(new Attribute(ATTR_NAME_UNIT, Integer.toString(unit.getID())));
+		ingredientElement.setAttribute(new Attribute(ATTR_NAME_SHOP, Integer.toString(shopPoint.getID())));
+		
+		return ingredientElement;
 	}
 }

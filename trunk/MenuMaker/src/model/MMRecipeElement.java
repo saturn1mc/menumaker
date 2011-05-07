@@ -3,6 +3,8 @@
  */
 package model;
 
+import org.jdom.Element;
+
 /**
  * @author cmaurice2
  *
@@ -35,5 +37,11 @@ public class MMRecipeElement {
 	@Override
 	public String toString() {
 		return quantity + " " + ingredient.getUnit().toString() + " of " + ingredient.toString();
+	}
+	
+	public Element toXML(){
+		//TODO
+		
+		return null;
 	}
 }
