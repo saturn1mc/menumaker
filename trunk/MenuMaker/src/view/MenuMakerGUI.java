@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JToolBar;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
@@ -37,14 +38,24 @@ public class MenuMakerGUI extends JFrame {
 
 	public static ImageIcon ICON_PLUS;
 	public static ImageIcon ICON_MINUS;
+	public static ImageIcon ICON_UNIT;
+	public static ImageIcon ICON_BOOK;
+	public static ImageIcon ICON_SHOP;
+	public static ImageIcon ICON_INGREDIENT;
+	public static ImageIcon ICON_RECIPE;
+	public static ImageIcon ICON_PRINT;
 
+	private JToolBar toolBar;
+	
 	private MMWeekMenuTable weekMenuTable;
 	private MMExtrasTable extrasTable;
 
 	public MenuMakerGUI() {
 		super("Menu Maker - Powered by MC");
+		this.setLayout(new BorderLayout());
 
 		loadIcons();
+		buildToolbar();
 		buildCenterPanel();
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -55,11 +66,63 @@ public class MenuMakerGUI extends JFrame {
 	}
 
 	private void loadIcons() {
-		ICON_PLUS = new ImageIcon(getClass().getResource("/img/Plus-icon.png"));
+		ICON_PLUS = new ImageIcon(getClass().getResource("/img/plus-icon.png"));
 		ICON_MINUS = new ImageIcon(getClass()
-				.getResource("/img/Minus-icon.png"));
+				.getResource("/img/minus-icon.png"));
+		ICON_UNIT = new ImageIcon(getClass().getResource("/img/rulers-icon.png"));
+		ICON_SHOP = new ImageIcon(getClass().getResource("/img/shop-icon.png"));
+		ICON_BOOK = new ImageIcon(getClass().getResource("/img/books-icon.png"));
+		ICON_INGREDIENT = new ImageIcon(getClass().getResource("/img/tomato-icon.png"));
+		ICON_RECIPE = new ImageIcon(getClass().getResource("/img/recipe-icon.png"));
+		ICON_PRINT = new ImageIcon(getClass().getResource("/img/printer-icon.png"));
 	}
 
+	private void buildToolbar(){		
+		
+		//TODO add actions
+		
+		//Manage units button
+		JButton unitButton = new JButton();
+		unitButton.setIcon(ICON_UNIT);
+		unitButton.setToolTipText("Manage units");
+		
+		//Manage shops button
+		JButton shopButton = new JButton();
+		shopButton.setIcon(ICON_SHOP);
+		shopButton.setToolTipText("Manage shops");
+		
+		//Manage books button
+		JButton bookButton = new JButton();
+		bookButton.setIcon(ICON_BOOK);
+		bookButton.setToolTipText("Manage books");
+		
+		//Manage ingredients button
+		JButton ingredientButton = new JButton();
+		ingredientButton.setIcon(ICON_INGREDIENT);
+		ingredientButton.setToolTipText("Manage ingredients");
+		
+		//Manage recipes button
+		JButton recipeButton = new JButton();
+		recipeButton.setIcon(ICON_RECIPE);
+		recipeButton.setToolTipText("Manage recipes");
+		
+		//Print button
+		JButton printButton = new JButton();
+		printButton.setIcon(ICON_PRINT);
+		printButton.setToolTipText("Print week menu");
+		
+		//Tool bar
+		toolBar = new JToolBar();
+		toolBar.add(unitButton);
+		toolBar.add(shopButton);
+		toolBar.add(bookButton);
+		toolBar.add(ingredientButton);
+		toolBar.add(recipeButton);
+		toolBar.add(printButton);
+		
+		this.add(toolBar, BorderLayout.PAGE_START);
+	}
+	
 	private void buildCenterPanel() {
 		JPanel centerPanel = new JPanel();
 		centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.PAGE_AXIS));
