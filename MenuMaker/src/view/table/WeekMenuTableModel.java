@@ -5,6 +5,8 @@ package view.table;
 
 import javax.swing.table.AbstractTableModel;
 
+import model.Recipe;
+
 /**
  * @author cmaurice2
  * 
@@ -32,6 +34,16 @@ public class WeekMenuTableModel extends AbstractTableModel {
 	public WeekMenuTableModel() {
 		super();
 	}
+	
+	@Override
+	public Class<?> getColumnClass(int columnIndex) {
+		if(columnIndex == 1){
+			return Recipe.class;
+		}
+		else{
+			return String.class;
+		}
+	}
 
 	@Override
 	public int getRowCount() {
@@ -45,17 +57,29 @@ public class WeekMenuTableModel extends AbstractTableModel {
 
 	@Override
 	public String getColumnName(int column) {
-		return columnNames[column];
+		if (column >= 0 && column < 5) {
+			return columnNames[column];
+		} else {
+			return null;
+		}
 	}
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		return data[rowIndex][columnIndex];
+		if ((rowIndex >= 0 && rowIndex < 14)
+				&& (columnIndex >= 0 && columnIndex < 5)) {
+			return data[rowIndex][columnIndex];
+		} else {
+			return null;
+		}
 	}
 
 	@Override
 	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-		data[rowIndex][columnIndex] = aValue.toString();
+		if ((rowIndex >= 0 && rowIndex < 14)
+				&& (columnIndex >= 0 && columnIndex < 5)) {
+			data[rowIndex][columnIndex] = aValue.toString();
+		}
 	}
 
 	@Override

@@ -4,7 +4,9 @@
 package view.table;
 
 import javax.swing.JTable;
-import javax.swing.table.TableColumn;
+import javax.swing.event.TableModelEvent;
+
+import model.Recipe;
 
 /**
  * @author cmaurice2
@@ -18,10 +20,21 @@ public class WeekMenuTable extends JTable {
 
 	public WeekMenuTable() {
 		super(new WeekMenuTableModel());
-		String[] items = {"A", "B", "C"};
-		
-		TableColumn mealColumn = this.getColumnModel().getColumn(1);
-		mealColumn.setCellEditor(new RecipeComboBoxEditor(items));
-		mealColumn.setCellRenderer(new RecipeComboBoxRenderer(items));
+		Recipe[] items = { new Recipe("Recette A", null, 0),
+				new Recipe("Recette B", null, 0),
+				new Recipe("Recette C", null, 0) };
+
+		this.getColumnModel().getColumn(1)
+				.setCellEditor(new ComboBoxCellEditor(items));
+	}
+
+	@Override
+	public void setValueAt(Object aValue, int row, int column) {
+		super.setValueAt(aValue, row, column);
+	}
+
+	@Override
+	public void tableChanged(TableModelEvent e) {
+		super.tableChanged(e);
 	}
 }
