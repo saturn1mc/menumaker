@@ -5,13 +5,13 @@ package view.table;
 
 import javax.swing.table.AbstractTableModel;
 
-import model.Recipe;
+import model.MMRecipe;
 
 /**
  * @author cmaurice2
  * 
  */
-public class WeekMenuTableModel extends AbstractTableModel {
+public class MMWeekMenuTableModel extends AbstractTableModel {
 
 	/**
 	 * Auto-generated SVUID
@@ -31,14 +31,14 @@ public class WeekMenuTableModel extends AbstractTableModel {
 			{ "Thu. diner", "", "", "", "" }, { "Fri. lunch", "", "", "", "" },
 			{ "Fri. diner", "", "", "", "" }, };
 
-	public WeekMenuTableModel() {
+	public MMWeekMenuTableModel() {
 		super();
 	}
 	
 	@Override
 	public Class<?> getColumnClass(int columnIndex) {
 		if(columnIndex == 1){
-			return Recipe.class;
+			return MMRecipe.class;
 		}
 		else{
 			return String.class;

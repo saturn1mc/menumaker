@@ -7,19 +7,17 @@ package model;
  * @author cmaurice2
  *
  */
-public class Book {
-
-	private static int currentID = 0;
+public class MMShopPoint {
+	private static int currentID;
 	
 	private int id;
 	private String name;
-	private String author;
+	private int priority;
 	
-	
-	public Book(String name, String author) {
+	public MMShopPoint(String name, int priority) {
 		this.id = currentID++;
 		this.name = name;
-		this.author = author;
+		this.priority = priority;
 	}
 	
 	public static int getCurrentID() {
@@ -27,7 +25,7 @@ public class Book {
 	}
 	
 	public static void setCurrentID(int currentID) {
-		Book.currentID = currentID;
+		MMShopPoint.currentID = currentID;
 	}
 	
 	public int getID() {
@@ -42,16 +40,16 @@ public class Book {
 		this.name = name;
 	}
 	
-	public String getAuthor() {
-		return author;
+	public void setPriority(int priority) {
+		this.priority = priority;
 	}
 	
-	public void setAuthor(String author) {
-		this.author = author;
+	public int getPriority() {
+		return priority;
 	}
 	
 	@Override
 	public String toString() {
-		return name + " - by " + author;
+		return priority + " - " + name;
 	}
 }
