@@ -20,7 +20,7 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
-import view.table.WeekMenuTable;
+import view.table.MMWeekMenuTable;
 
 /**
  * @author cmaurice2
@@ -39,7 +39,7 @@ public class MenuMakerGUI extends JFrame {
 	public static ImageIcon ICON_PLUS;
 	public static ImageIcon ICON_MINUS;
 	
-	private WeekMenuTable weekMenuTable;
+	private MMWeekMenuTable weekMenuTable;
 	private JTable extrasTable;
 
 	public MenuMakerGUI() {
@@ -78,7 +78,7 @@ public class MenuMakerGUI extends JFrame {
 				BorderFactory.createEtchedBorder(EtchedBorder.LOWERED),
 				"WeekMenu", TitledBorder.LEFT, TitledBorder.TOP));
 		
-		weekMenuTable = new WeekMenuTable();
+		weekMenuTable = new MMWeekMenuTable();
 		
 		JScrollPane scrollpane = new JScrollPane(weekMenuTable);
 		

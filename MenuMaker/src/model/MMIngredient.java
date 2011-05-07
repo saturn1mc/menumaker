@@ -7,16 +7,16 @@ package model;
  * @author cmaurice2
  *
  */
-public class Ingredient {
+public class MMIngredient {
 	
 	private static int currentID = 0;
 	
 	private int id;
 	private String name;
 	private String unit;
-	private ShopPoint shopPoint;
+	private MMShopPoint shopPoint;
 	
-	public Ingredient(String name, String unit, ShopPoint shopPoint){
+	public MMIngredient(String name, String unit, MMShopPoint shopPoint){
 		this.id = currentID++;
 		
 		this.name = name;
@@ -28,7 +28,7 @@ public class Ingredient {
 	}
 	
 	public static void setCurrentID(int currentID) {
-		Ingredient.currentID = currentID;
+		MMIngredient.currentID = currentID;
 	}
 	
 	public int getID() {
@@ -51,11 +51,11 @@ public class Ingredient {
 		this.unit = unit;
 	}
 	
-	public ShopPoint getShopPoint() {
+	public MMShopPoint getShopPoint() {
 		return shopPoint;
 	}
 	
-	public void setShopPoint(ShopPoint shopPoint) {
+	public void setShopPoint(MMShopPoint shopPoint) {
 		this.shopPoint = shopPoint;
 	}
 	

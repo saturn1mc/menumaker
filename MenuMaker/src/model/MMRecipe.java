@@ -9,25 +9,25 @@ import java.util.ArrayList;
  * @author cmaurice2
  *
  */
-public class Recipe {
+public class MMRecipe {
 	
 	private static int currentID = 0;
 	
 	private int id;
 	private String name;
-	private Book book;
+	private MMBook book;
 	private int page;
 	
-	private ArrayList<RecipeElement> elements;
+	private ArrayList<MMRecipeElement> elements;
 	
-	public Recipe(String name, Book book, int page) {
+	public MMRecipe(String name, MMBook book, int page) {
 		this.id = currentID++;
 		
 		this.name = name;
 		this.book = book;
 		this.page = page;
 		
-		this.elements = new ArrayList<RecipeElement>();
+		this.elements = new ArrayList<MMRecipeElement>();
 	}
 
 	public static int getCurrentID() {
@@ -35,7 +35,7 @@ public class Recipe {
 	}
 	
 	public static void setCurrentID(int currentID) {
-		Recipe.currentID = currentID;
+		MMRecipe.currentID = currentID;
 	}
 	
 	public int getID() {
@@ -50,11 +50,11 @@ public class Recipe {
 		this.name = name;
 	}
 
-	public Book getBook() {
+	public MMBook getBook() {
 		return book;
 	}
 
-	public void setBook(Book book) {
+	public void setBook(MMBook book) {
 		this.book = book;
 	}
 
@@ -66,15 +66,15 @@ public class Recipe {
 		this.page = page;
 	}
 
-	public ArrayList<RecipeElement> getElements() {
+	public ArrayList<MMRecipeElement> getElements() {
 		return elements;
 	}
 
-	public void addIngredient(RecipeElement element){
+	public void addIngredient(MMRecipeElement element){
 		elements.add(element);
 	}
 	
-	public void removeIngredient(RecipeElement element){
+	public void removeIngredient(MMRecipeElement element){
 		elements.remove(element);
 	}
 	

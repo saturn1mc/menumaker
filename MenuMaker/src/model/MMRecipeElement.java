@@ -7,20 +7,20 @@ package model;
  * @author cmaurice2
  *
  */
-public class RecipeElement {
-	private Ingredient ingredient;
+public class MMRecipeElement {
+	private MMIngredient ingredient;
 	private int quantity;
 	
-	public RecipeElement(Ingredient ingredient, int quantity){
+	public MMRecipeElement(MMIngredient ingredient, int quantity){
 		this.ingredient = ingredient;
 		this.quantity = quantity;
 	}
 	
-	public Ingredient getIngredient() {
+	public MMIngredient getIngredient() {
 		return ingredient;
 	}
 	
-	public void setIngredient(Ingredient ingredient) {
+	public void setIngredient(MMIngredient ingredient) {
 		this.ingredient = ingredient;
 	}
 	

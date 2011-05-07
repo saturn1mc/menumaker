@@ -6,26 +6,26 @@ package view.table;
 import javax.swing.JTable;
 import javax.swing.event.TableModelEvent;
 
-import model.Recipe;
+import model.MMRecipe;
 
 /**
  * @author cmaurice2
  * 
  */
-public class WeekMenuTable extends JTable {
+public class MMWeekMenuTable extends JTable {
 	/**
 	 * Auto-generated SVUID
 	 */
 	private static final long serialVersionUID = 6404860223050257081L;
 
-	public WeekMenuTable() {
-		super(new WeekMenuTableModel());
-		Recipe[] items = { new Recipe("Recette A", null, 0),
-				new Recipe("Recette B", null, 0),
-				new Recipe("Recette C", null, 0) };
+	public MMWeekMenuTable() {
+		super(new MMWeekMenuTableModel());
+		MMRecipe[] items = { new MMRecipe("Recette A", null, 0),
+				new MMRecipe("Recette B", null, 0),
+				new MMRecipe("Recette C", null, 0) };
 
 		this.getColumnModel().getColumn(1)
-				.setCellEditor(new ComboBoxCellEditor(items));
+				.setCellEditor(new MMComboBoxCellEditor(items));
 	}
 
 	@Override
