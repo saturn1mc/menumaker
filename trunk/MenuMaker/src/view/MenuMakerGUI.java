@@ -21,7 +21,6 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
 import view.table.WeekMenuTable;
-import view.table.WeekMenuTableModel;
 
 /**
  * @author cmaurice2
