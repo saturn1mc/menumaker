@@ -3,9 +3,11 @@
  */
 package view.table;
 
-import javax.swing.JTable;
-import javax.swing.event.TableModelEvent;
 
+
+import javax.swing.JTable;
+
+import model.MMBook;
 import model.MMRecipe;
 
 /**
@@ -20,21 +22,26 @@ public class MMWeekMenuTable extends JTable {
 
 	public MMWeekMenuTable() {
 		super(new MMWeekMenuTableModel());
-		MMRecipe[] items = { new MMRecipe("Recette A", null, 0),
-				new MMRecipe("Recette B", null, 0),
-				new MMRecipe("Recette C", null, 0) };
-
-		this.getColumnModel().getColumn(1)
+		
+		//TODO a remplacer par vrai chargement
+		MMRecipe[] items = { new MMRecipe("Recette A", new MMBook("Test book A", "Me"), 12),
+				new MMRecipe("Recette B", new MMBook("Test book B", "Me"), 13),
+				new MMRecipe("Recette C", new MMBook("Test book C", "Me"), 14) };
+		//
+		
+		this.setDefaultRenderer(Object.class, new MMTableCellRenderer());
+		this.getColumnModel().getColumn(MMWeekMenuTableModel.COL_MEAL)
 				.setCellEditor(new MMComboBoxCellEditor(items));
 	}
 
 	@Override
 	public void setValueAt(Object aValue, int row, int column) {
 		super.setValueAt(aValue, row, column);
-	}
-
-	@Override
-	public void tableChanged(TableModelEvent e) {
-		super.tableChanged(e);
+		
+		if(column == MMWeekMenuTableModel.COL_MEAL){
+			setValueAt(((MMRecipe)aValue).getBook(), row, MMWeekMenuTableModel.COL_BOOK);
+			setValueAt(((MMRecipe)aValue).getPage(), row, MMWeekMenuTableModel.COL_PAGE);
+			repaint();
+		}
 	}
 }
