@@ -85,7 +85,11 @@ public class MMData {
 		recipes.remove(recipe);
 	}
 	
-	public void loadData(String filename){
+	public void loadData(){
+		//TODO
+	}
+	
+	public void saveData(){
 		//TODO
 	}
 }
