@@ -13,10 +13,10 @@ public class MMIngredient {
 	
 	private int id;
 	private String name;
-	private String unit;
+	private MMUnit unit;
 	private MMShopPoint shopPoint;
 	
-	public MMIngredient(String name, String unit, MMShopPoint shopPoint){
+	public MMIngredient(String name, MMUnit unit, MMShopPoint shopPoint){
 		this.id = currentID++;
 		
 		this.name = name;
@@ -43,11 +43,11 @@ public class MMIngredient {
 		this.name = name;
 	}
 	
-	public String getUnit() {
+	public MMUnit getUnit() {
 		return unit;
 	}
 	
-	public void setUnit(String unit) {
+	public void setUnit(MMUnit unit) {
 		this.unit = unit;
 	}
 	

@@ -21,6 +21,12 @@ public class MMWeekMenuTableModel extends AbstractTableModel {
 	private static final int ROW_COUNT = 14;
 	private static final int COLUMN_COUNT = 5;
 
+	public static int COL_DAY = 0; 
+	public static int COL_MEAL = 1;
+	public static int COL_BOOK = 2;
+	public static int COL_PAGE = 3;
+	public static int COL_COMMENTS = 4;
+	
 	private String[] columnNames = { "Day", "Meal", "Book", "Page", "Comments" };
 	private String[][] data = { { "Sat. lunch", "", "", "", "" },
 			{ "Sat. diner", "", "", "", "" }, { "Sun. lunch", "", "", "", "" },
@@ -37,7 +43,7 @@ public class MMWeekMenuTableModel extends AbstractTableModel {
 	
 	@Override
 	public Class<?> getColumnClass(int columnIndex) {
-		if(columnIndex == 1){
+		if(columnIndex == COL_MEAL){
 			return MMRecipe.class;
 		}
 		else{
@@ -57,7 +63,7 @@ public class MMWeekMenuTableModel extends AbstractTableModel {
 
 	@Override
 	public String getColumnName(int column) {
-		if (column >= 0 && column < 5) {
+		if (column >= 0 && column < COLUMN_COUNT) {
 			return columnNames[column];
 		} else {
 			return null;
@@ -66,8 +72,8 @@ public class MMWeekMenuTableModel extends AbstractTableModel {
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		if ((rowIndex >= 0 && rowIndex < 14)
-				&& (columnIndex >= 0 && columnIndex < 5)) {
+		if ((rowIndex >= 0 && rowIndex < ROW_COUNT)
+				&& (columnIndex >= 0 && columnIndex < COLUMN_COUNT)) {
 			return data[rowIndex][columnIndex];
 		} else {
 			return null;
@@ -76,14 +82,14 @@ public class MMWeekMenuTableModel extends AbstractTableModel {
 
 	@Override
 	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-		if ((rowIndex >= 0 && rowIndex < 14)
-				&& (columnIndex >= 0 && columnIndex < 5)) {
+		if ((rowIndex >= 0 && rowIndex < ROW_COUNT)
+				&& (columnIndex >= 0 && columnIndex < COLUMN_COUNT)) {
 			data[rowIndex][columnIndex] = aValue.toString();
 		}
 	}
 
 	@Override
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
-		return columnIndex == 1 || columnIndex == 4;
+		return columnIndex == COL_MEAL || columnIndex == COL_COMMENTS;
 	}
 }
