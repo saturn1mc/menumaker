@@ -3,11 +3,19 @@
  */
 package model;
 
+import org.jdom.Attribute;
+import org.jdom.Element;
+
 /**
  * @author cmaurice2
  * 
  */
 public class MMUnit {
+	public static final String NODE_NAME_UNIT = "unit";
+	
+	public static final String ATTR_NAME_ID = "id";
+	public static final String ATTR_NAME_NAME = "name";
+	
 	private static int currentID = 0;
 
 	private int id;
@@ -41,5 +49,14 @@ public class MMUnit {
 	@Override
 	public String toString() {
 		return name;
+	}
+	
+	public Element toXML(){
+		Element unitElement = new Element(NODE_NAME_UNIT);
+		
+		unitElement.setAttribute(new Attribute(ATTR_NAME_ID, Integer.toString(id)));
+		unitElement.setAttribute(new Attribute(ATTR_NAME_NAME, name));
+		
+		return unitElement;
 	}
 }

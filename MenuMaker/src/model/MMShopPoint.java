@@ -3,11 +3,21 @@
  */
 package model;
 
+import org.jdom.Attribute;
+import org.jdom.Element;
+
 /**
  * @author cmaurice2
  *
  */
 public class MMShopPoint {
+	public static final String NODE_NAME_SHOP = "shop";
+	
+	public static final String ATTR_NAME_ID = "id";
+	public static final String ATTR_NAME_NAME = "name";
+	public static final String ATTR_NAME_PRIO = "priority";
+	
+	
 	private static int currentID;
 	
 	private int id;
@@ -51,5 +61,15 @@ public class MMShopPoint {
 	@Override
 	public String toString() {
 		return priority + " - " + name;
+	}
+	
+	public Element toXML(){
+		Element shopElement = new Element(NODE_NAME_SHOP);
+		
+		shopElement.setAttribute(new Attribute(ATTR_NAME_ID, Integer.toString(id)));
+		shopElement.setAttribute(new Attribute(ATTR_NAME_NAME, name));
+		shopElement.setAttribute(new Attribute(ATTR_NAME_PRIO, Integer.toString(priority)));
+		
+		return shopElement;
 	}
 }

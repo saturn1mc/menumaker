@@ -3,6 +3,7 @@
  */
 package model;
 
+import org.jdom.Attribute;
 import org.jdom.Element;
 
 /**
@@ -10,6 +11,11 @@ import org.jdom.Element;
  *
  */
 public class MMRecipeElement {
+	public static final String NODE_NAME_ELEMENT = "element";
+	
+	public static final String ATTR_NAME_INGREDIENT = "ingredient";
+	public static final String ATTR_NAME_QTY = "quantity";	
+	
 	private MMIngredient ingredient;
 	private int quantity;
 	
@@ -40,8 +46,11 @@ public class MMRecipeElement {
 	}
 	
 	public Element toXML(){
-		//TODO
+		Element ingredientElement = new Element(NODE_NAME_ELEMENT);
 		
-		return null;
+		ingredientElement.setAttribute(new Attribute(ATTR_NAME_INGREDIENT, Integer.toString(ingredient.getID())));
+		ingredientElement.setAttribute(new Attribute(ATTR_NAME_QTY, Integer.toString(quantity)));
+		
+		return ingredientElement;
 	}
 }

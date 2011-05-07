@@ -19,6 +19,7 @@ import javax.swing.JToolBar;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
+import model.MMData;
 import view.table.MMExtrasTable;
 import view.table.MMWeekMenuTable;
 
@@ -34,7 +35,6 @@ public class MenuMakerGUI extends JFrame {
 	private static final long serialVersionUID = -1017764394785180674L;
 
 	public static final String FOLDER_IMG = "/img/";
-	public static final String FOLDER_CONF = "/config/";
 
 	public static final int DEFAULT_WIDTH = 600;
 	public static final int DEFAULT_HEIGHT = 600;
@@ -48,6 +48,8 @@ public class MenuMakerGUI extends JFrame {
 	public static ImageIcon ICON_RECIPE;
 	public static ImageIcon ICON_PRINT;
 
+	private MMData data;
+	
 	private JToolBar toolBar;
 
 	private MMWeekMenuTable weekMenuTable;
@@ -57,6 +59,8 @@ public class MenuMakerGUI extends JFrame {
 		super("Menu Maker - Powered by MC");
 		this.setLayout(new BorderLayout());
 
+		data = new MMData();
+		
 		loadIcons();
 		buildToolbar();
 		buildCenterPanel();
@@ -214,12 +218,17 @@ public class MenuMakerGUI extends JFrame {
 
 		return extrasPanel;
 	}
+	
+	public void saveData(){
+		data.saveData();
+	}
 
 	public static void main(String[] args) {
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				MenuMakerGUI gui = new MenuMakerGUI();
 				gui.setVisible(true);
+				gui.saveData();
 			}
 		});
 

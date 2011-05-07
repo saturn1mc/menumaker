@@ -106,6 +106,7 @@ public class MMRecipe {
 		for(MMRecipeElement element : elements){
 			elementsElement.addContent(element.toXML());
 		}
+		
 		ingredientElement.addContent(elementsElement);
 		
 		return ingredientElement;
