@@ -9,7 +9,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map.Entry;
 
 import org.jdom.Attribute;
 import org.jdom.Document;
@@ -125,51 +124,61 @@ public class MMData {
 	public void loadData() throws JDOMException, IOException {
 		SAXBuilder saxBuilder = new SAXBuilder();
 		Document document = saxBuilder.build(new File(getConfigFile()));
-		
+
 		Element rootNode = document.getRootElement();
-		
-		//Books
+
+		// Books
 		Element booksElement = rootNode.getChild(NODE_NAME_BOOKS);
-		MMBook.setCurrentID(Integer.parseInt(booksElement.getAttributeValue(ATTR_NAME_CURR_ID)));
-		
-		List<Element> booksList = booksElement.getChildren(MMBook.NODE_NAME_BOOK);
-		for(Element bookElement : booksList){
+		MMBook.setCurrentID(Integer.parseInt(booksElement
+				.getAttributeValue(ATTR_NAME_CURR_ID)));
+
+		List<Element> booksList = booksElement
+				.getChildren(MMBook.NODE_NAME_BOOK);
+		for (Element bookElement : booksList) {
 			addBook(new MMBook(bookElement));
 		}
-		
-		//Shops
+
+		// Shops
 		Element shopsElement = rootNode.getChild(NODE_NAME_SHOPS);
-		MMShopPoint.setCurrentID(Integer.parseInt(shopsElement.getAttributeValue(ATTR_NAME_CURR_ID)));
-		
-		List<Element> shopsList = shopsElement.getChildren(MMShopPoint.NODE_NAME_SHOP);
-		for(Element shopElement : shopsList){
+		MMShopPoint.setCurrentID(Integer.parseInt(shopsElement
+				.getAttributeValue(ATTR_NAME_CURR_ID)));
+
+		List<Element> shopsList = shopsElement
+				.getChildren(MMShopPoint.NODE_NAME_SHOP);
+		for (Element shopElement : shopsList) {
 			addShopPoint(new MMShopPoint(shopElement));
 		}
-		
-		//Units
+
+		// Units
 		Element unitsElement = rootNode.getChild(NODE_NAME_UNITS);
-		MMUnit.setCurrentID(Integer.parseInt(unitsElement.getAttributeValue(ATTR_NAME_CURR_ID)));
-		
-		List<Element> unitsList = unitsElement.getChildren(MMUnit.NODE_NAME_UNIT);
-		for(Element unitElement : unitsList){
+		MMUnit.setCurrentID(Integer.parseInt(unitsElement
+				.getAttributeValue(ATTR_NAME_CURR_ID)));
+
+		List<Element> unitsList = unitsElement
+				.getChildren(MMUnit.NODE_NAME_UNIT);
+		for (Element unitElement : unitsList) {
 			addUnit(new MMUnit(unitElement));
 		}
-		
-		//Ingredients
+
+		// Ingredients
 		Element ingredientsElement = rootNode.getChild(NODE_NAME_INGREDIENTS);
-		MMIngredient.setCurrentID(Integer.parseInt(ingredientsElement.getAttributeValue(ATTR_NAME_CURR_ID)));
-		
-		List<Element> ingredientsList = ingredientsElement.getChildren(MMIngredient.NODE_NAME_INGREDIENT);
-		for(Element ingredientElement : ingredientsList){
+		MMIngredient.setCurrentID(Integer.parseInt(ingredientsElement
+				.getAttributeValue(ATTR_NAME_CURR_ID)));
+
+		List<Element> ingredientsList = ingredientsElement
+				.getChildren(MMIngredient.NODE_NAME_INGREDIENT);
+		for (Element ingredientElement : ingredientsList) {
 			addIngredient(new MMIngredient(ingredientElement, units, shopPoints));
 		}
-		
-		//Recipes
+
+		// Recipes
 		Element recipesElement = rootNode.getChild(NODE_NAME_RECIPES);
-		MMRecipe.setCurrentID(Integer.parseInt(recipesElement.getAttributeValue(ATTR_NAME_CURR_ID)));
-		
-		List<Element> recipesList = recipesElement.getChildren(MMRecipe.NODE_NAME_RECIPE);
-		for(Element recipeElement : recipesList){
+		MMRecipe.setCurrentID(Integer.parseInt(recipesElement
+				.getAttributeValue(ATTR_NAME_CURR_ID)));
+
+		List<Element> recipesList = recipesElement
+				.getChildren(MMRecipe.NODE_NAME_RECIPE);
+		for (Element recipeElement : recipesList) {
 			addRecipe(new MMRecipe(recipeElement, books, ingredients));
 		}
 	}
@@ -184,8 +193,8 @@ public class MMData {
 		booksNode.setAttribute(new Attribute(ATTR_NAME_CURR_ID, Integer
 				.toString(MMBook.getCurrentID())));
 
-		for (Entry<Integer, MMBook> entry : books.entrySet()) {
-			booksNode.addContent(entry.getValue().toXML());
+		for (MMBook book : books.values()) {
+			booksNode.addContent(book.toXML());
 		}
 
 		rootNode.addContent(booksNode);
@@ -195,8 +204,8 @@ public class MMData {
 		shopsNode.setAttribute(new Attribute(ATTR_NAME_CURR_ID, Integer
 				.toString(MMShopPoint.getCurrentID())));
 
-		for (Entry<Integer, MMShopPoint> entry : shopPoints.entrySet()) {
-			shopsNode.addContent(entry.getValue().toXML());
+		for (MMShopPoint shop : shopPoints.values()) {
+			shopsNode.addContent(shop.toXML());
 		}
 
 		rootNode.addContent(shopsNode);
@@ -206,19 +215,19 @@ public class MMData {
 		unitsNode.setAttribute(new Attribute(ATTR_NAME_CURR_ID, Integer
 				.toString(MMUnit.getCurrentID())));
 
-		for (Entry<Integer, MMUnit> entry : units.entrySet()) {
-			unitsNode.addContent(entry.getValue().toXML());
+		for (MMUnit unit : units.values()) {
+			unitsNode.addContent(unit.toXML());
 		}
 
 		rootNode.addContent(unitsNode);
-		
+
 		// Ingredients
 		Element ingredientsNode = new Element(NODE_NAME_INGREDIENTS);
 		ingredientsNode.setAttribute(new Attribute(ATTR_NAME_CURR_ID, Integer
 				.toString(MMIngredient.getCurrentID())));
 
-		for (Entry<Integer, MMIngredient> entry : ingredients.entrySet()) {
-			ingredientsNode.addContent(entry.getValue().toXML());
+		for (MMIngredient ingredient : ingredients.values()) {
+			ingredientsNode.addContent(ingredient.toXML());
 		}
 
 		rootNode.addContent(ingredientsNode);
@@ -228,8 +237,8 @@ public class MMData {
 		recipesNode.setAttribute(new Attribute(ATTR_NAME_CURR_ID, Integer
 				.toString(MMRecipe.getCurrentID())));
 
-		for (Entry<Integer, MMRecipe> entry : recipes.entrySet()) {
-			recipesNode.addContent(entry.getValue().toXML());
+		for (MMRecipe recipe : recipes.values()) {
+			recipesNode.addContent(recipe.toXML());
 		}
 
 		rootNode.addContent(recipesNode);
