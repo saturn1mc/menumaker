@@ -5,6 +5,7 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
@@ -16,7 +17,11 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -24,6 +29,7 @@ import javax.swing.JToolBar;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
+import legacy.MMLegacyParser;
 import model.MMData;
 import view.table.MMExtrasTable;
 import view.table.MMWeekMenuTable;
@@ -53,10 +59,10 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 	public static ImageIcon ICON_RECIPE;
 	public static ImageIcon ICON_PRINT;
 
-	private MMData data;
-
+	private JMenuBar menuBar;
 	private JToolBar toolBar;
 
+	private MMData data;
 	private MMWeekMenuTable weekMenuTable;
 	private MMExtrasTable extrasTable;
 
@@ -67,6 +73,7 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 		data = new MMData();
 
 		loadIcons();
+		buildMenu();
 		buildToolbar();
 		buildCenterPanel();
 
@@ -96,6 +103,42 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 				FOLDER_IMG + "recipe-icon.png"));
 		ICON_PRINT = new ImageIcon(getClass().getResource(
 				FOLDER_IMG + "printer-icon.png"));
+	}
+
+	private void buildMenu() {
+		// Properties menu
+		JMenu propertiesMenu = new JMenu("Properties");
+		propertiesMenu.setMnemonic(KeyEvent.VK_P);
+
+		JMenuItem legacyItem = new JMenuItem("Load legacy data");
+
+		MouseAdapter legacyAdapter = new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				JFileChooser fileChooser = new JFileChooser();
+				fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+				fileChooser.setMultiSelectionEnabled(false);
+				fileChooser.setDialogTitle("Select legacy file");
+				int retVal = fileChooser.showOpenDialog(MenuMakerGUI.this);
+
+				if (retVal == JFileChooser.APPROVE_OPTION) {
+					try {
+						MMLegacyParser.getInstance().parseLegacyFile(
+								fileChooser.getSelectedFile());
+					} catch (IOException ioe) {
+						JOptionPane.showMessageDialog(MenuMakerGUI.this,
+								"Can't parse legacy file", "Legacy",
+								JOptionPane.ERROR_MESSAGE);
+					}
+				}
+			}
+		};
+
+		legacyItem.addMouseListener(legacyAdapter);
+
+		// Menu bar
+		menuBar = new JMenuBar();
+		menuBar.add(propertiesMenu);
 	}
 
 	private void buildToolbar() {
@@ -229,15 +272,15 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 	public MMData getData() {
 		return data;
 	}
-	
+
 	public MMWeekMenuTable getWeekMenuTable() {
 		return weekMenuTable;
 	}
-	
+
 	public MMExtrasTable getExtrasTable() {
 		return extrasTable;
 	}
-	
+
 	@Override
 	public void windowOpened(WindowEvent e) {
 		// TODO Auto-generated method stub

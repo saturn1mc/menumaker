@@ -4,7 +4,7 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 
 import org.jdom.Attribute;
@@ -44,8 +44,8 @@ public class MMRecipe {
 	}
 
 	@SuppressWarnings("unchecked")
-	public MMRecipe(Element recipeElement, HashMap<Integer, MMBook> books,
-			HashMap<Integer, MMIngredient> ingredients) {
+	public MMRecipe(Element recipeElement, Hashtable<Integer, MMBook> books,
+			Hashtable<Integer, MMIngredient> ingredients) {
 		
 		this.id = Integer.parseInt(recipeElement.getAttributeValue(ATTR_NAME_ID));
 		this.name = recipeElement.getAttributeValue(ATTR_NAME_NAME);
