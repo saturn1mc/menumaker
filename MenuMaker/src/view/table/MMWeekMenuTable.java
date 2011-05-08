@@ -7,8 +7,8 @@ package view.table;
 
 import javax.swing.JTable;
 
-import model.MMBook;
 import model.MMRecipe;
+import view.MenuMakerGUI;
 
 /**
  * @author cmaurice2
@@ -20,18 +20,22 @@ public class MMWeekMenuTable extends JTable {
 	 */
 	private static final long serialVersionUID = 6404860223050257081L;
 
-	public MMWeekMenuTable() {
+	private MenuMakerGUI parent;
+	
+	public MMWeekMenuTable(MenuMakerGUI parent) {
 		super(new MMWeekMenuTableModel());
 		
-		//TODO a remplacer par vrai chargement
-		MMRecipe[] items = { new MMRecipe("Recette A", new MMBook("Test book A", "Me"), 12),
-				new MMRecipe("Recette B", new MMBook("Test book B", "Me"), 13),
-				new MMRecipe("Recette C", new MMBook("Test book C", "Me"), 14) };
-		//
-		
+		this.parent = parent;
 		this.setDefaultRenderer(Object.class, new MMTableCellRenderer());
+		refreshCellEditor();
+	}
+	
+	public void refreshCellEditor(){
+		MMRecipe[] items = new MMRecipe[parent.getData().getRecipes().size()];
+		parent.getData().getRecipes().values().toArray(items);
+		
 		this.getColumnModel().getColumn(MMWeekMenuTableModel.COL_MEAL)
-				.setCellEditor(new MMComboBoxCellEditor(items));
+		.setCellEditor(new MMComboBoxCellEditor(items));
 	}
 
 	@Override

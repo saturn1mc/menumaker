@@ -163,7 +163,7 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 				BorderFactory.createEtchedBorder(EtchedBorder.LOWERED),
 				"WeekMenu", TitledBorder.LEFT, TitledBorder.TOP));
 
-		weekMenuTable = new MMWeekMenuTable();
+		weekMenuTable = new MMWeekMenuTable(this);
 
 		JScrollPane scrollpane = new JScrollPane(weekMenuTable);
 
@@ -179,7 +179,7 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 		JPanel tablePanel = new JPanel();
 		tablePanel.setLayout(new BorderLayout());
 
-		extrasTable = new MMExtrasTable();
+		extrasTable = new MMExtrasTable(this);
 
 		JScrollPane scrollpane = new JScrollPane(extrasTable);
 
@@ -226,6 +226,18 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 		return extrasPanel;
 	}
 
+	public MMData getData() {
+		return data;
+	}
+	
+	public MMWeekMenuTable getWeekMenuTable() {
+		return weekMenuTable;
+	}
+	
+	public MMExtrasTable getExtrasTable() {
+		return extrasTable;
+	}
+	
 	@Override
 	public void windowOpened(WindowEvent e) {
 		// TODO Auto-generated method stub
