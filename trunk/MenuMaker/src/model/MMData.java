@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 
 import org.jdom.Attribute;
@@ -36,18 +36,18 @@ public class MMData {
 
 	public static final String ATTR_NAME_CURR_ID = "currentid";
 
-	private HashMap<Integer, MMBook> books;
-	private HashMap<Integer, MMShopPoint> shopPoints;
-	private HashMap<Integer, MMUnit> units;
-	private HashMap<Integer, MMIngredient> ingredients;
-	private HashMap<Integer, MMRecipe> recipes;
+	private Hashtable<Integer, MMBook> books;
+	private Hashtable<Integer, MMShopPoint> shopPoints;
+	private Hashtable<Integer, MMUnit> units;
+	private Hashtable<Integer, MMIngredient> ingredients;
+	private Hashtable<Integer, MMRecipe> recipes;
 
 	public MMData() {
-		books = new HashMap<Integer, MMBook>();
-		shopPoints = new HashMap<Integer, MMShopPoint>();
-		units = new HashMap<Integer, MMUnit>();
-		ingredients = new HashMap<Integer, MMIngredient>();
-		recipes = new HashMap<Integer, MMRecipe>();
+		books = new Hashtable<Integer, MMBook>();
+		shopPoints = new Hashtable<Integer, MMShopPoint>();
+		units = new Hashtable<Integer, MMUnit>();
+		ingredients = new Hashtable<Integer, MMIngredient>();
+		recipes = new Hashtable<Integer, MMRecipe>();
 	}
 
 	public String getConfigFile() throws IOException {
@@ -60,7 +60,7 @@ public class MMData {
 		return configDir.getPath() + File.separator + CONFIG_FILE;
 	}
 
-	public HashMap<Integer, MMBook> getBooks() {
+	public Hashtable<Integer, MMBook> getBooks() {
 		return books;
 	}
 
@@ -72,7 +72,7 @@ public class MMData {
 		books.remove(book);
 	}
 
-	public HashMap<Integer, MMShopPoint> getShopPoints() {
+	public Hashtable<Integer, MMShopPoint> getShopPoints() {
 		return shopPoints;
 	}
 
@@ -84,7 +84,7 @@ public class MMData {
 		shopPoints.remove(shopPoint);
 	}
 
-	public HashMap<Integer, MMUnit> getUnits() {
+	public Hashtable<Integer, MMUnit> getUnits() {
 		return units;
 	}
 
@@ -96,7 +96,7 @@ public class MMData {
 		units.remove(unit);
 	}
 
-	public HashMap<Integer, MMIngredient> getIngredients() {
+	public Hashtable<Integer, MMIngredient> getIngredients() {
 		return ingredients;
 	}
 
@@ -108,7 +108,7 @@ public class MMData {
 		ingredients.remove(ingredient);
 	}
 
-	public HashMap<Integer, MMRecipe> getRecipes() {
+	public Hashtable<Integer, MMRecipe> getRecipes() {
 		return recipes;
 	}
 

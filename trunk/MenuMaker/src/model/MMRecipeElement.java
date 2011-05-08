@@ -3,7 +3,7 @@
  */
 package model;
 
-import java.util.HashMap;
+import java.util.Hashtable;
 
 import org.jdom.Attribute;
 import org.jdom.Element;
@@ -27,7 +27,7 @@ public class MMRecipeElement {
 	}
 	
 	public MMRecipeElement(Element elementElement,
-			HashMap<Integer, MMIngredient> ingredients) {
+			Hashtable<Integer, MMIngredient> ingredients) {
 
 		this.ingredient = ingredients.get(Integer.parseInt(elementElement.getAttributeValue(ATTR_NAME_INGREDIENT)));
 		this.quantity = Integer.parseInt(elementElement.getAttributeValue(ATTR_NAME_QTY));
