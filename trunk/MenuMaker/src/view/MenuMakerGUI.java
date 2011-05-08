@@ -7,12 +7,17 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
@@ -27,7 +32,7 @@ import view.table.MMWeekMenuTable;
  * @author cmaurice2
  * 
  */
-public class MenuMakerGUI extends JFrame {
+public class MenuMakerGUI extends JFrame implements WindowListener {
 
 	/**
 	 * Auto-generated SVUID
@@ -49,7 +54,7 @@ public class MenuMakerGUI extends JFrame {
 	public static ImageIcon ICON_PRINT;
 
 	private MMData data;
-	
+
 	private JToolBar toolBar;
 
 	private MMWeekMenuTable weekMenuTable;
@@ -60,10 +65,12 @@ public class MenuMakerGUI extends JFrame {
 		this.setLayout(new BorderLayout());
 
 		data = new MMData();
-		
+
 		loadIcons();
 		buildToolbar();
 		buildCenterPanel();
+
+		this.addWindowListener(this);
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.getContentPane().setPreferredSize(
@@ -218,9 +225,52 @@ public class MenuMakerGUI extends JFrame {
 
 		return extrasPanel;
 	}
-	
-	public void saveData(){
-		data.saveData();
+
+	@Override
+	public void windowOpened(WindowEvent e) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void windowClosing(WindowEvent e) {
+		try {
+			data.saveData();
+		} catch (FileNotFoundException fnfe) {
+			JOptionPane.showMessageDialog(this, "Sauvegarde impossible : "
+					+ fnfe.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+		} catch (IOException ioe) {
+			JOptionPane.showMessageDialog(this, "Sauvegarde impossible : "
+					+ ioe.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
+	@Override
+	public void windowClosed(WindowEvent e) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void windowIconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void windowDeiconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void windowActivated(WindowEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void windowDeactivated(WindowEvent e) {
+		// TODO Auto-generated method stub
+
 	}
 
 	public static void main(String[] args) {
@@ -228,9 +278,7 @@ public class MenuMakerGUI extends JFrame {
 			public void run() {
 				MenuMakerGUI gui = new MenuMakerGUI();
 				gui.setVisible(true);
-				gui.saveData();
 			}
 		});
-
 	}
 }

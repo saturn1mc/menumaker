@@ -4,6 +4,8 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import org.jdom.Attribute;
 import org.jdom.Element;
@@ -14,7 +16,7 @@ import org.jdom.Element;
  */
 public class MMRecipe {
 	
-	public static final String NODE_NAME_INGREDIENT = "ingredient";
+	public static final String NODE_NAME_RECIPE = "recipe";
 	public static final String NODE_NAME_ELEMENTS = "elements";
 	
 	public static final String ATTR_NAME_ID = "id";
@@ -39,6 +41,23 @@ public class MMRecipe {
 		this.page = page;
 		
 		this.elements = new ArrayList<MMRecipeElement>();
+	}
+
+	@SuppressWarnings("unchecked")
+	public MMRecipe(Element recipeElement, HashMap<Integer, MMBook> books,
+			HashMap<Integer, MMIngredient> ingredients) {
+		
+		this.id = Integer.parseInt(recipeElement.getAttributeValue(ATTR_NAME_ID));
+		this.name = recipeElement.getAttributeValue(ATTR_NAME_NAME);
+		this.book = books.get(Integer.parseInt(recipeElement.getAttributeValue(ATTR_NAME_BOOK)));
+		
+		this.elements = new ArrayList<MMRecipeElement>();
+		Element elementsNode = recipeElement.getChild(NODE_NAME_ELEMENTS);
+		List<Element> elementList = elementsNode.getChildren(MMRecipeElement.NODE_NAME_ELEMENT);
+		
+		for(Element elementElement : elementList){
+			addElement(new MMRecipeElement(elementElement, ingredients));
+		}
 	}
 
 	public static int getCurrentID() {
@@ -81,11 +100,11 @@ public class MMRecipe {
 		return elements;
 	}
 
-	public void addIngredient(MMRecipeElement element){
+	public void addElement(MMRecipeElement element){
 		elements.add(element);
 	}
 	
-	public void removeIngredient(MMRecipeElement element){
+	public void removeElement(MMRecipeElement element){
 		elements.remove(element);
 	}
 	
@@ -95,20 +114,20 @@ public class MMRecipe {
 	}
 	
 	public Element toXML(){
-		Element ingredientElement = new Element(NODE_NAME_INGREDIENT);
+		Element recipeElement = new Element(NODE_NAME_RECIPE);
 		
-		ingredientElement.setAttribute(new Attribute(ATTR_NAME_ID, Integer.toString(id)));
-		ingredientElement.setAttribute(new Attribute(ATTR_NAME_NAME, name));
-		ingredientElement.setAttribute(new Attribute(ATTR_NAME_BOOK, Integer.toString(book.getID())));
-		ingredientElement.setAttribute(new Attribute(ATTR_NAME_PAGE, Integer.toString(page)));
+		recipeElement.setAttribute(new Attribute(ATTR_NAME_ID, Integer.toString(id)));
+		recipeElement.setAttribute(new Attribute(ATTR_NAME_NAME, name));
+		recipeElement.setAttribute(new Attribute(ATTR_NAME_BOOK, Integer.toString(book.getID())));
+		recipeElement.setAttribute(new Attribute(ATTR_NAME_PAGE, Integer.toString(page)));
 		
 		Element elementsElement = new Element(NODE_NAME_ELEMENTS);
 		for(MMRecipeElement element : elements){
 			elementsElement.addContent(element.toXML());
 		}
 		
-		ingredientElement.addContent(elementsElement);
+		recipeElement.addContent(elementsElement);
 		
-		return ingredientElement;
+		return recipeElement;
 	}
 }

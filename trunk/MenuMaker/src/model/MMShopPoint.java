@@ -30,6 +30,12 @@ public class MMShopPoint {
 		this.priority = priority;
 	}
 	
+	public MMShopPoint(Element shopElement){
+		this.id = Integer.parseInt(shopElement.getAttributeValue(ATTR_NAME_ID));
+		this.name = shopElement.getAttributeValue(ATTR_NAME_NAME);
+		this.priority = Integer.parseInt(shopElement.getAttributeValue(ATTR_NAME_PRIO));
+	}
+	
 	public static int getCurrentID() {
 		return currentID;
 	}
