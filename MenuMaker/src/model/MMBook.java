@@ -30,6 +30,12 @@ public class MMBook {
 		this.author = author;
 	}
 	
+	public MMBook(Element bookElement){
+		this.id = Integer.parseInt(bookElement.getAttributeValue(ATTR_NAME_ID));
+		this.name = bookElement.getAttributeValue(ATTR_NAME_NAME);
+		this.author = bookElement.getAttributeValue(ATTR_NAME_AUTHOR);
+	}
+	
 	public static int getCurrentID() {
 		return currentID;
 	}

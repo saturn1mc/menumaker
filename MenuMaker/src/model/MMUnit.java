@@ -25,6 +25,11 @@ public class MMUnit {
 		this.id = currentID++;
 		this.name = name;
 	}
+	
+	public MMUnit(Element unitElement) {
+		this.id = Integer.parseInt(unitElement.getAttributeValue(ATTR_NAME_ID));
+		this.name = unitElement.getAttributeValue(ATTR_NAME_NAME);
+	}
 
 	public static int getCurrentID() {
 		return currentID;
