@@ -5,6 +5,7 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.MenuBar;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -107,9 +108,6 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 
 	private void buildMenu() {
 		// Properties menu
-		JMenu propertiesMenu = new JMenu("Properties");
-		propertiesMenu.setMnemonic(KeyEvent.VK_P);
-
 		JMenuItem legacyItem = new JMenuItem("Load legacy data");
 
 		MouseAdapter legacyAdapter = new MouseAdapter() {
@@ -136,9 +134,14 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 
 		legacyItem.addMouseListener(legacyAdapter);
 
+		JMenu propertiesMenu = new JMenu("Properties");
+		propertiesMenu.setMnemonic(KeyEvent.VK_P);
+		propertiesMenu.add(legacyItem);
+		
 		// Menu bar
 		menuBar = new JMenuBar();
 		menuBar.add(propertiesMenu);
+		this.setJMenuBar(menuBar);
 	}
 
 	private void buildToolbar() {
