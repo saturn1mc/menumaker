@@ -1,9 +1,1091 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <menumaker>
-  <books currentid="0" />
-  <shops currentid="0" />
-  <units currentid="0" />
-  <ingredients currentid="0" />
-  <recipes currentid="0" />
+  <books currentid="25">
+    <book id="24" name="Harumi Kurihara" author="?" />
+    <book id="23" name="Cuisine Rapide" author="?" />
+    <book id="22" name="Diner Thai" author="?" />
+    <book id="21" name="Bible des Soupes" author="?" />
+    <book id="20" name="Imprimé" author="?" />
+    <book id="19" name="Reinventez vos Tartes" author="?" />
+    <book id="18" name="Réinventez vos tartes" author="?" />
+    <book id="17" name="Thai cooking class book" author="?" />
+    <book id="16" name="Meilleures recettes de pates" author="?" />
+    <book id="15" name="Les 200 Meilleurs recettes de pâtes" author="?" />
+    <book id="14" name="Cuisine d'asie" author="?" />
+    <book id="13" name="Risotto" author="?" />
+    <book id="12" name="Cuisine Facile" author="?" />
+    <book id="11" name="La cuisine légère" author="?" />
+    <book id="10" name="Cuisine Italienne" author="?" />
+    <book id="9" name="Asia Scenic Cookbook" author="?" />
+    <book id="8" name="-" author="?" />
+    <book id="7" name="Dîner Thai" author="?" />
+    <book id="6" name="La bible des soupes" author="?" />
+    <book id="5" name="Recettes Faciles" author="?" />
+    <book id="4" name="Soupes!" author="?" />
+    <book id="3" name="La cuisine rapide" author="?" />
+    <book id="2" name="Ashleigh's Head" author="?" />
+    <book id="1" name="Cuisine légère" author="?" />
+    <book id="0" name="Other" author="?" />
+  </books>
+  <shops currentid="15">
+    <shop id="14" name="Supermarché asiastique" priority="0" />
+    <shop id="13" name="Boucherie" priority="0" />
+    <shop id="12" name="Traiteur Italien" priority="0" />
+    <shop id="11" name="Poissonier" priority="0" />
+    <shop id="10" name="Boulangerie" priority="0" />
+    <shop id="9" name="Supermarché asiatique" priority="0" />
+    <shop id="8" name="Boucher" priority="0" />
+    <shop id="7" name="Asiatique" priority="0" />
+    <shop id="6" name="Picard" priority="0" />
+    <shop id="5" name="Supermarché" priority="0" />
+    <shop id="4" name="Primeur" priority="5" />
+    <shop id="3" name="Primeur" priority="4" />
+    <shop id="2" name="Primeur" priority="3" />
+    <shop id="1" name="Primeur" priority="2" />
+    <shop id="0" name="Primeur" priority="1" />
+  </shops>
+  <units currentid="7">
+    <unit id="6" name="Pgé" />
+    <unit id="5" name="G" />
+    <unit id="4" name="Ml" />
+    <unit id="3" name="Pgné" />
+    <unit id="2" name="Botte" />
+    <unit id="1" name="Gr" />
+    <unit id="0" name="UN" />
+  </units>
+  <ingredients currentid="153">
+    <ingredient id="152" name="Pois Gourmands" unit="5" shop="2" />
+    <ingredient id="151" name="Mini Maïs" unit="5" shop="5" />
+    <ingredient id="150" name="Chou chinois" unit="5" shop="3" />
+    <ingredient id="149" name="Patate Douce" unit="0" shop="2" />
+    <ingredient id="148" name="Pignons" unit="0" shop="5" />
+    <ingredient id="147" name="Sauce soja" unit="0" shop="9" />
+    <ingredient id="146" name="Mirin" unit="0" shop="9" />
+    <ingredient id="145" name="Gingembre" unit="0" shop="3" />
+    <ingredient id="144" name="Comté" unit="0" shop="5" />
+    <ingredient id="143" name="Chou blanc" unit="0" shop="3" />
+    <ingredient id="142" name="Navet" unit="0" shop="3" />
+    <ingredient id="141" name="Pate de curry Panang" unit="5" shop="9" />
+    <ingredient id="140" name="Orge" unit="5" shop="5" />
+    <ingredient id="139" name="Bœuf" unit="5" shop="5" />
+    <ingredient id="138" name="Brocolinis" unit="5" shop="9" />
+    <ingredient id="137" name="Echalotes frites" unit="5" shop="9" />
+    <ingredient id="136" name="Feuilles de kaffir" unit="0" shop="9" />
+    <ingredient id="135" name="Sauce rouleaux printemps" unit="0" shop="14" />
+    <ingredient id="134" name="Nouilles de riz" unit="0" shop="9" />
+    <ingredient id="133" name="Galette de riz" unit="0" shop="9" />
+    <ingredient id="132" name="Laïtue" unit="0" shop="1" />
+    <ingredient id="131" name="Graine de sésame" unit="0" shop="5" />
+    <ingredient id="130" name="Cèpes séchés" unit="5" shop="5" />
+    <ingredient id="129" name="Epaule de veau haché" unit="5" shop="13" />
+    <ingredient id="128" name="Fenouil" unit="5" shop="2" />
+    <ingredient id="127" name="Lentilles en boîte" unit="4" shop="5" />
+    <ingredient id="126" name="Vinaigre blanc" unit="0" shop="5" />
+    <ingredient id="125" name="Tortellini" unit="5" shop="12" />
+    <ingredient id="124" name="Courge spaghetti" unit="5" shop="3" />
+    <ingredient id="123" name="Cacahuètes" unit="5" shop="5" />
+    <ingredient id="122" name="Brocoli" unit="0" shop="3" />
+    <ingredient id="121" name="Ptites torsades sucrées pr Mousse choco" unit="0" shop="5" />
+    <ingredient id="120" name="Chocolat noir nestlé dessert" unit="5" shop="5" />
+    <ingredient id="119" name="Aneth" unit="0" shop="4" />
+    <ingredient id="118" name="Lait de coco" unit="4" shop="5" />
+    <ingredient id="117" name="Citrouille" unit="5" shop="3" />
+    <ingredient id="116" name="Tomates entières en boîte" unit="5" shop="5" />
+    <ingredient id="115" name="Parmesan copeaux" unit="5" shop="5" />
+    <ingredient id="114" name="Tomates séchées à l'huile" unit="5" shop="5" />
+    <ingredient id="113" name="Girolles" unit="5" shop="0" />
+    <ingredient id="112" name="Pate brisée" unit="0" shop="5" />
+    <ingredient id="111" name="Pavé Saumon" unit="0" shop="11" />
+    <ingredient id="110" name="Crème Fraiche" unit="0" shop="5" />
+    <ingredient id="109" name="Estragon frais" unit="0" shop="4" />
+    <ingredient id="108" name="Cœurs d'artichauts" unit="5" shop="5" />
+    <ingredient id="107" name="Baguette" unit="0" shop="10" />
+    <ingredient id="106" name="Tapenade" unit="0" shop="5" />
+    <ingredient id="105" name="Cashews" unit="5" shop="5" />
+    <ingredient id="104" name="Baby corn" unit="5" shop="9" />
+    <ingredient id="103" name="Ear Mushroom" unit="5" shop="9" />
+    <ingredient id="102" name="Mozzarelle" unit="0" shop="5" />
+    <ingredient id="101" name="Riz basmati" unit="5" shop="5" />
+    <ingredient id="100" name="Ananas frais" unit="5" shop="3" />
+    <ingredient id="99" name="Céréales" unit="0" shop="5" />
+    <ingredient id="98" name="Riz Arborio" unit="5" shop="5" />
+    <ingredient id="97" name="Beurre" unit="5" shop="5" />
+    <ingredient id="96" name="Roquette" unit="6" shop="2" />
+    <ingredient id="95" name="Pancetta" unit="5" shop="5" />
+    <ingredient id="94" name="Brousse" unit="5" shop="5" />
+    <ingredient id="93" name="Anchois" unit="0" shop="5" />
+    <ingredient id="92" name="Parmesan" unit="0" shop="5" />
+    <ingredient id="91" name="Romaine" unit="0" shop="2" />
+    <ingredient id="90" name="Poches Tofu Frit" unit="0" shop="7" />
+    <ingredient id="89" name="Jambon de Parme" unit="0" shop="5" />
+    <ingredient id="88" name="Melon" unit="0" shop="0" />
+    <ingredient id="87" name="Boulgour" unit="5" shop="5" />
+    <ingredient id="86" name="Tofu" unit="0" shop="5" />
+    <ingredient id="85" name="Coffee" unit="0" shop="5" />
+    <ingredient id="84" name="Porc haché maigre" unit="5" shop="8" />
+    <ingredient id="83" name="Pâte de won-ton" unit="0" shop="7" />
+    <ingredient id="82" name="Champignons" unit="5" shop="0" />
+    <ingredient id="81" name="Lardons" unit="0" shop="5" />
+    <ingredient id="80" name="Buche de chèvre" unit="0" shop="5" />
+    <ingredient id="79" name="Thon" unit="0" shop="6" />
+    <ingredient id="78" name="PdT ratte" unit="0" shop="2" />
+    <ingredient id="77" name="Aubergines" unit="0" shop="3" />
+    <ingredient id="76" name="Ricotta" unit="5" shop="5" />
+    <ingredient id="75" name="Prosciutto" unit="0" shop="5" />
+    <ingredient id="74" name="Pâte de pizza" unit="0" shop="5" />
+    <ingredient id="73" name="Purée de tomates" unit="5" shop="5" />
+    <ingredient id="72" name="Gruyère entier" unit="0" shop="5" />
+    <ingredient id="71" name="Tomates italiennes en boîte" unit="4" shop="5" />
+    <ingredient id="70" name="Fromage de chèvre crémeux" unit="1" shop="5" />
+    <ingredient id="69" name="Sirop d'érable" unit="0" shop="5" />
+    <ingredient id="68" name="Pousse d'épinards" unit="3" shop="3" />
+    <ingredient id="67" name="Petits pois" unit="1" shop="3" />
+    <ingredient id="66" name="Pesto" unit="0" shop="5" />
+    <ingredient id="65" name="Bouillon légume" unit="0" shop="5" />
+    <ingredient id="64" name="Blettes" unit="1" shop="3" />
+    <ingredient id="63" name="Eponges" unit="0" shop="5" />
+    <ingredient id="62" name="Avoine Naturalia" unit="0" shop="5" />
+    <ingredient id="61" name="Pastèque" unit="0" shop="3" />
+    <ingredient id="60" name="Thon en boîte" unit="0" shop="5" />
+    <ingredient id="59" name="Vinaigre blanc" unit="0" shop="5" />
+    <ingredient id="58" name="Poivre" unit="0" shop="5" />
+    <ingredient id="57" name="Huile d'olive" unit="0" shop="5" />
+    <ingredient id="56" name="Tomates cerises" unit="1" shop="3" />
+    <ingredient id="55" name="Ananas en boîte" unit="1" shop="5" />
+    <ingredient id="54" name="Sopalin" unit="0" shop="5" />
+    <ingredient id="53" name="Pain" unit="0" shop="5" />
+    <ingredient id="52" name="Jus" unit="0" shop="5" />
+    <ingredient id="51" name="T-Paper" unit="0" shop="5" />
+    <ingredient id="50" name="Lait écrémé" unit="0" shop="5" />
+    <ingredient id="49" name="Œufs" unit="0" shop="5" />
+    <ingredient id="48" name="Pate à feuilletée" unit="0" shop="5" />
+    <ingredient id="47" name="Jambon" unit="0" shop="5" />
+    <ingredient id="46" name="Gruyère rapé" unit="0" shop="5" />
+    <ingredient id="45" name="Tortillas" unit="0" shop="5" />
+    <ingredient id="44" name="Blc de poulet" unit="0" shop="5" />
+    <ingredient id="43" name="Olives noires" unit="0" shop="5" />
+    <ingredient id="42" name="Feta" unit="1" shop="5" />
+    <ingredient id="41" name="Crevettes" unit="1" shop="5" />
+    <ingredient id="40" name="Poisson blanc" unit="0" shop="6" />
+    <ingredient id="39" name="Fruits pour smoothie" unit="0" shop="6" />
+    <ingredient id="38" name="Crème" unit="0" shop="5" />
+    <ingredient id="37" name="Bouillon poulet" unit="0" shop="5" />
+    <ingredient id="36" name="Yaourts" unit="0" shop="5" />
+    <ingredient id="35" name="Pack Pates" unit="0" shop="5" />
+    <ingredient id="34" name="Nutella" unit="0" shop="5" />
+    <ingredient id="33" name="Oignons nouveaux" unit="0" shop="4" />
+    <ingredient id="32" name="Piment r" unit="0" shop="4" />
+    <ingredient id="31" name="Citronelle" unit="0" shop="4" />
+    <ingredient id="30" name="Persil" unit="0" shop="4" />
+    <ingredient id="29" name="Basilic" unit="0" shop="4" />
+    <ingredient id="28" name="Menthe fraiche" unit="0" shop="4" />
+    <ingredient id="27" name="Pousses de soja" unit="1" shop="4" />
+    <ingredient id="26" name="Citrons verts" unit="0" shop="4" />
+    <ingredient id="25" name="Ciboulette" unit="0" shop="4" />
+    <ingredient id="24" name="Coriandre" unit="0" shop="4" />
+    <ingredient id="23" name="Chou-Fleur" unit="0" shop="3" />
+    <ingredient id="22" name="Asperges" unit="2" shop="3" />
+    <ingredient id="21" name="Poireaux" unit="0" shop="3" />
+    <ingredient id="20" name="Céleri" unit="0" shop="3" />
+    <ingredient id="19" name="Poivrons J" unit="0" shop="3" />
+    <ingredient id="18" name="Poivrons R" unit="0" shop="3" />
+    <ingredient id="17" name="Poivrons V" unit="0" shop="3" />
+    <ingredient id="16" name="Courgettes" unit="0" shop="3" />
+    <ingredient id="15" name="Carottes" unit="0" shop="3" />
+    <ingredient id="14" name="Epinards" unit="1" shop="3" />
+    <ingredient id="13" name="Mache" unit="0" shop="2" />
+    <ingredient id="12" name="Ail" unit="0" shop="2" />
+    <ingredient id="11" name="Oignons R" unit="0" shop="2" />
+    <ingredient id="10" name="Echalotes" unit="0" shop="2" />
+    <ingredient id="9" name="Oignons" unit="0" shop="2" />
+    <ingredient id="8" name="PdT" unit="0" shop="2" />
+    <ingredient id="7" name="Citrons" unit="0" shop="1" />
+    <ingredient id="6" name="Avocats" unit="0" shop="1" />
+    <ingredient id="5" name="Poires" unit="0" shop="1" />
+    <ingredient id="4" name="Bananes" unit="0" shop="1" />
+    <ingredient id="3" name="Haricots verts" unit="1" shop="0" />
+    <ingredient id="2" name="Concombres" unit="0" shop="0" />
+    <ingredient id="1" name="Tomates" unit="0" shop="0" />
+    <ingredient id="0" name="Pommes" unit="0" shop="0" />
+  </ingredients>
+  <recipes currentid="99">
+    <recipe id="98" name="Bœuf sauté à la sauce d'huître" book="7" page="83">
+      <elements>
+        <element ingredient="33" quantity="1.0" />
+        <element ingredient="138" quantity="250.0" />
+        <element ingredient="139" quantity="500.0" />
+        <element ingredient="150" quantity="400.0" />
+        <element ingredient="151" quantity="425.0" />
+        <element ingredient="152" quantity="50.0" />
+      </elements>
+    </recipe>
+    <recipe id="97" name="Hachis au saumon et à la patate douce" book="11" page="193">
+      <elements>
+        <element ingredient="111" quantity="2.0" />
+        <element ingredient="149" quantity="2.0" />
+      </elements>
+    </recipe>
+    <recipe id="96" name="Potage aux courgettes" book="21" page="94">
+      <elements>
+        <element ingredient="1" quantity="1.0" />
+        <element ingredient="8" quantity="1.0" />
+        <element ingredient="9" quantity="1.0" />
+        <element ingredient="12" quantity="1.0" />
+        <element ingredient="16" quantity="3.0" />
+        <element ingredient="148" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="95" name="Haricots verts et porc haché" book="24" page="64">
+      <elements>
+        <element ingredient="3" quantity="500.0" />
+        <element ingredient="12" quantity="1.0" />
+        <element ingredient="21" quantity="1.0" />
+        <element ingredient="32" quantity="1.0" />
+        <element ingredient="84" quantity="200.0" />
+        <element ingredient="145" quantity="1.0" />
+        <element ingredient="147" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="94" name="Salade poubelle" book="2" page="0">
+      <elements>
+        <element ingredient="1" quantity="2.0" />
+        <element ingredient="3" quantity="150.0" />
+        <element ingredient="13" quantity="1.0" />
+        <element ingredient="47" quantity="2.0" />
+        <element ingredient="49" quantity="1.0" />
+        <element ingredient="68" quantity="2.0" />
+        <element ingredient="72" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="93" name="Quiche brocoli comté" book="2" page="0">
+      <elements>
+        <element ingredient="1" quantity="1.0" />
+        <element ingredient="13" quantity="1.0" />
+        <element ingredient="38" quantity="1.0" />
+        <element ingredient="48" quantity="1.0" />
+        <element ingredient="49" quantity="3.0" />
+        <element ingredient="50" quantity="1.0" />
+        <element ingredient="122" quantity="1.0" />
+        <element ingredient="144" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="92" name="Omelette et salade" book="2" page="0">
+      <elements>
+        <element ingredient="1" quantity="1.0" />
+        <element ingredient="8" quantity="2.0" />
+        <element ingredient="13" quantity="1.0" />
+        <element ingredient="46" quantity="1.0" />
+        <element ingredient="49" quantity="4.0" />
+      </elements>
+    </recipe>
+    <recipe id="91" name="Steaks de thon avec tagliatelles de courgette" book="23" page="133">
+      <elements>
+        <element ingredient="16" quantity="3.0" />
+        <element ingredient="79" quantity="2.0" />
+      </elements>
+    </recipe>
+    <recipe id="90" name="Crème de légumes" book="21" page="74">
+      <elements>
+        <element ingredient="0" quantity="1.0" />
+        <element ingredient="9" quantity="1.0" />
+        <element ingredient="15" quantity="1.0" />
+        <element ingredient="20" quantity="1.0" />
+        <element ingredient="21" quantity="1.0" />
+        <element ingredient="23" quantity="1.0" />
+        <element ingredient="38" quantity="1.0" />
+        <element ingredient="67" quantity="125.0" />
+        <element ingredient="142" quantity="1.0" />
+        <element ingredient="143" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="89" name="Curry de poulet panang" book="22" page="61">
+      <elements>
+        <element ingredient="3" quantity="100.0" />
+        <element ingredient="32" quantity="2.0" />
+        <element ingredient="44" quantity="4.0" />
+        <element ingredient="101" quantity="400.0" />
+        <element ingredient="118" quantity="800.0" />
+        <element ingredient="123" quantity="70.0" />
+        <element ingredient="141" quantity="75.0" />
+      </elements>
+    </recipe>
+    <recipe id="88" name="Soupe de bœuf et à l'orge" book="21" page="34">
+      <elements>
+        <element ingredient="9" quantity="2.0" />
+        <element ingredient="15" quantity="2.0" />
+        <element ingredient="128" quantity="250.0" />
+        <element ingredient="139" quantity="300.0" />
+        <element ingredient="140" quantity="200.0" />
+      </elements>
+    </recipe>
+    <recipe id="87" name="Porc gluant aux brocolinis" book="7" page="87">
+      <elements>
+        <element ingredient="24" quantity="1.0" />
+        <element ingredient="26" quantity="1.0" />
+        <element ingredient="32" quantity="1.0" />
+        <element ingredient="84" quantity="300.0" />
+        <element ingredient="123" quantity="70.0" />
+        <element ingredient="136" quantity="4.0" />
+        <element ingredient="137" quantity="50.0" />
+        <element ingredient="138" quantity="350.0" />
+      </elements>
+    </recipe>
+    <recipe id="86" name="Rouleaux de printemps" book="2" page="0">
+      <elements>
+        <element ingredient="2" quantity="1.0" />
+        <element ingredient="24" quantity="1.0" />
+        <element ingredient="28" quantity="1.0" />
+        <element ingredient="41" quantity="200.0" />
+        <element ingredient="44" quantity="2.0" />
+        <element ingredient="132" quantity="1.0" />
+        <element ingredient="133" quantity="1.0" />
+        <element ingredient="134" quantity="1.0" />
+        <element ingredient="135" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="85" name="Légumes sautés au tofu" book="11" page="201">
+      <elements>
+        <element ingredient="3" quantity="300.0" />
+        <element ingredient="18" quantity="1.0" />
+        <element ingredient="86" quantity="1.0" />
+        <element ingredient="122" quantity="1.0" />
+        <element ingredient="131" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="84" name="Soupe d'épinards" book="2" page="0">
+      <elements>
+        <element ingredient="8" quantity="2.0" />
+        <element ingredient="14" quantity="500.0" />
+        <element ingredient="110" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="83" name="Timbale aux cèpes et sauce  à la viande" book="13" page="36">
+      <elements>
+        <element ingredient="9" quantity="1.0" />
+        <element ingredient="10" quantity="3.0" />
+        <element ingredient="15" quantity="1.0" />
+        <element ingredient="20" quantity="1.0" />
+        <element ingredient="30" quantity="1.0" />
+        <element ingredient="49" quantity="1.0" />
+        <element ingredient="92" quantity="140.0" />
+        <element ingredient="97" quantity="100.0" />
+        <element ingredient="98" quantity="400.0" />
+        <element ingredient="129" quantity="1000.0" />
+        <element ingredient="130" quantity="80.0" />
+      </elements>
+    </recipe>
+    <recipe id="82" name="Crème de lentilles" book="6" page="248">
+      <elements>
+        <element ingredient="8" quantity="1.0" />
+        <element ingredient="9" quantity="1.0" />
+        <element ingredient="15" quantity="1.0" />
+        <element ingredient="127" quantity="540.0" />
+        <element ingredient="128" quantity="200.0" />
+      </elements>
+    </recipe>
+    <recipe id="81" name="Salade de poulet et roquette de Laurence" book="20" page="0">
+      <elements>
+        <element ingredient="11" quantity="2.0" />
+        <element ingredient="42" quantity="100.0" />
+        <element ingredient="44" quantity="2.0" />
+        <element ingredient="96" quantity="4.0" />
+        <element ingredient="114" quantity="100.0" />
+      </elements>
+    </recipe>
+    <recipe id="80" name="Tarte courgette + feta + crumble parmesan" book="18" page="24">
+      <elements>
+        <element ingredient="1" quantity="1.0" />
+        <element ingredient="7" quantity="1.0" />
+        <element ingredient="13" quantity="1.0" />
+        <element ingredient="16" quantity="2.0" />
+        <element ingredient="38" quantity="1.0" />
+        <element ingredient="42" quantity="50.0" />
+        <element ingredient="49" quantity="3.0" />
+        <element ingredient="50" quantity="1.0" />
+        <element ingredient="92" quantity="1.0" />
+        <element ingredient="97" quantity="50.0" />
+        <element ingredient="112" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="79" name="Vinaigre blanc" book="0" page="0">
+      <elements>
+        <element ingredient="126" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="78" name="Velouté d'épinards" book="6" page="88">
+      <elements>
+        <element ingredient="8" quantity="1.0" />
+        <element ingredient="10" quantity="1.0" />
+        <element ingredient="12" quantity="1.0" />
+        <element ingredient="14" quantity="230.0" />
+        <element ingredient="16" quantity="1.0" />
+        <element ingredient="37" quantity="1.0" />
+        <element ingredient="38" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="77" name="Velouté de tomates et de céleri w/ grilled cheese" book="6" page="98">
+      <elements>
+        <element ingredient="8" quantity="2.0" />
+        <element ingredient="9" quantity="1.0" />
+        <element ingredient="20" quantity="4.0" />
+        <element ingredient="38" quantity="1.0" />
+        <element ingredient="71" quantity="800.0" />
+        <element ingredient="72" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="76" name="Velouté de citrouille" book="6" page="204">
+      <elements>
+        <element ingredient="8" quantity="2.0" />
+        <element ingredient="9" quantity="1.0" />
+        <element ingredient="15" quantity="1.0" />
+        <element ingredient="117" quantity="1000.0" />
+        <element ingredient="118" quantity="125.0" />
+      </elements>
+    </recipe>
+    <recipe id="75" name="Velouté aux pois et au fromage de chèvre" book="6" page="100">
+      <elements>
+        <element ingredient="8" quantity="1.0" />
+        <element ingredient="9" quantity="1.0" />
+        <element ingredient="67" quantity="400.0" />
+        <element ingredient="70" quantity="50.0" />
+      </elements>
+    </recipe>
+    <recipe id="74" name="T-Paper" book="0" page="0">
+      <elements>
+        <element ingredient="51" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="73" name="Tomates Mozzarelle" book="2" page="0">
+      <elements>
+        <element ingredient="1" quantity="3.0" />
+        <element ingredient="29" quantity="1.0" />
+        <element ingredient="102" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="72" name="Thon aux aubergines" book="3" page="291">
+      <elements>
+        <element ingredient="30" quantity="1.0" />
+        <element ingredient="56" quantity="250.0" />
+        <element ingredient="77" quantity="2.0" />
+        <element ingredient="78" quantity="4.0" />
+        <element ingredient="79" quantity="4.0" />
+      </elements>
+    </recipe>
+    <recipe id="71" name="Tarte saumon, poireau, champignons + salade pousses d'épinards" book="19" page="20">
+      <elements>
+        <element ingredient="10" quantity="2.0" />
+        <element ingredient="21" quantity="2.0" />
+        <element ingredient="38" quantity="1.0" />
+        <element ingredient="49" quantity="3.0" />
+        <element ingredient="50" quantity="1.0" />
+        <element ingredient="68" quantity="3.0" />
+        <element ingredient="82" quantity="150.0" />
+        <element ingredient="111" quantity="2.0" />
+        <element ingredient="112" quantity="1.0" />
+        <element ingredient="119" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="70" name="Tarte girolles ciboulette poulet" book="19" page="26">
+      <elements>
+        <element ingredient="1" quantity="1.0" />
+        <element ingredient="10" quantity="2.0" />
+        <element ingredient="13" quantity="1.0" />
+        <element ingredient="25" quantity="1.0" />
+        <element ingredient="38" quantity="1.0" />
+        <element ingredient="49" quantity="3.0" />
+        <element ingredient="50" quantity="1.0" />
+        <element ingredient="112" quantity="1.0" />
+        <element ingredient="113" quantity="150.0" />
+      </elements>
+    </recipe>
+    <recipe id="69" name="Tarte aux poivrons, jambon" book="11" page="295">
+      <elements>
+        <element ingredient="11" quantity="1.0" />
+        <element ingredient="12" quantity="1.0" />
+        <element ingredient="13" quantity="1.0" />
+        <element ingredient="15" quantity="1.0" />
+        <element ingredient="16" quantity="1.0" />
+        <element ingredient="17" quantity="1.0" />
+        <element ingredient="25" quantity="1.0" />
+        <element ingredient="30" quantity="1.0" />
+        <element ingredient="47" quantity="2.0" />
+        <element ingredient="48" quantity="1.0" />
+        <element ingredient="49" quantity="4.0" />
+        <element ingredient="50" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="68" name="Tarte au thon, petits pois, menthe" book="18" page="10">
+      <elements>
+        <element ingredient="1" quantity="1.0" />
+        <element ingredient="13" quantity="1.0" />
+        <element ingredient="28" quantity="1.0" />
+        <element ingredient="38" quantity="1.0" />
+        <element ingredient="49" quantity="3.0" />
+        <element ingredient="50" quantity="1.0" />
+        <element ingredient="60" quantity="1.0" />
+        <element ingredient="67" quantity="100.0" />
+        <element ingredient="92" quantity="1.0" />
+        <element ingredient="112" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="67" name="Tartare de tomate et d'avocat" book="11" page="135">
+      <elements>
+        <element ingredient="1" quantity="2.0" />
+        <element ingredient="6" quantity="2.0" />
+        <element ingredient="7" quantity="0.5" />
+        <element ingredient="24" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="66" name="Stir fried sweet and sour vegetables" book="9" page="22">
+      <elements>
+        <element ingredient="1" quantity="1.0" />
+        <element ingredient="2" quantity="1.0" />
+        <element ingredient="15" quantity="1.0" />
+        <element ingredient="33" quantity="1.0" />
+        <element ingredient="55" quantity="300.0" />
+        <element ingredient="73" quantity="100.0" />
+        <element ingredient="86" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="65" name="Stir fried Chicken with Cashew nuts" book="17" page="25">
+      <elements>
+        <element ingredient="9" quantity="1.0" />
+        <element ingredient="15" quantity="1.0" />
+        <element ingredient="33" quantity="1.0" />
+        <element ingredient="44" quantity="2.0" />
+        <element ingredient="103" quantity="100.0" />
+        <element ingredient="104" quantity="100.0" />
+        <element ingredient="105" quantity="150.0" />
+      </elements>
+    </recipe>
+    <recipe id="64" name="Spray" book="8" page="0">
+      <elements />
+    </recipe>
+    <recipe id="63" name="Soupe won-ton au porc" book="6" page="124">
+      <elements>
+        <element ingredient="33" quantity="1.0" />
+        <element ingredient="49" quantity="1.0" />
+        <element ingredient="82" quantity="100.0" />
+        <element ingredient="83" quantity="20.0" />
+        <element ingredient="84" quantity="200.0" />
+      </elements>
+    </recipe>
+    <recipe id="62" name="Soupe Tomates et Tofu" book="6" page="154">
+      <elements>
+        <element ingredient="9" quantity="1.0" />
+        <element ingredient="15" quantity="1.0" />
+        <element ingredient="43" quantity="1.0" />
+        <element ingredient="71" quantity="400.0" />
+        <element ingredient="86" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="61" name="Soupe poulet et riz" book="6" page="20">
+      <elements>
+        <element ingredient="33" quantity="1.0" />
+        <element ingredient="44" quantity="2.0" />
+        <element ingredient="82" quantity="150.0" />
+        <element ingredient="101" quantity="60.0" />
+        <element ingredient="122" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="60" name="Soupe légumes d'été et croutons à la tapenade" book="4" page="48">
+      <elements>
+        <element ingredient="1" quantity="4.0" />
+        <element ingredient="3" quantity="100.0" />
+        <element ingredient="9" quantity="1.0" />
+        <element ingredient="15" quantity="2.0" />
+        <element ingredient="16" quantity="2.0" />
+        <element ingredient="18" quantity="2.0" />
+        <element ingredient="29" quantity="1.0" />
+        <element ingredient="67" quantity="100.0" />
+        <element ingredient="106" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="59" name="Soupe concombre + PB" book="0" page="0">
+      <elements>
+        <element ingredient="2" quantity="1.0" />
+        <element ingredient="6" quantity="1.0" />
+        <element ingredient="26" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="58" name="Soupe Chicken Noodle" book="2" page="0">
+      <elements>
+        <element ingredient="9" quantity="1.0" />
+        <element ingredient="15" quantity="3.0" />
+        <element ingredient="20" quantity="2.0" />
+        <element ingredient="24" quantity="1.0" />
+        <element ingredient="44" quantity="2.0" />
+        <element ingredient="49" quantity="2.0" />
+      </elements>
+    </recipe>
+    <recipe id="57" name="Soupe aux tortellinis" book="6" page="68">
+      <elements>
+        <element ingredient="9" quantity="1.0" />
+        <element ingredient="12" quantity="1.0" />
+        <element ingredient="15" quantity="1.0" />
+        <element ingredient="29" quantity="1.0" />
+        <element ingredient="30" quantity="1.0" />
+        <element ingredient="71" quantity="400.0" />
+        <element ingredient="92" quantity="1.0" />
+        <element ingredient="125" quantity="230.0" />
+      </elements>
+    </recipe>
+    <recipe id="56" name="Soupe aux légumes de printemps" book="6" page="126">
+      <elements>
+        <element ingredient="3" quantity="200.0" />
+        <element ingredient="22" quantity="1.0" />
+        <element ingredient="33" quantity="4.0" />
+        <element ingredient="65" quantity="1.0" />
+        <element ingredient="66" quantity="1.0" />
+        <element ingredient="67" quantity="400.0" />
+        <element ingredient="68" quantity="3.0" />
+      </elements>
+    </recipe>
+    <recipe id="55" name="Soupe aux légumes d'automne" book="6" page="242">
+      <elements>
+        <element ingredient="1" quantity="2.0" />
+        <element ingredient="9" quantity="1.0" />
+        <element ingredient="15" quantity="1.0" />
+        <element ingredient="16" quantity="1.0" />
+        <element ingredient="71" quantity="400.0" />
+        <element ingredient="77" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="54" name="Soupe aux courgettes et aux pates" book="16" page="33">
+      <elements>
+        <element ingredient="7" quantity="1.0" />
+        <element ingredient="9" quantity="2.0" />
+        <element ingredient="16" quantity="4.0" />
+        <element ingredient="110" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="53" name="Soupe au jambon et aux petits pois" book="16" page="26">
+      <elements>
+        <element ingredient="33" quantity="1.0" />
+        <element ingredient="47" quantity="4.0" />
+        <element ingredient="67" quantity="350.0" />
+        <element ingredient="107" quantity="1.0" />
+        <element ingredient="110" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="52" name="Soupe aigre-douce à la thailandaise" book="14" page="14">
+      <elements>
+        <element ingredient="9" quantity="1.0" />
+        <element ingredient="15" quantity="2.0" />
+        <element ingredient="20" quantity="3.0" />
+        <element ingredient="21" quantity="1.0" />
+        <element ingredient="26" quantity="2.0" />
+        <element ingredient="31" quantity="2.0" />
+        <element ingredient="32" quantity="1.0" />
+        <element ingredient="33" quantity="2.0" />
+        <element ingredient="44" quantity="2.0" />
+        <element ingredient="55" quantity="450.0" />
+      </elements>
+    </recipe>
+    <recipe id="51" name="Soupe à la courge spaghetti" book="6" page="200">
+      <elements>
+        <element ingredient="8" quantity="1.0" />
+        <element ingredient="9" quantity="1.0" />
+        <element ingredient="15" quantity="1.0" />
+        <element ingredient="82" quantity="150.0" />
+        <element ingredient="124" quantity="800.0" />
+      </elements>
+    </recipe>
+    <recipe id="50" name="Sopalin" book="0" page="0">
+      <elements>
+        <element ingredient="54" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="49" name="Smoothie Ash + Pâtes CTH" book="0" page="0">
+      <elements>
+        <element ingredient="35" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="48" name="Sambal de crevettes" book="14" page="60">
+      <elements>
+        <element ingredient="7" quantity="1.0" />
+        <element ingredient="9" quantity="1.0" />
+        <element ingredient="12" quantity="2.0" />
+        <element ingredient="18" quantity="1.0" />
+        <element ingredient="31" quantity="1.0" />
+        <element ingredient="41" quantity="500.0" />
+        <element ingredient="116" quantity="400.0" />
+      </elements>
+    </recipe>
+    <recipe id="47" name="Salade Mixte" book="5" page="58">
+      <elements>
+        <element ingredient="2" quantity="1.0" />
+        <element ingredient="3" quantity="155.0" />
+        <element ingredient="26" quantity="2.0" />
+        <element ingredient="27" quantity="155.0" />
+        <element ingredient="32" quantity="2.0" />
+        <element ingredient="56" quantity="250.0" />
+        <element ingredient="100" quantity="300.0" />
+      </elements>
+    </recipe>
+    <recipe id="46" name="Salade grecque" book="3" page="119">
+      <elements>
+        <element ingredient="1" quantity="6.0" />
+        <element ingredient="2" quantity="1.0" />
+        <element ingredient="29" quantity="1.0" />
+        <element ingredient="42" quantity="200.0" />
+        <element ingredient="43" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="45" name="Salade de penne aux tomates séchées" book="5" page="84">
+      <elements>
+        <element ingredient="29" quantity="1.0" />
+        <element ingredient="43" quantity="1.0" />
+        <element ingredient="114" quantity="150.0" />
+        <element ingredient="115" quantity="60.0" />
+      </elements>
+    </recipe>
+    <recipe id="44" name="Salade de pâtes aux artichauts" book="15" page="112">
+      <elements>
+        <element ingredient="9" quantity="1.0" />
+        <element ingredient="18" quantity="1.0" />
+        <element ingredient="30" quantity="1.0" />
+        <element ingredient="35" quantity="1.0" />
+        <element ingredient="43" quantity="1.0" />
+        <element ingredient="108" quantity="350.0" />
+        <element ingredient="122" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="43" name="Salade de mache" book="0" page="0">
+      <elements>
+        <element ingredient="13" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="42" name="Salade chèvre chaud" book="2" page="0">
+      <elements>
+        <element ingredient="1" quantity="2.0" />
+        <element ingredient="13" quantity="1.0" />
+        <element ingredient="80" quantity="1.0" />
+        <element ingredient="81" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="41" name="Salade César" book="2" page="0">
+      <elements>
+        <element ingredient="7" quantity="1.0" />
+        <element ingredient="44" quantity="2.0" />
+        <element ingredient="49" quantity="2.0" />
+        <element ingredient="91" quantity="1.0" />
+        <element ingredient="92" quantity="1.0" />
+        <element ingredient="93" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="40" name="Rouleaux vietnamiens" book="11" page="47">
+      <elements>
+        <element ingredient="2" quantity="1.0" />
+        <element ingredient="15" quantity="1.0" />
+        <element ingredient="26" quantity="1.0" />
+        <element ingredient="28" quantity="1.0" />
+        <element ingredient="41" quantity="150.0" />
+      </elements>
+    </recipe>
+    <recipe id="39" name="Rouleaux de porc au tofu" book="14" page="96">
+      <elements>
+        <element ingredient="25" quantity="1.0" />
+        <element ingredient="26" quantity="1.0" />
+        <element ingredient="32" quantity="1.0" />
+        <element ingredient="33" quantity="1.0" />
+        <element ingredient="84" quantity="350.0" />
+        <element ingredient="90" quantity="12.0" />
+      </elements>
+    </recipe>
+    <recipe id="38" name="Risotto aux tomates et au basilic" book="13" page="24">
+      <elements>
+        <element ingredient="1" quantity="6.0" />
+        <element ingredient="9" quantity="1.0" />
+        <element ingredient="29" quantity="1.0" />
+        <element ingredient="92" quantity="1.0" />
+        <element ingredient="97" quantity="60.0" />
+        <element ingredient="98" quantity="400.0" />
+      </elements>
+    </recipe>
+    <recipe id="37" name="Risotto au poulet et aux poireaux" book="12" page="123">
+      <elements>
+        <element ingredient="21" quantity="2.0" />
+        <element ingredient="44" quantity="2.0" />
+        <element ingredient="92" quantity="1.0" />
+        <element ingredient="98" quantity="440.0" />
+      </elements>
+    </recipe>
+    <recipe id="36" name="Restes" book="0" page="0">
+      <elements />
+    </recipe>
+    <recipe id="35" name="Restau" book="0" page="0">
+      <elements />
+    </recipe>
+    <recipe id="34" name="Quiche jambon et carottes" book="11" page="43">
+      <elements>
+        <element ingredient="1" quantity="1.0" />
+        <element ingredient="13" quantity="1.0" />
+        <element ingredient="15" quantity="4.0" />
+        <element ingredient="47" quantity="2.0" />
+        <element ingredient="48" quantity="1.0" />
+        <element ingredient="94" quantity="70.0" />
+      </elements>
+    </recipe>
+    <recipe id="33" name="Poulet carottes et cardamome" book="11" page="235">
+      <elements>
+        <element ingredient="1" quantity="3.0" />
+        <element ingredient="15" quantity="2.0" />
+        <element ingredient="44" quantity="2.0" />
+        <element ingredient="101" quantity="350.0" />
+      </elements>
+    </recipe>
+    <recipe id="32" name="Potage froid aux poivrons grillés" book="6" page="156">
+      <elements>
+        <element ingredient="8" quantity="1.0" />
+        <element ingredient="9" quantity="1.0" />
+        <element ingredient="18" quantity="5.0" />
+        <element ingredient="42" quantity="50.0" />
+      </elements>
+    </recipe>
+    <recipe id="31" name="Poivre" book="0" page="0">
+      <elements>
+        <element ingredient="58" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="30" name="Poisson grillé et salade aux herbes" book="7" page="105">
+      <elements>
+        <element ingredient="10" quantity="2.0" />
+        <element ingredient="24" quantity="1.0" />
+        <element ingredient="26" quantity="1.0" />
+        <element ingredient="27" quantity="150.0" />
+        <element ingredient="28" quantity="1.0" />
+        <element ingredient="40" quantity="2.0" />
+      </elements>
+    </recipe>
+    <recipe id="29" name="Poisson haricots tomates cerises" book="11" page="285">
+      <elements>
+        <element ingredient="3" quantity="350.0" />
+        <element ingredient="7" quantity="1.0" />
+        <element ingredient="30" quantity="1.0" />
+        <element ingredient="40" quantity="2.0" />
+        <element ingredient="56" quantity="200.0" />
+      </elements>
+    </recipe>
+    <recipe id="28" name="Pizza au prosciutto et à la ricotta" book="10" page="90">
+      <elements>
+        <element ingredient="1" quantity="3.0" />
+        <element ingredient="11" quantity="1.0" />
+        <element ingredient="29" quantity="1.0" />
+        <element ingredient="68" quantity="4.0" />
+        <element ingredient="73" quantity="135.0" />
+        <element ingredient="74" quantity="1.0" />
+        <element ingredient="75" quantity="9.0" />
+        <element ingredient="76" quantity="300.0" />
+      </elements>
+    </recipe>
+    <recipe id="27" name="Pâtes au saumon et à la crème" book="0" page="0">
+      <elements>
+        <element ingredient="25" quantity="1.0" />
+        <element ingredient="68" quantity="1.0" />
+        <element ingredient="110" quantity="1.0" />
+        <element ingredient="111" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="26" name="Pastèque et tuna salad" book="2" page="0">
+      <elements>
+        <element ingredient="20" quantity="2.0" />
+        <element ingredient="49" quantity="1.0" />
+        <element ingredient="60" quantity="1.0" />
+        <element ingredient="61" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="25" name="Pad Thai" book="9" page="16">
+      <elements>
+        <element ingredient="15" quantity="1.0" />
+        <element ingredient="25" quantity="1.0" />
+        <element ingredient="26" quantity="1.0" />
+        <element ingredient="27" quantity="150.0" />
+        <element ingredient="44" quantity="1.0" />
+        <element ingredient="49" quantity="1.0" />
+        <element ingredient="86" quantity="1.0" />
+        <element ingredient="123" quantity="100.0" />
+      </elements>
+    </recipe>
+    <recipe id="24" name="Pack semaine Pain / Jus / Yaourt" book="0" page="0">
+      <elements>
+        <element ingredient="36" quantity="1.0" />
+        <element ingredient="52" quantity="2.0" />
+        <element ingredient="53" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="23" name="Nutella" book="8" page="0">
+      <elements>
+        <element ingredient="34" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="22" name="Mousse au chocolat" book="2" page="0">
+      <elements>
+        <element ingredient="49" quantity="5.0" />
+        <element ingredient="120" quantity="150.0" />
+        <element ingredient="121" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="21" name="Légumes sautés au poivre" book="7" page="92">
+      <elements>
+        <element ingredient="3" quantity="250.0" />
+        <element ingredient="15" quantity="3.0" />
+        <element ingredient="27" quantity="100.0" />
+        <element ingredient="64" quantity="400.0" />
+      </elements>
+    </recipe>
+    <recipe id="20" name="Lait" book="0" page="0">
+      <elements>
+        <element ingredient="50" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="19" name="Jambon Melon" book="2" page="0">
+      <elements>
+        <element ingredient="88" quantity="2.0" />
+        <element ingredient="89" quantity="8.0" />
+      </elements>
+    </recipe>
+    <recipe id="18" name="Huile d'olive" book="0" page="0">
+      <elements>
+        <element ingredient="57" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="17" name="Haricots verts à la tomate" book="5" page="42">
+      <elements>
+        <element ingredient="3" quantity="750.0" />
+        <element ingredient="9" quantity="1.0" />
+        <element ingredient="30" quantity="1.0" />
+        <element ingredient="71" quantity="400.0" />
+      </elements>
+    </recipe>
+    <recipe id="16" name="Gaspacho" book="6" page="172">
+      <elements>
+        <element ingredient="1" quantity="3.0" />
+        <element ingredient="2" quantity="1.0" />
+        <element ingredient="17" quantity="1.0" />
+        <element ingredient="18" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="15" name="Fruits pour smoothie" book="0" page="0">
+      <elements>
+        <element ingredient="39" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="14" name="Fruits Ash et CTH semaine" book="0" page="0">
+      <elements>
+        <element ingredient="0" quantity="5.0" />
+        <element ingredient="4" quantity="6.0" />
+        <element ingredient="5" quantity="4.0" />
+      </elements>
+    </recipe>
+    <recipe id="13" name="Frittata à l'artichaut" book="5" page="166">
+      <elements>
+        <element ingredient="7" quantity="1.0" />
+        <element ingredient="12" quantity="1.0" />
+        <element ingredient="21" quantity="2.0" />
+        <element ingredient="49" quantity="6.0" />
+        <element ingredient="97" quantity="30.0" />
+        <element ingredient="108" quantity="100.0" />
+        <element ingredient="109" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="12" name="Farandole de jeunes pousses à la féta" book="3" page="71">
+      <elements>
+        <element ingredient="7" quantity="1.0" />
+        <element ingredient="13" quantity="1.0" />
+        <element ingredient="42" quantity="150.0" />
+        <element ingredient="56" quantity="200.0" />
+        <element ingredient="67" quantity="150.0" />
+        <element ingredient="68" quantity="3.0" />
+        <element ingredient="96" quantity="3.0" />
+      </elements>
+    </recipe>
+    <recipe id="11" name="Fajitas" book="2" page="0">
+      <elements>
+        <element ingredient="1" quantity="1.0" />
+        <element ingredient="9" quantity="1.0" />
+        <element ingredient="17" quantity="1.0" />
+        <element ingredient="44" quantity="2.0" />
+        <element ingredient="45" quantity="1.0" />
+        <element ingredient="46" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="10" name="Eponges" book="0" page="0">
+      <elements>
+        <element ingredient="63" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="9" name="Déjeuner Ver" book="0" page="0">
+      <elements />
+    </recipe>
+    <recipe id="8" name="Croque Mr et Salade" book="2" page="0">
+      <elements>
+        <element ingredient="1" quantity="1.0" />
+        <element ingredient="13" quantity="1.0" />
+        <element ingredient="47" quantity="2.0" />
+        <element ingredient="68" quantity="2.0" />
+        <element ingredient="72" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="7" name="Crème citronnée aux haricots verts" book="4" page="44">
+      <elements>
+        <element ingredient="3" quantity="300.0" />
+        <element ingredient="7" quantity="1.0" />
+        <element ingredient="8" quantity="3.0" />
+        <element ingredient="25" quantity="1.0" />
+        <element ingredient="97" quantity="30.0" />
+        <element ingredient="110" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="6" name="Coffee G20" book="0" page="0">
+      <elements>
+        <element ingredient="85" quantity="6.0" />
+      </elements>
+    </recipe>
+    <recipe id="5" name="Clafoutis aux tomates cerises et a la pancetta" book="3" page="63">
+      <elements>
+        <element ingredient="38" quantity="1.0" />
+        <element ingredient="49" quantity="9.0" />
+        <element ingredient="56" quantity="150.0" />
+        <element ingredient="92" quantity="1.0" />
+        <element ingredient="95" quantity="130.0" />
+      </elements>
+    </recipe>
+    <recipe id="4" name="Céréales" book="2" page="0">
+      <elements>
+        <element ingredient="50" quantity="1.0" />
+        <element ingredient="99" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="3" name="Brunch w/ham, eggs + pancakes" book="2" page="0">
+      <elements>
+        <element ingredient="47" quantity="2.0" />
+        <element ingredient="49" quantity="4.0" />
+        <element ingredient="50" quantity="1.0" />
+        <element ingredient="69" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="2" name="Boulgour vert" book="1" page="15">
+      <elements>
+        <element ingredient="1" quantity="4.0" />
+        <element ingredient="2" quantity="1.0" />
+        <element ingredient="9" quantity="1.0" />
+        <element ingredient="16" quantity="1.0" />
+        <element ingredient="28" quantity="1.0" />
+        <element ingredient="30" quantity="1.0" />
+        <element ingredient="87" quantity="500.0" />
+      </elements>
+    </recipe>
+    <recipe id="1" name="Baguette" book="0" page="0">
+      <elements>
+        <element ingredient="107" quantity="1.0" />
+      </elements>
+    </recipe>
+    <recipe id="0" name="Avoine Naturalia" book="0" page="0">
+      <elements>
+        <element ingredient="62" quantity="4.0" />
+      </elements>
+    </recipe>
+  </recipes>
 </menumaker>
 
