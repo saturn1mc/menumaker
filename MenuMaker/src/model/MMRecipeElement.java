@@ -19,9 +19,9 @@ public class MMRecipeElement {
 	public static final String ATTR_NAME_QTY = "quantity";	
 	
 	private MMIngredient ingredient;
-	private int quantity;
+	private float quantity;
 	
-	public MMRecipeElement(MMIngredient ingredient, int quantity){
+	public MMRecipeElement(MMIngredient ingredient, float quantity){
 		this.ingredient = ingredient;
 		this.quantity = quantity;
 	}
@@ -30,7 +30,7 @@ public class MMRecipeElement {
 			Hashtable<Integer, MMIngredient> ingredients) {
 
 		this.ingredient = ingredients.get(Integer.parseInt(elementElement.getAttributeValue(ATTR_NAME_INGREDIENT)));
-		this.quantity = Integer.parseInt(elementElement.getAttributeValue(ATTR_NAME_QTY));
+		this.quantity = Float.parseFloat(elementElement.getAttributeValue(ATTR_NAME_QTY));
 	}
 
 	public MMIngredient getIngredient() {
@@ -41,11 +41,11 @@ public class MMRecipeElement {
 		this.ingredient = ingredient;
 	}
 	
-	public int getQuantity() {
+	public float getQuantity() {
 		return quantity;
 	}
 	
-	public void setQuantity(int quantity) {
+	public void setQuantity(float quantity) {
 		this.quantity = quantity;
 	}
 	
@@ -58,7 +58,7 @@ public class MMRecipeElement {
 		Element ingredientElement = new Element(NODE_NAME_ELEMENT);
 		
 		ingredientElement.setAttribute(new Attribute(ATTR_NAME_INGREDIENT, Integer.toString(ingredient.getID())));
-		ingredientElement.setAttribute(new Attribute(ATTR_NAME_QTY, Integer.toString(quantity)));
+		ingredientElement.setAttribute(new Attribute(ATTR_NAME_QTY, Float.toString(quantity)));
 		
 		return ingredientElement;
 	}

@@ -14,7 +14,7 @@ import org.jdom.Element;
  * @author cmaurice2
  *
  */
-public class MMRecipe {
+public class MMRecipe implements Comparable<MMRecipe>{
 	
 	public static final String NODE_NAME_RECIPE = "recipe";
 	public static final String NODE_NAME_ELEMENTS = "elements";
@@ -50,6 +50,7 @@ public class MMRecipe {
 		this.id = Integer.parseInt(recipeElement.getAttributeValue(ATTR_NAME_ID));
 		this.name = recipeElement.getAttributeValue(ATTR_NAME_NAME);
 		this.book = books.get(Integer.parseInt(recipeElement.getAttributeValue(ATTR_NAME_BOOK)));
+		this.page = Integer.parseInt(recipeElement.getAttributeValue(ATTR_NAME_PAGE));
 		
 		this.elements = new ArrayList<MMRecipeElement>();
 		Element elementsNode = recipeElement.getChild(NODE_NAME_ELEMENTS);
@@ -112,6 +113,12 @@ public class MMRecipe {
 	public String toString() {
 		return name;
 	}
+	
+	@Override
+	public int compareTo(MMRecipe o) {
+		return this.toString().compareTo(o.toString());
+	}
+	
 	
 	public Element toXML(){
 		Element recipeElement = new Element(NODE_NAME_RECIPE);

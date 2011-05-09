@@ -5,7 +5,6 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.MenuBar;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -29,6 +28,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
+
+import org.jdom.JDOMException;
 
 import legacy.MMLegacyParser;
 import model.MMData;
@@ -121,8 +122,11 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 
 				if (retVal == JFileChooser.APPROVE_OPTION) {
 					try {
-						MMLegacyParser.getInstance().parseLegacyFile(
-								fileChooser.getSelectedFile());
+						//TODO swing worker
+						MenuMakerGUI.this
+								.setData(MMLegacyParser.getInstance()
+										.parseLegacyFile(
+												fileChooser.getSelectedFile()));
 					} catch (IOException ioe) {
 						JOptionPane.showMessageDialog(MenuMakerGUI.this,
 								"Can't parse legacy file", "Legacy",
@@ -137,7 +141,7 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 		JMenu propertiesMenu = new JMenu("Properties");
 		propertiesMenu.setMnemonic(KeyEvent.VK_P);
 		propertiesMenu.add(legacyItem);
-		
+
 		// Menu bar
 		menuBar = new JMenuBar();
 		menuBar.add(propertiesMenu);
@@ -276,6 +280,10 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 		return data;
 	}
 
+	public void setData(MMData data) {
+		this.data = data;
+	}
+
 	public MMWeekMenuTable getWeekMenuTable() {
 		return weekMenuTable;
 	}
@@ -286,7 +294,16 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 
 	@Override
 	public void windowOpened(WindowEvent e) {
-		// TODO Auto-generated method stub
+		//TODO swing worker
+		//TODO handle case no config file
+		try {
+			data.loadData();
+			weekMenuTable.refreshCellEditor();
+		} catch (JDOMException jde) {
+			jde.printStackTrace();
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		}
 	}
 
 	@Override
