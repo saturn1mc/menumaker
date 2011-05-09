@@ -33,6 +33,7 @@ import org.jdom.JDOMException;
 
 import legacy.MMLegacyParser;
 import model.MMData;
+import view.dialog.MMBookDialog;
 import view.table.MMExtrasTable;
 import view.table.MMWeekMenuTable;
 
@@ -54,6 +55,7 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 
 	public static ImageIcon ICON_PLUS;
 	public static ImageIcon ICON_MINUS;
+	public static ImageIcon ICON_EDIT;
 	public static ImageIcon ICON_UNIT;
 	public static ImageIcon ICON_BOOK;
 	public static ImageIcon ICON_SHOP;
@@ -93,6 +95,8 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 				FOLDER_IMG + "plus-icon.png"));
 		ICON_MINUS = new ImageIcon(getClass().getResource(
 				FOLDER_IMG + "minus-icon.png"));
+		ICON_EDIT = new ImageIcon(getClass().getResource(
+				FOLDER_IMG + "edit-icon.png"));
 		ICON_UNIT = new ImageIcon(getClass().getResource(
 				FOLDER_IMG + "rulers-icon.png"));
 		ICON_SHOP = new ImageIcon(getClass().getResource(
@@ -156,32 +160,91 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 		JButton unitButton = new JButton();
 		unitButton.setIcon(ICON_UNIT);
 		unitButton.setToolTipText("Manage units");
+		
+		MouseAdapter unitAdapter = new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				super.mousePressed(e);
+			}
+		};
+		
+		unitButton.addMouseListener(unitAdapter);
 
 		// Manage shops button
 		JButton shopButton = new JButton();
 		shopButton.setIcon(ICON_SHOP);
 		shopButton.setToolTipText("Manage shop points");
+		
+		MouseAdapter shopAdapter = new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				super.mousePressed(e);
+			}
+		};
+		
+		shopButton.addMouseListener(shopAdapter);
 
 		// Manage books button
 		JButton bookButton = new JButton();
 		bookButton.setIcon(ICON_BOOK);
 		bookButton.setToolTipText("Manage books");
+		
+		MouseAdapter bookAdapter = new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				new MMBookDialog(MenuMakerGUI.this).setVisible(true);
+			}
+		};
+		
+		bookButton.addMouseListener(bookAdapter);
 
 		// Manage ingredients button
 		JButton ingredientButton = new JButton();
 		ingredientButton.setIcon(ICON_INGREDIENT);
 		ingredientButton.setToolTipText("Manage ingredients");
 
+		MouseAdapter ingredientAdapter = new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				super.mousePressed(e);
+			}
+		};
+		
+		ingredientButton.addMouseListener(ingredientAdapter);
+		
 		// Manage recipes button
 		JButton recipeButton = new JButton();
 		recipeButton.setIcon(ICON_RECIPE);
 		recipeButton.setToolTipText("Manage recipes");
 
+		MouseAdapter recipeAdapter = new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				super.mousePressed(e);
+			}
+		};
+		
+		recipeButton.addMouseListener(recipeAdapter);
+		
 		// Print button
 		JButton printButton = new JButton();
 		printButton.setIcon(ICON_PRINT);
 		printButton.setToolTipText("Print week menu");
 
+		MouseAdapter printAdapter = new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				super.mousePressed(e);
+			}
+		};
+		
+		printButton.addMouseListener(printAdapter);
+		
 		// Tool bar
 		toolBar = new JToolBar();
 		toolBar.add(bookButton);

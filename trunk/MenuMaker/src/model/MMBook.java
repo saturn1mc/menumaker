@@ -66,7 +66,7 @@ public class MMBook {
 	
 	@Override
 	public String toString() {
-		return name + " - by " + author;
+		return name;
 	}
 	
 	public Element toXML(){
