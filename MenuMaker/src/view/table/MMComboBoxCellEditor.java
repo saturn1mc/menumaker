@@ -43,7 +43,7 @@ public class MMComboBoxCellEditor extends AbstractCellEditor implements
 			Object obj = comboBox.getItemAt(i);
 			comboBox.setSelectedItem(obj);
 
-			if (obj.toString().compareTo(inputStr) >= 0) {
+			if (obj.toString().toLowerCase().compareTo(inputStr.toLowerCase()) >= 0) {
 				break;
 			}
 		}
