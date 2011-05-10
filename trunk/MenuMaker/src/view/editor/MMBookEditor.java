@@ -5,6 +5,7 @@ package view.editor;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -32,6 +33,9 @@ public class MMBookEditor extends JDialog {
 	 */
 	private static final long serialVersionUID = 4070524773506940562L;
 
+	public static final int DEFAULT_WIDTH = 250;
+	public static final int DEFAULT_HEIGHT = 110;
+	
 	private MMBookDialog parent;
 	private MMBook book;
 
@@ -50,36 +54,52 @@ public class MMBookEditor extends JDialog {
 		buildInputs();
 		buildButtons();
 
+		this.setPreferredSize(new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT));
+		
 		this.setModal(true);
 		this.pack();
 		this.setLocationRelativeTo(parent);
 	}
 
 	private void buildInputs() {
+		Dimension fieldsDim = new Dimension(MenuMakerGUI.DEFAULT_FIELD_WIDTH, MenuMakerGUI.DEFAULT_FIELD_HEIGHT);
+		
 		// Name input
 		JLabel nameLabel = new JLabel("Name");
 		nameLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 		nameField = new JTextField();
 		nameField.setAlignmentX(Component.RIGHT_ALIGNMENT);
-
+		nameField.setPreferredSize(fieldsDim);
+		nameField.setMaximumSize(fieldsDim);
+		
+		if(book != null){
+			nameField.setText(book.getName());
+		}
+		
 		JPanel namePanel = new JPanel();
 		namePanel.setLayout(new BoxLayout(namePanel, BoxLayout.LINE_AXIS));
 		namePanel.add(nameLabel);
 		namePanel.add(Box.createHorizontalGlue());
 		namePanel.add(nameField);
-
+		
 		// Author input
 		JLabel authorLabel = new JLabel("Author");
 		authorLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 		authorField = new JTextField();
 		authorField.setAlignmentX(Component.RIGHT_ALIGNMENT);
+		authorField.setPreferredSize(fieldsDim);
+		authorField.setMaximumSize(fieldsDim);
+		
+		if(book != null){
+			authorField.setText(book.getAuthor());
+		}
 		
 		JPanel authorPanel = new JPanel();
 		authorPanel.setLayout(new BoxLayout(authorPanel, BoxLayout.LINE_AXIS));
 		authorPanel.add(authorLabel);
 		authorPanel.add(Box.createHorizontalGlue());
 		authorPanel.add(authorField);
-
+		
 		// Inputs panel
 		JPanel inputsPanel = new JPanel();
 		inputsPanel.setLayout(new BoxLayout(inputsPanel, BoxLayout.PAGE_AXIS));

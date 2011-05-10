@@ -57,6 +57,9 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 
 	public static final int DEFAULT_WIDTH = 600;
 	public static final int DEFAULT_HEIGHT = 600;
+	
+	public static final int DEFAULT_FIELD_WIDTH = 190;
+	public static final int DEFAULT_FIELD_HEIGHT = 25;
 
 	public static ImageIcon ICON_PLUS;
 	public static ImageIcon ICON_MINUS;
