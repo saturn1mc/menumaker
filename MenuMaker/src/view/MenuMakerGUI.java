@@ -26,14 +26,18 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
-
-import org.jdom.JDOMException;
 
 import legacy.MMLegacyParser;
 import model.MMBook;
 import model.MMData;
+import model.MMRecipe;
+
+import org.jdom.JDOMException;
+
 import view.dialog.MMBookDialog;
 import view.table.MMExtrasTable;
 import view.table.MMWeekMenuTable;
@@ -63,6 +67,8 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 	public static ImageIcon ICON_INGREDIENT;
 	public static ImageIcon ICON_RECIPE;
 	public static ImageIcon ICON_PRINT;
+	public static ImageIcon ICON_OK;
+	public static ImageIcon ICON_CANCEL;
 
 	private JMenuBar menuBar;
 	private JToolBar toolBar;
@@ -70,6 +76,8 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 	private MMData data;
 	private MMWeekMenuTable weekMenuTable;
 	private MMExtrasTable extrasTable;
+
+	private MMBookDialog bookManageDialog;
 
 	public MenuMakerGUI() {
 		super("Menu Maker - Powered by MC");
@@ -110,6 +118,10 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 				FOLDER_IMG + "recipe-icon.png"));
 		ICON_PRINT = new ImageIcon(getClass().getResource(
 				FOLDER_IMG + "printer-icon.png"));
+		ICON_OK = new ImageIcon(getClass().getResource(
+				FOLDER_IMG + "ok-icon.png"));
+		ICON_CANCEL = new ImageIcon(getClass().getResource(
+				FOLDER_IMG + "cancel-icon.png"));
 	}
 
 	private void buildMenu() {
@@ -127,7 +139,7 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 
 				if (retVal == JFileChooser.APPROVE_OPTION) {
 					try {
-						//TODO swing worker
+						// TODO swing worker
 						MenuMakerGUI.this
 								.setData(MMLegacyParser.getInstance()
 										.parseLegacyFile(
@@ -195,7 +207,8 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 		MouseAdapter bookAdapter = new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				new MMBookDialog(MenuMakerGUI.this).setVisible(true);
+				bookManageDialog = new MMBookDialog(MenuMakerGUI.this);
+				bookManageDialog.setVisible(true);
 			}
 		};
 		
@@ -306,6 +319,7 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 
 		JButton addExtra = new JButton();
 		addExtra.setIcon(ICON_PLUS);
+		addExtra.setToolTipText("Add an extra");
 		MouseAdapter addAdapter = new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -316,6 +330,7 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 
 		JButton removeExtra = new JButton();
 		removeExtra.setIcon(ICON_MINUS);
+		removeExtra.setToolTipText("Remove selected extra(s)");
 		MouseAdapter removeAdapter = new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -347,13 +362,23 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 	public void setData(MMData data) {
 		this.data = data;
 	}
-	
-	public void addBook(MMBook book){
+
+	public void addBook(MMBook book) {
 		this.data.addBook(book);
 	}
-	
-	public void removeBook(MMBook book){
-		//TODO
+
+	public void removeBook(MMBook book) {
+		// TODO
+	}
+
+	public boolean canDelete(MMBook book) {
+		for (MMRecipe recipe : data.getRecipes().values()) {
+			if (recipe.getBook().equals(book)) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 	public MMWeekMenuTable getWeekMenuTable() {
@@ -366,8 +391,8 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 
 	@Override
 	public void windowOpened(WindowEvent e) {
-		//TODO swing worker
-		//TODO handle case no config file
+		// TODO swing worker
+		// TODO handle case no config file
 		try {
 			data.loadData();
 			weekMenuTable.refreshCellEditor();
@@ -421,6 +446,19 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 	}
 
 	public static void main(String[] args) {
+
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (UnsupportedLookAndFeelException e) {
+			e.printStackTrace();
+		}
+
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				MenuMakerGUI gui = new MenuMakerGUI();

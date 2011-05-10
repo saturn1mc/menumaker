@@ -10,7 +10,7 @@ import org.jdom.Element;
  * @author cmaurice2
  * 
  */
-public class MMUnit {
+public class MMUnit implements Comparable<MMUnit>{
 	public static final String NODE_NAME_UNIT = "unit";
 	
 	public static final String ATTR_NAME_ID = "id";
@@ -54,6 +54,26 @@ public class MMUnit {
 	@Override
 	public String toString() {
 		return name;
+	}
+	
+	@Override
+	public int compareTo(MMUnit o) {
+		return this.toString().compareTo(o.toString());
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof MMUnit){
+			if(((MMUnit)obj).getID() == id){
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
+		else{
+			return false;
+		}
 	}
 	
 	public Element toXML(){

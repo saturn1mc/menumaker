@@ -10,7 +10,7 @@ import org.jdom.Element;
  * @author cmaurice2
  *
  */
-public class MMBook {
+public class MMBook implements Comparable<MMBook>{
 
 	public static final String NODE_NAME_BOOK = "book";
 	public static final String ATTR_NAME_ID = "id";
@@ -67,6 +67,26 @@ public class MMBook {
 	@Override
 	public String toString() {
 		return name;
+	}
+	
+	@Override
+	public int compareTo(MMBook o) {
+		return this.toString().compareTo(o.toString());
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof MMBook){
+			if(((MMBook)obj).getID() == id){
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
+		else{
+			return false;
+		}
 	}
 	
 	public Element toXML(){

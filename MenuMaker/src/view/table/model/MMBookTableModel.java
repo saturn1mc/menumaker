@@ -4,6 +4,8 @@
 package view.table.model;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.AbstractTableModel;
@@ -29,14 +31,20 @@ public class MMBookTableModel extends AbstractTableModel {
 	private String[] columnNames = { "Name", "Author" };
 	private ArrayList<MMBook> data;
 
-	public MMBookTableModel() {
+	public MMBookTableModel(final Collection<MMBook> books) {
 		super();
-		data = new ArrayList<MMBook>();
+		data = new ArrayList<MMBook>(books);
+		sortData();
 	}
 
 	@Override
 	public Class<?> getColumnClass(int columnIndex) {
 		return String.class;
+	}
+	
+	public void sortData(){
+		Collections.sort(data);
+		fireTableChanged(new TableModelEvent(this));
 	}
 
 	public void addRow(MMBook book) {
@@ -47,6 +55,15 @@ public class MMBookTableModel extends AbstractTableModel {
 	public void removeRow(MMBook book){
 		data.remove(book);
 		fireTableChanged(new TableModelEvent(this));
+	}
+	
+	public MMBook getRowElement(int row){
+		if(row >= 0 && row < data.size()){
+			return data.get(row);
+		}
+		else{
+			return null;
+		}
 	}
 
 	@Override
