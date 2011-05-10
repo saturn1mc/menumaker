@@ -9,6 +9,8 @@ import javax.swing.JTable;
 
 import model.MMRecipe;
 import view.MenuMakerGUI;
+import view.table.model.MMWeekMenuTableModel;
+import view.table.renderer.MMTableCellRenderer;
 
 /**
  * @author cmaurice2

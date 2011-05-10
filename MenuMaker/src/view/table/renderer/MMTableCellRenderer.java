@@ -1,4 +1,4 @@
-package view.table;
+package view.table.renderer;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -15,7 +15,7 @@ public class MMTableCellRenderer extends DefaultTableCellRenderer {
 	public static final Color DODGER_BLUE = new Color(30,144,255);
 	public static final Color GREY82 = new Color(209,209,209);
 	
-	MMTableCellRenderer(){
+	public MMTableCellRenderer(){
 		super();
 	}
 
