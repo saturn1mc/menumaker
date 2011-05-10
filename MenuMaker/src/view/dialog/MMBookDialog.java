@@ -5,7 +5,6 @@ package view.dialog;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -46,6 +45,9 @@ public class MMBookDialog extends JDialog {
 		super(parent, "Manage books");
 		this.parent = parent;
 		this.setModal(true);
+		
+		this.getContentPane().setLayout(
+				new BoxLayout(this.getContentPane(), BoxLayout.PAGE_AXIS));
 
 		refreshTableModel();
 		buildButtons();
@@ -66,7 +68,7 @@ public class MMBookDialog extends JDialog {
 
 		JScrollPane scrollPane = new JScrollPane(table);
 
-		this.getContentPane().add(scrollPane, BorderLayout.CENTER);
+		this.getContentPane().add(scrollPane);
 
 		this.repaint();
 	}
@@ -141,10 +143,7 @@ public class MMBookDialog extends JDialog {
 		buttonPanel.add(buttonEdit);
 		buttonPanel.add(buttonRemove);
 
-		JPanel centeredPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-		centeredPanel.add(buttonPanel);
-
-		this.getContentPane().add(centeredPanel, BorderLayout.SOUTH);
+		this.getContentPane().add(buttonPanel, BorderLayout.SOUTH);
 	}
 
 	public Collection<MMBook> getBookList() {

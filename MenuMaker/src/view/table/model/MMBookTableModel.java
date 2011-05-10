@@ -65,6 +65,10 @@ public class MMBookTableModel extends AbstractTableModel {
 			return null;
 		}
 	}
+	
+	public int getRowOf(MMBook book){
+		return data.indexOf(book);
+	}
 
 	@Override
 	public int getRowCount() {

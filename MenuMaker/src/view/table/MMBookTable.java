@@ -32,9 +32,15 @@ public class MMBookTable extends JTable {
 		((MMBookTableModel) getModel()).sortData();
 	}
 	
+	public void setFocusOn(MMBook book) {
+		this.changeSelection(((MMBookTableModel) getModel()).getRowOf(book), 0, false, false);
+		this.requestFocus();
+	}
+	
 	public void addRow(MMBook book) {
 		((MMBookTableModel) getModel()).addRow(book);
 		sortData();
+		setFocusOn(book);
 	}
 
 	public void removeRow(MMBook book) {
