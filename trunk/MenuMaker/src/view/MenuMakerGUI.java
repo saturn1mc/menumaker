@@ -34,11 +34,16 @@ import javax.swing.border.TitledBorder;
 import legacy.MMLegacyParser;
 import model.MMBook;
 import model.MMData;
+import model.MMIngredient;
 import model.MMRecipe;
+import model.MMShopPoint;
+import model.MMUnit;
 
 import org.jdom.JDOMException;
 
 import view.dialog.MMBookDialog;
+import view.dialog.MMShopPointDialog;
+import view.dialog.MMUnitDialog;
 import view.table.MMExtrasTable;
 import view.table.MMWeekMenuTable;
 
@@ -81,6 +86,8 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 	private MMExtrasTable extrasTable;
 
 	private MMBookDialog bookManageDialog;
+	private MMShopPointDialog shopManageDialog;
+	private MMUnitDialog unitManageDialog;
 
 	public MenuMakerGUI() {
 		super("Menu Maker - Powered by MC");
@@ -169,9 +176,6 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 	}
 
 	private void buildToolbar() {
-
-		// TODO add actions
-
 		// Manage units button
 		JButton unitButton = new JButton();
 		unitButton.setIcon(ICON_UNIT);
@@ -180,8 +184,8 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 		MouseAdapter unitAdapter = new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				super.mousePressed(e);
+				unitManageDialog = new MMUnitDialog(MenuMakerGUI.this);
+				unitManageDialog.setVisible(true);
 			}
 		};
 		
@@ -195,8 +199,8 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 		MouseAdapter shopAdapter = new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				super.mousePressed(e);
+				shopManageDialog = new MMShopPointDialog(MenuMakerGUI.this);
+				shopManageDialog.setVisible(true);
 			}
 		};
 		
@@ -371,7 +375,23 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 	}
 
 	public void removeBook(MMBook book) {
-		// TODO
+		this.data.removeBook(book);
+	}
+	
+	public void addShopPoint(MMShopPoint shopPoint) {
+		this.data.addShopPoint(shopPoint);
+	}
+	
+	public void removeShopPoint(MMShopPoint shopPoint){
+		this.data.removeShopPoint(shopPoint);
+	}
+	
+	public void addUnit(MMUnit unit) {
+		this.data.addUnit(unit);
+	}
+	
+	public void removeUnit(MMUnit unit){
+		this.data.removeUnit(unit);
 	}
 
 	public boolean canDelete(MMBook book) {
@@ -384,6 +404,26 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 		return true;
 	}
 
+	public boolean canDelete(MMShopPoint shopPoint) {
+		for (MMIngredient ingredient : data.getIngredients().values()) {
+			if (ingredient.getShopPoint().equals(shopPoint)) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	public boolean canDelete(MMUnit unit) {
+		for (MMIngredient ingredient : data.getIngredients().values()) {
+			if (ingredient.getUnit().equals(unit)) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+	
 	public MMWeekMenuTable getWeekMenuTable() {
 		return weekMenuTable;
 	}

@@ -33,7 +33,6 @@ public class MMBookDialog extends JDialog {
 	 */
 	private static final long serialVersionUID = -5241460721152660173L;
 
-	public static final int COL_COUNT = 2;
 	public static final int DEFAULT_WIDTH = 400;
 	public static final int DEFAULT_HEIGHT = 400;
 
@@ -49,7 +48,7 @@ public class MMBookDialog extends JDialog {
 		this.getContentPane().setLayout(
 				new BoxLayout(this.getContentPane(), BoxLayout.PAGE_AXIS));
 
-		refreshTableModel();
+		buildTable();
 		buildButtons();
 
 		this.getContentPane().setPreferredSize(
@@ -58,11 +57,7 @@ public class MMBookDialog extends JDialog {
 		this.setLocationRelativeTo(parent);
 	}
 
-	private void refreshTableModel() {
-
-		if (table != null) {
-			this.getContentPane().remove(table);
-		}
+	private void buildTable() {
 
 		this.table = new MMBookTable(this);
 
