@@ -16,36 +16,40 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
 
-import model.MMBook;
+import model.MMShopPoint;
 import view.MenuMakerGUI;
-import view.dialog.MMBookDialog;
+import view.dialog.MMShopPointDialog;
 
 /**
  * @author cmaurice2
  * 
  */
-public class MMBookEditor extends JDialog {
+public class MMShopPointEditor extends JDialog {
 
 	/**
+	 *
 	 * Auto-generated SVUID
+	 *
 	 */
-	private static final long serialVersionUID = 4070524773506940562L;
+	private static final long serialVersionUID = 7595816125776414756L;
 
 	public static final int DEFAULT_WIDTH = 250;
 	public static final int DEFAULT_HEIGHT = 110;
 	
-	private MMBookDialog parent;
-	private MMBook book;
+	private MMShopPointDialog parent;
+	private MMShopPoint shopPoint;
 
 	private JTextField nameField;
-	private JTextField authorField;
+	private JSpinner prioritySpinner;
 
-	public MMBookEditor(MMBookDialog parent, MMBook book) {
+	public MMShopPointEditor(MMShopPointDialog parent, MMShopPoint shopPoint) {
 		super(parent, "Edit book");
 		this.parent = parent;
-		this.book = book;
+		this.shopPoint = shopPoint;
 		this.setModal(true);
 
 		this.getContentPane().setLayout(
@@ -72,8 +76,8 @@ public class MMBookEditor extends JDialog {
 		nameField.setPreferredSize(fieldsDim);
 		nameField.setMaximumSize(fieldsDim);
 		
-		if(book != null){
-			nameField.setText(book.getName());
+		if(shopPoint != null){
+			nameField.setText(shopPoint.getName());
 		}
 		
 		JPanel namePanel = new JPanel();
@@ -82,29 +86,29 @@ public class MMBookEditor extends JDialog {
 		namePanel.add(Box.createHorizontalGlue());
 		namePanel.add(nameField);
 		
-		// Author input
-		JLabel authorLabel = new JLabel("Author");
-		authorLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-		authorField = new JTextField();
-		authorField.setAlignmentX(Component.RIGHT_ALIGNMENT);
-		authorField.setPreferredSize(fieldsDim);
-		authorField.setMaximumSize(fieldsDim);
+		// Priority input
+		JLabel priorityLabel = new JLabel("Author");
+		priorityLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+		prioritySpinner = new JSpinner(new SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1));
+		prioritySpinner.setAlignmentX(Component.RIGHT_ALIGNMENT);
+		prioritySpinner.setPreferredSize(fieldsDim);
+		prioritySpinner.setMaximumSize(fieldsDim);
 		
-		if(book != null){
-			authorField.setText(book.getAuthor());
+		if(shopPoint != null){
+			prioritySpinner.setValue(shopPoint.getPriority());
 		}
 		
-		JPanel authorPanel = new JPanel();
-		authorPanel.setLayout(new BoxLayout(authorPanel, BoxLayout.LINE_AXIS));
-		authorPanel.add(authorLabel);
-		authorPanel.add(Box.createHorizontalGlue());
-		authorPanel.add(authorField);
+		JPanel priorityPanel = new JPanel();
+		priorityPanel.setLayout(new BoxLayout(priorityPanel, BoxLayout.LINE_AXIS));
+		priorityPanel.add(priorityLabel);
+		priorityPanel.add(Box.createHorizontalGlue());
+		priorityPanel.add(prioritySpinner);
 		
 		// Inputs panel
 		JPanel inputsPanel = new JPanel();
 		inputsPanel.setLayout(new BoxLayout(inputsPanel, BoxLayout.PAGE_AXIS));
 		inputsPanel.add(namePanel);
-		inputsPanel.add(authorPanel);
+		inputsPanel.add(priorityPanel);
 
 		this.getContentPane().add(inputsPanel);
 	}
@@ -116,30 +120,20 @@ public class MMBookEditor extends JDialog {
 		MouseAdapter okAdapter = new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if (areInputsValid()) {
-					
-					String authorStr;
-					
-					if(authorField.getText().isEmpty()){
-						authorStr = "?";
-					}
-					else{
-						authorStr = authorField.getText();
-					}
-					
-					if (book == null) {
-						book = new MMBook(nameField.getText(),
-								authorStr);
-						parent.addBook(book);
+				if (areInputsValid()) {				
+					if (shopPoint == null) {
+						shopPoint = new MMShopPoint(nameField.getText(),
+								(Integer)prioritySpinner.getValue());
+						parent.addShopPoint(shopPoint);
 					} else {
-						book.setName(nameField.getText());
-						book.setAuthor(authorStr);
+						shopPoint.setName(nameField.getText());
+						shopPoint.setPriority((Integer)prioritySpinner.getValue());
 						parent.repaint();
 					}
 
 					setVisible(false);
 				} else {
-					JOptionPane.showMessageDialog(MMBookEditor.this,
+					JOptionPane.showMessageDialog(MMShopPointEditor.this,
 							"Please fill mandatory fields", "Inputs invalid",
 							JOptionPane.ERROR_MESSAGE);
 				}

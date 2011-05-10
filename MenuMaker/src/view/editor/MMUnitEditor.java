@@ -18,15 +18,15 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import model.MMBook;
+import model.MMUnit;
 import view.MenuMakerGUI;
-import view.dialog.MMBookDialog;
+import view.dialog.MMUnitDialog;
 
 /**
  * @author cmaurice2
  * 
  */
-public class MMBookEditor extends JDialog {
+public class MMUnitEditor extends JDialog {
 
 	/**
 	 * Auto-generated SVUID
@@ -36,16 +36,15 @@ public class MMBookEditor extends JDialog {
 	public static final int DEFAULT_WIDTH = 250;
 	public static final int DEFAULT_HEIGHT = 110;
 	
-	private MMBookDialog parent;
-	private MMBook book;
+	private MMUnitDialog parent;
+	private MMUnit unit;
 
 	private JTextField nameField;
-	private JTextField authorField;
 
-	public MMBookEditor(MMBookDialog parent, MMBook book) {
-		super(parent, "Edit book");
+	public MMUnitEditor(MMUnitDialog parent, MMUnit unit) {
+		super(parent, "Edit unit");
 		this.parent = parent;
-		this.book = book;
+		this.unit = unit;
 		this.setModal(true);
 
 		this.getContentPane().setLayout(
@@ -72,8 +71,8 @@ public class MMBookEditor extends JDialog {
 		nameField.setPreferredSize(fieldsDim);
 		nameField.setMaximumSize(fieldsDim);
 		
-		if(book != null){
-			nameField.setText(book.getName());
+		if(unit != null){
+			nameField.setText(unit.getName());
 		}
 		
 		JPanel namePanel = new JPanel();
@@ -82,29 +81,10 @@ public class MMBookEditor extends JDialog {
 		namePanel.add(Box.createHorizontalGlue());
 		namePanel.add(nameField);
 		
-		// Author input
-		JLabel authorLabel = new JLabel("Author");
-		authorLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-		authorField = new JTextField();
-		authorField.setAlignmentX(Component.RIGHT_ALIGNMENT);
-		authorField.setPreferredSize(fieldsDim);
-		authorField.setMaximumSize(fieldsDim);
-		
-		if(book != null){
-			authorField.setText(book.getAuthor());
-		}
-		
-		JPanel authorPanel = new JPanel();
-		authorPanel.setLayout(new BoxLayout(authorPanel, BoxLayout.LINE_AXIS));
-		authorPanel.add(authorLabel);
-		authorPanel.add(Box.createHorizontalGlue());
-		authorPanel.add(authorField);
-		
 		// Inputs panel
 		JPanel inputsPanel = new JPanel();
 		inputsPanel.setLayout(new BoxLayout(inputsPanel, BoxLayout.PAGE_AXIS));
 		inputsPanel.add(namePanel);
-		inputsPanel.add(authorPanel);
 
 		this.getContentPane().add(inputsPanel);
 	}
@@ -117,29 +97,17 @@ public class MMBookEditor extends JDialog {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				if (areInputsValid()) {
-					
-					String authorStr;
-					
-					if(authorField.getText().isEmpty()){
-						authorStr = "?";
-					}
-					else{
-						authorStr = authorField.getText();
-					}
-					
-					if (book == null) {
-						book = new MMBook(nameField.getText(),
-								authorStr);
-						parent.addBook(book);
+					if (unit == null) {
+						unit = new MMUnit(nameField.getText());
+						parent.addUnit(unit);
 					} else {
-						book.setName(nameField.getText());
-						book.setAuthor(authorStr);
+						unit.setName(nameField.getText());
 						parent.repaint();
 					}
 
 					setVisible(false);
 				} else {
-					JOptionPane.showMessageDialog(MMBookEditor.this,
+					JOptionPane.showMessageDialog(MMUnitEditor.this,
 							"Please fill mandatory fields", "Inputs invalid",
 							JOptionPane.ERROR_MESSAGE);
 				}
