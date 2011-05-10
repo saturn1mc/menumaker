@@ -1,7 +1,7 @@
 /**
  * 
  */
-package view.table;
+package view.table.model;
 
 import javax.swing.table.AbstractTableModel;
 

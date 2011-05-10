@@ -14,12 +14,10 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
 import model.MMBook;
-
 import view.MenuMakerGUI;
+import view.table.MMBookTable;
 
 /**
  * @author cmaurice2
@@ -37,7 +35,7 @@ public class MMBookDialog extends JDialog {
 	public static final int DEFAULT_HEIGHT = 400;
 
 	private MenuMakerGUI parent;
-	private JTable table;
+	private MMBookTable table;
 
 	public MMBookDialog(MenuMakerGUI parent) {
 		super(parent, "Manage books");
@@ -57,54 +55,9 @@ public class MMBookDialog extends JDialog {
 		if(table != null){
 			this.getContentPane().remove(table);
 		}
-		
-		final int bookCount = parent.getData().getBooks().size();
 
-		this.table = new JTable(bookCount, 2);
+		this.table = new MMBookTable(this);
 
-		DefaultTableModel tableModel = new DefaultTableModel() {
-
-			/**
-			 * Auto-generated SVUID
-			 */
-			private static final long serialVersionUID = -8485173775235708077L;
-			
-			private String[] columns = {"Name", "Author"};
-			
-			@Override
-			public Object getValueAt(int row, int column) {
-				MMBook book = (MMBook)parent.getData().getBooks().values().toArray()[row];
-				
-				if(column == 0){
-					return book.getName();
-				}
-				else{
-					return book.getAuthor();
-				}
-			}
-			
-			@Override
-			public String getColumnName(int column) {
-				return columns[column];
-			}
-			
-			@Override
-			public int getColumnCount() {
-				return COL_COUNT;
-			}
-
-			@Override
-			public int getRowCount() {
-				return bookCount;
-			}
-			
-			@Override
-			public boolean isCellEditable(int row, int column) {
-				return false;
-			}
-		};
-		
-		table.setModel(tableModel);
 		JScrollPane scrollPane = new JScrollPane(table);
 		
 		this.getContentPane().add(scrollPane, BorderLayout.CENTER);
@@ -118,7 +71,7 @@ public class MMBookDialog extends JDialog {
 		MouseAdapter addAdapter = new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				//TODO
+				new Mous
 			}
 		};
 		buttonAdd.addMouseListener(addAdapter);
@@ -154,5 +107,13 @@ public class MMBookDialog extends JDialog {
 		centeredPanel.add(buttonPanel);
 		
 		this.getContentPane().add(centeredPanel, BorderLayout.SOUTH);
+	}
+	
+	public void addBook(MMBook book){
+		parent.addBook(book);
+	}
+	
+	public void removeBook(MMBook book){
+		parent.removeBook(book);
 	}
 }

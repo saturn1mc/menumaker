@@ -32,6 +32,7 @@ import javax.swing.border.TitledBorder;
 import org.jdom.JDOMException;
 
 import legacy.MMLegacyParser;
+import model.MMBook;
 import model.MMData;
 import view.dialog.MMBookDialog;
 import view.table.MMExtrasTable;
@@ -345,6 +346,14 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 
 	public void setData(MMData data) {
 		this.data = data;
+	}
+	
+	public void addBook(MMBook book){
+		this.data.addBook(book);
+	}
+	
+	public void removeBook(MMBook book){
+		//TODO
 	}
 
 	public MMWeekMenuTable getWeekMenuTable() {
