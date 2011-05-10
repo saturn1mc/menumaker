@@ -10,7 +10,7 @@ import org.jdom.Element;
  * @author cmaurice2
  *
  */
-public class MMShopPoint {
+public class MMShopPoint implements Comparable<MMShopPoint>{
 	public static final String NODE_NAME_SHOP = "shop";
 	
 	public static final String ATTR_NAME_ID = "id";
@@ -67,6 +67,26 @@ public class MMShopPoint {
 	@Override
 	public String toString() {
 		return priority + " - " + name;
+	}
+	
+	@Override
+	public int compareTo(MMShopPoint o) {
+		return this.toString().compareTo(o.toString());
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof MMShopPoint){
+			if(((MMShopPoint)obj).getID() == id){
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
+		else{
+			return false;
+		}
 	}
 	
 	public Element toXML(){

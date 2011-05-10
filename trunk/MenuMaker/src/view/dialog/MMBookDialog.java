@@ -8,15 +8,19 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import model.MMBook;
 import view.MenuMakerGUI;
+import view.editor.MMBookEditor;
 import view.table.MMBookTable;
 
 /**
@@ -36,84 +40,124 @@ public class MMBookDialog extends JDialog {
 
 	private MenuMakerGUI parent;
 	private MMBookTable table;
+	private MMBookEditor bookEditor;
 
 	public MMBookDialog(MenuMakerGUI parent) {
 		super(parent, "Manage books");
 		this.parent = parent;
 		this.setModal(true);
-		
+
 		refreshTableModel();
 		buildButtons();
-		
-		this.getContentPane().setPreferredSize(new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT));
+
+		this.getContentPane().setPreferredSize(
+				new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT));
 		this.pack();
 		this.setLocationRelativeTo(parent);
 	}
 
 	private void refreshTableModel() {
-		
-		if(table != null){
+
+		if (table != null) {
 			this.getContentPane().remove(table);
 		}
 
 		this.table = new MMBookTable(this);
 
 		JScrollPane scrollPane = new JScrollPane(table);
-		
+
 		this.getContentPane().add(scrollPane, BorderLayout.CENTER);
-		
+
 		this.repaint();
 	}
-	
-	private void buildButtons(){
-		//Add button
+
+	private void buildButtons() {
+		// Add button
 		JButton buttonAdd = new JButton(MenuMakerGUI.ICON_PLUS);
+		buttonAdd.setToolTipText("Add a book");
 		MouseAdapter addAdapter = new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				new Mous
+				bookEditor = new MMBookEditor(MMBookDialog.this, null);
+				bookEditor.setVisible(true);
 			}
 		};
 		buttonAdd.addMouseListener(addAdapter);
-		
-		//Edit button
+
+		// Edit button
 		JButton buttonEdit = new JButton(MenuMakerGUI.ICON_EDIT);
+		buttonEdit.setToolTipText("Edit book");
 		MouseAdapter editAdapter = new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				//TODO
+				bookEditor = new MMBookEditor(MMBookDialog.this,
+						table.getFirstSelectedItem());
+				bookEditor.setVisible(true);
 			}
 		};
 		buttonEdit.addMouseListener(editAdapter);
-		
-		//Remove button
+
+		// Remove button
 		JButton buttonRemove = new JButton(MenuMakerGUI.ICON_MINUS);
+		buttonRemove.setToolTipText("Remove selected book(s)");
 		MouseAdapter removeAdapter = new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				//TODO
+
+				ArrayList<MMBook> books = table.getSelectedItems();
+
+				if (!books.isEmpty()) {
+					int retVal = JOptionPane.showConfirmDialog(
+							MMBookDialog.this,
+							"All selected books will be deleted. Confirm ?",
+							"Confirm deletion", JOptionPane.YES_NO_OPTION);
+
+					if (retVal == JOptionPane.OK_OPTION) {
+						for (MMBook book : books) {
+							if (parent.canDelete(book)) {
+								parent.removeBook(book);
+								table.removeRow(book);
+							} else {
+								JOptionPane
+										.showMessageDialog(
+												MMBookDialog.this,
+												"Book \""
+														+ book.getName()
+														+ "\" is used in one or more recipes.",
+												"Can't delete",
+												JOptionPane.ERROR_MESSAGE);
+							}
+						}
+					}
+				}
 			}
 		};
 		buttonRemove.addMouseListener(removeAdapter);
-		
-		//Button panel
+
+		// Button panel
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.LINE_AXIS));
 		buttonPanel.add(buttonAdd);
 		buttonPanel.add(buttonEdit);
 		buttonPanel.add(buttonRemove);
-		
+
 		JPanel centeredPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		centeredPanel.add(buttonPanel);
-		
+
 		this.getContentPane().add(centeredPanel, BorderLayout.SOUTH);
 	}
-	
-	public void addBook(MMBook book){
-		parent.addBook(book);
+
+	public Collection<MMBook> getBookList() {
+		return parent.getData().getBooks().values();
 	}
-	
-	public void removeBook(MMBook book){
+
+	public void addBook(MMBook book) {
+		parent.addBook(book);
+		table.addRow(book);
+	}
+
+	public void removeBook(MMBook book) {
 		parent.removeBook(book);
+		table.removeRow(book);
 	}
 }

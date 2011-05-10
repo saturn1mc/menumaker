@@ -119,6 +119,20 @@ public class MMRecipe implements Comparable<MMRecipe>{
 		return this.toString().compareTo(o.toString());
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof MMRecipe){
+			if(((MMRecipe)obj).getID() == id){
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
+		else{
+			return false;
+		}
+	}
 	
 	public Element toXML(){
 		Element recipeElement = new Element(NODE_NAME_RECIPE);

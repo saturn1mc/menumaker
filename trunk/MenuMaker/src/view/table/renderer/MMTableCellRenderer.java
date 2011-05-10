@@ -11,11 +11,12 @@ public class MMTableCellRenderer extends DefaultTableCellRenderer {
 	 * Auto-generated SVUID
 	 */
 	private static final long serialVersionUID = 3420216439691165390L;
-	
-	public static final Color DODGER_BLUE = new Color(30,144,255);
-	public static final Color GREY82 = new Color(209,209,209);
-	
-	public MMTableCellRenderer(){
+
+	public static final Color DODGER_BLUE = new Color(30, 144, 255);
+	public static final Color LIGHT_GRAY = new Color(200, 200, 200);
+	public static final Color LIGHTER_GRAY = new Color(170, 170, 170);
+
+	public MMTableCellRenderer() {
 		super();
 	}
 
@@ -27,18 +28,24 @@ public class MMTableCellRenderer extends DefaultTableCellRenderer {
 				isSelected, hasFocus, row, column);
 
 		if (comp != null) {
-			if (table.getModel().isCellEditable(row, column)) {
-				comp.setForeground(Color.BLACK);
-				comp.setBackground(Color.WHITE);
+			if (isSelected) {
+				comp.setForeground(Color.WHITE);
+				comp.setBackground(DODGER_BLUE);
 			} else {
-				if (row % 2 == 0) {
-					comp.setForeground(Color.WHITE);
-					comp.setBackground(DODGER_BLUE);
+				if (table.getModel().isCellEditable(row, column)) {
+					comp.setForeground(Color.BLACK);
+					comp.setBackground(Color.WHITE);
 				} else {
-					comp.setForeground(Color.WHITE);
-					comp.setBackground(GREY82);
+					if (row % 2 == 0) {
+						comp.setForeground(Color.WHITE);
+						comp.setBackground(LIGHTER_GRAY);
+					} else {
+						comp.setForeground(Color.WHITE);
+						comp.setBackground(LIGHT_GRAY);
+					}
 				}
 			}
+
 		}
 
 		return comp;

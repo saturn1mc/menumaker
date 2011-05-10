@@ -12,7 +12,7 @@ import org.jdom.Element;
  * @author cmaurice2
  * 
  */
-public class MMIngredient {
+public class MMIngredient implements Comparable<MMIngredient>{
 
 	public static final String NODE_NAME_INGREDIENT = "ingredient";
 	public static final String ATTR_NAME_ID = "id";
@@ -85,6 +85,26 @@ public class MMIngredient {
 	@Override
 	public String toString() {
 		return name;
+	}
+	
+	@Override
+	public int compareTo(MMIngredient o) {
+		return this.toString().compareTo(o.toString());
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof MMIngredient){
+			if(((MMIngredient)obj).getID() == id){
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
+		else{
+			return false;
+		}
 	}
 
 	public Element toXML() {
