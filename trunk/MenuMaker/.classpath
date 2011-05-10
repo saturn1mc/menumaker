@@ -15,5 +15,11 @@
 	<classpathentry kind="lib" path="src/lib/xalan.jar"/>
 	<classpathentry kind="lib" path="src/lib/xerces.jar"/>
 	<classpathentry kind="lib" path="src/lib/xml-apis.jar"/>
+	<classpathentry kind="lib" path="src/lib/itext-xtra-5.1.0-javadoc.jar"/>
+	<classpathentry kind="lib" path="src/lib/itext-xtra-5.1.0-sources.jar"/>
+	<classpathentry kind="lib" path="src/lib/itext-xtra-5.1.0.jar"/>
+	<classpathentry kind="lib" path="src/lib/itextpdf-5.1.0-javadoc.jar"/>
+	<classpathentry kind="lib" path="src/lib/itextpdf-5.1.0-sources.jar"/>
+	<classpathentry kind="lib" path="src/lib/itextpdf-5.1.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
