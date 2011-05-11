@@ -6,6 +6,7 @@ package view.table;
 import javax.swing.JTable;
 
 import model.MMRecipe;
+import view.MMComboBoxCellEditor;
 import view.MenuMakerGUI;
 import view.table.model.MMWeekMenuTableModel;
 import view.table.renderer.MMTableCellRenderer;

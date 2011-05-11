@@ -13,8 +13,8 @@ public class MMTableCellRenderer extends DefaultTableCellRenderer {
 	private static final long serialVersionUID = 3420216439691165390L;
 
 	public static final Color DODGER_BLUE = new Color(30, 144, 255);
-	public static final Color LIGHT_GRAY = new Color(200, 200, 200);
-	public static final Color LIGHTER_GRAY = new Color(170, 170, 170);
+	public static final Color LIGHT_GRAY = new Color(170, 170, 170);
+	public static final Color LIGHTER_GRAY = new Color(200, 200, 200);
 
 	public MMTableCellRenderer() {
 		super();
