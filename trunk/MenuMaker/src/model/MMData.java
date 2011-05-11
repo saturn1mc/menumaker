@@ -24,7 +24,7 @@ import org.jdom.output.XMLOutputter;
  */
 public class MMData {
 
-	public static final String FOLDER_CONF = "/config/";
+	public static final String FOLDER_CONF = "config/";
 	public static final String CONFIG_FILE = "mmdata.xml";
 
 	public static final String NODE_NAME_ROOT = "menumaker";
@@ -51,7 +51,7 @@ public class MMData {
 	}
 
 	private String getConfigFile() throws IOException {
-		File configDir = new File("." + FOLDER_CONF);
+		File configDir = new File(FOLDER_CONF);
 
 		if (!configDir.exists()) {
 			configDir.mkdirs();

@@ -100,7 +100,7 @@ public class MMShopListTableModel extends AbstractTableModel {
 				return element.getIngredient();
 
 			default:
-				return Object.class;
+				return null;
 			}
 
 		} else {

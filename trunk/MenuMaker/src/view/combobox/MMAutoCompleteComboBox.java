@@ -32,11 +32,11 @@ public class MMAutoCompleteComboBox extends PlainDocument {
     private boolean hidePopupOnFocusLoss;
     private MMComboBoxCellEditor cellEditor;
     
-    public MMAutoCompleteComboBox(MMComboBoxCellEditor cellEditor, JComboBox comboBox) {
+    public MMAutoCompleteComboBox(MMComboBoxCellEditor cellEditor, Object[] items) {
         
     	this.cellEditor = cellEditor;
     	
-    	this.comboBox = comboBox;
+    	this.comboBox = new JComboBox(items);
         comboBox.setEditable(true);
         model = comboBox.getModel();
         editor = (JTextComponent) comboBox.getEditor().getEditorComponent();
@@ -59,7 +59,10 @@ public class MMAutoCompleteComboBox extends PlainDocument {
             public void keyPressed(java.awt.event.KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     highlightCompletedText(0);
-                    MMAutoCompleteComboBox.this.cellEditor.stopCellEditing();
+                    
+                    if(MMAutoCompleteComboBox.this.cellEditor != null){
+                    	MMAutoCompleteComboBox.this.cellEditor.stopCellEditing();
+                    }
                     
                 } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
                     MMAutoCompleteComboBox.this.comboBox.setSelectedIndex(0);
@@ -72,6 +75,10 @@ public class MMAutoCompleteComboBox extends PlainDocument {
         // Handle initially selected object
         Object selected = comboBox.getSelectedItem();
         if (selected != null) editor.setText(selected.toString());
+    }
+    
+    public MMAutoCompleteComboBox(Object[] items) {
+    	this(null, items);
     }
     
     public JComboBox getComboBox() {

@@ -66,12 +66,17 @@ public class MMShopPoint implements Comparable<MMShopPoint>{
 	
 	@Override
 	public String toString() {
-		return priority + " - " + name;
+		return name + " (" + priority + ")";
 	}
 	
 	@Override
 	public int compareTo(MMShopPoint o) {
-		return this.toString().compareTo(o.toString());
+		if(this.priority != o.priority){
+			return ((Integer)this.getPriority()).compareTo(o.priority);
+		}
+		else{
+			return this.name.compareTo(o.name);
+		}
 	}
 	
 	@Override

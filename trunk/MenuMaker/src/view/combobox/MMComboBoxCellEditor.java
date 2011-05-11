@@ -8,7 +8,6 @@ import java.io.Serializable;
 import java.util.Arrays;
 
 import javax.swing.AbstractCellEditor;
-import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.table.TableCellEditor;
 
@@ -29,9 +28,7 @@ public class MMComboBoxCellEditor extends AbstractCellEditor implements
 
 	public MMComboBoxCellEditor(Object[] items) {
 		Arrays.sort(items);
-		
-		JComboBox jcomboBox = new JComboBox(items);
-		this.autoComboBox = new MMAutoCompleteComboBox(this, jcomboBox);
+		this.autoComboBox = new MMAutoCompleteComboBox(this, items);
 	}
 	
 	@Override

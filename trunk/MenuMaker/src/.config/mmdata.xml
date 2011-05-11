@@ -53,8 +53,7 @@
     <unit id="1" name="Gr" />
     <unit id="0" name="UN" />
   </units>
-  <ingredients currentid="154">
-    <ingredient id="153" name="NewIngredient" unit="3" shop="5" />
+  <ingredients currentid="153">
     <ingredient id="152" name="Pois Gourmands" unit="5" shop="2" />
     <ingredient id="151" name="Mini Maïs" unit="5" shop="5" />
     <ingredient id="150" name="Chou chinois" unit="5" shop="3" />

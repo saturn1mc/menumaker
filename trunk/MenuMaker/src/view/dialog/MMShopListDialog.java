@@ -3,19 +3,25 @@
  */
 package view.dialog;
 
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import pdf.MMWeekMenuPdf;
 import view.MenuMakerGUI;
 import view.table.MMShopListTable;
+
+import com.itextpdf.text.DocumentException;
 
 /**
  * @author cmaurice2
@@ -70,32 +76,27 @@ public class MMShopListDialog extends JDialog {
 		MouseAdapter okAdapter = new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-//				weekMenuPdf = new MMWeekMenuPdf(weekMenuTable);
-//
-//				try {
-//					weekMenuPdf.writePdf();
-//					JOptionPane.showMessageDialog(MenuMakerGUI.this, "Pdf successfully created", "Success", JOptionPane.INFORMATION_MESSAGE);
-//				} catch (FileNotFoundException fnfe) {
-//					fnfe.printStackTrace();
-//					
-//					JOptionPane.showMessageDialog(MenuMakerGUI.this,
-//							"Can't create PDF file", "Failure",
-//							JOptionPane.ERROR_MESSAGE);
-//					
-//				} catch (DocumentException de) {
-//					de.printStackTrace();
-//					
-//					JOptionPane.showMessageDialog(MenuMakerGUI.this,
-//							"Can't create PDF file", "Failure",
-//							JOptionPane.ERROR_MESSAGE);
-//					
-//				} catch (IOException ioe) {
-//					ioe.printStackTrace();
-//					
-//					JOptionPane.showMessageDialog(MenuMakerGUI.this,
-//							"Can't create PDF file", "Failure",
-//							JOptionPane.ERROR_MESSAGE);
-//				}
+				weekMenuPdf = new MMWeekMenuPdf(parent.getWeekMenuTable(), table);
+
+				try {
+					weekMenuPdf.writePdf();					
+					JOptionPane.showMessageDialog(MMShopListDialog.this, "Pdf successfully created", "Success", JOptionPane.INFORMATION_MESSAGE);
+					Desktop.getDesktop().open(weekMenuPdf.getTargetFile());
+				} catch (FileNotFoundException fnfe) {
+					JOptionPane.showMessageDialog(MMShopListDialog.this,
+							fnfe.getMessage(), "Failure",
+							JOptionPane.ERROR_MESSAGE);
+					
+				} catch (DocumentException de) {
+					JOptionPane.showMessageDialog(MMShopListDialog.this,
+							de.getMessage(), "Failure",
+							JOptionPane.ERROR_MESSAGE);
+					
+				} catch (IOException ioe) {
+					JOptionPane.showMessageDialog(MMShopListDialog.this,
+							ioe.getMessage(), "Failure",
+							JOptionPane.ERROR_MESSAGE);
+				}
 
 				setVisible(false);
 			}
