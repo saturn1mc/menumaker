@@ -20,6 +20,6 @@
 	<classpathentry kind="lib" path="src/lib/itext-xtra-5.1.0.jar"/>
 	<classpathentry kind="lib" path="src/lib/itextpdf-5.1.0-javadoc.jar"/>
 	<classpathentry kind="lib" path="src/lib/itextpdf-5.1.0-sources.jar"/>
-	<classpathentry kind="lib" path="src/lib/itextpdf-5.1.0.jar"/>
+	<classpathentry kind="lib" path="src/lib/itextpdf-5.1.0.jar" sourcepath="src/lib/itextpdf-5.1.0-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
