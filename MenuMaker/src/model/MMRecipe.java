@@ -105,6 +105,10 @@ public class MMRecipe implements Comparable<MMRecipe>{
 		elements.add(element);
 	}
 	
+	public void setElements(ArrayList<MMRecipeElement> elements) {
+		this.elements = elements;
+	}
+	
 	public void removeElement(MMRecipeElement element){
 		elements.remove(element);
 	}

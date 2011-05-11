@@ -36,12 +36,14 @@ import model.MMBook;
 import model.MMData;
 import model.MMIngredient;
 import model.MMRecipe;
+import model.MMRecipeElement;
 import model.MMShopPoint;
 import model.MMUnit;
 
 import org.jdom.JDOMException;
 
 import view.dialog.MMBookDialog;
+import view.dialog.MMIngredientDialog;
 import view.dialog.MMShopListDialog;
 import view.dialog.MMShopPointDialog;
 import view.dialog.MMUnitDialog;
@@ -62,7 +64,7 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 	public static final String FOLDER_IMG = "/img/";
 
 	public static final int DEFAULT_WIDTH = 600;
-	public static final int DEFAULT_HEIGHT = 600;
+	public static final int DEFAULT_HEIGHT = 620;
 
 	public static final int DEFAULT_FIELD_WIDTH = 190;
 	public static final int DEFAULT_FIELD_HEIGHT = 25;
@@ -89,6 +91,7 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 	private MMBookDialog bookManageDialog;
 	private MMShopPointDialog shopManageDialog;
 	private MMUnitDialog unitManageDialog;
+	private MMIngredientDialog ingredientManageDialog;
 	private MMShopListDialog shopListDialog;
 
 	public MenuMakerGUI() {
@@ -231,8 +234,8 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 		MouseAdapter ingredientAdapter = new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				super.mousePressed(e);
+				ingredientManageDialog = new MMIngredientDialog(MenuMakerGUI.this);
+				ingredientManageDialog.setVisible(true);
 			}
 		};
 
@@ -395,6 +398,22 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 	public void removeUnit(MMUnit unit) {
 		this.data.removeUnit(unit);
 	}
+	
+	public void addIngredient(MMIngredient ingredient) {
+		this.data.addIngredient(ingredient);
+	}
+	
+	public void removeIngredient(MMIngredient ingredient) {
+		this.data.removeIngredient(ingredient);
+	}
+	
+	public void addRecipe(MMRecipe recipe){
+		this.data.addRecipe(recipe);
+	}
+	
+	public void removeRecipe(MMRecipe recipe){
+		this.data.removeRecipe(recipe);
+	}
 
 	public boolean canDelete(MMBook book) {
 		for (MMRecipe recipe : data.getRecipes().values()) {
@@ -423,6 +442,22 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 			}
 		}
 
+		return true;
+	}
+	
+	public boolean canDelete(MMIngredient ingredient) {
+		for (MMRecipe recipe : data.getRecipes().values()) {
+			for(MMRecipeElement element : recipe.getElements()){
+				if(element.getIngredient().equals(ingredient)){
+					return false;
+				}
+			}
+		}
+
+		return true;
+	}
+	
+	public boolean canDelete(MMRecipe recipe){
 		return true;
 	}
 
