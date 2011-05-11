@@ -41,11 +41,14 @@ import model.MMUnit;
 
 import org.jdom.JDOMException;
 
+import pdf.MMWeekMenuPdf;
 import view.dialog.MMBookDialog;
 import view.dialog.MMShopPointDialog;
 import view.dialog.MMUnitDialog;
 import view.table.MMExtrasTable;
 import view.table.MMWeekMenuTable;
+
+import com.itextpdf.text.DocumentException;
 
 /**
  * @author cmaurice2
@@ -62,7 +65,7 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 
 	public static final int DEFAULT_WIDTH = 600;
 	public static final int DEFAULT_HEIGHT = 600;
-	
+
 	public static final int DEFAULT_FIELD_WIDTH = 190;
 	public static final int DEFAULT_FIELD_HEIGHT = 25;
 
@@ -84,6 +87,8 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 	private MMData data;
 	private MMWeekMenuTable weekMenuTable;
 	private MMExtrasTable extrasTable;
+
+	private MMWeekMenuPdf weekMenuPdf;
 
 	private MMBookDialog bookManageDialog;
 	private MMShopPointDialog shopManageDialog;
@@ -180,7 +185,7 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 		JButton unitButton = new JButton();
 		unitButton.setIcon(ICON_UNIT);
 		unitButton.setToolTipText("Manage units");
-		
+
 		MouseAdapter unitAdapter = new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -188,14 +193,14 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 				unitManageDialog.setVisible(true);
 			}
 		};
-		
+
 		unitButton.addMouseListener(unitAdapter);
 
 		// Manage shops button
 		JButton shopButton = new JButton();
 		shopButton.setIcon(ICON_SHOP);
 		shopButton.setToolTipText("Manage shop points");
-		
+
 		MouseAdapter shopAdapter = new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -203,14 +208,14 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 				shopManageDialog.setVisible(true);
 			}
 		};
-		
+
 		shopButton.addMouseListener(shopAdapter);
 
 		// Manage books button
 		JButton bookButton = new JButton();
 		bookButton.setIcon(ICON_BOOK);
 		bookButton.setToolTipText("Manage books");
-		
+
 		MouseAdapter bookAdapter = new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -218,7 +223,7 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 				bookManageDialog.setVisible(true);
 			}
 		};
-		
+
 		bookButton.addMouseListener(bookAdapter);
 
 		// Manage ingredients button
@@ -233,9 +238,9 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 				super.mousePressed(e);
 			}
 		};
-		
+
 		ingredientButton.addMouseListener(ingredientAdapter);
-		
+
 		// Manage recipes button
 		JButton recipeButton = new JButton();
 		recipeButton.setIcon(ICON_RECIPE);
@@ -248,9 +253,9 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 				super.mousePressed(e);
 			}
 		};
-		
+
 		recipeButton.addMouseListener(recipeAdapter);
-		
+
 		// Print button
 		JButton printButton = new JButton();
 		printButton.setIcon(ICON_PRINT);
@@ -259,13 +264,38 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 		MouseAdapter printAdapter = new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				super.mousePressed(e);
+				weekMenuPdf = new MMWeekMenuPdf(weekMenuTable);
+
+				try {
+					weekMenuPdf.writePdf();
+					JOptionPane.showMessageDialog(MenuMakerGUI.this, "Pdf successfully created", "Success", JOptionPane.INFORMATION_MESSAGE);
+				} catch (FileNotFoundException fnfe) {
+					fnfe.printStackTrace();
+					
+					JOptionPane.showMessageDialog(MenuMakerGUI.this,
+							"Can't create PDF file", "Failure",
+							JOptionPane.ERROR_MESSAGE);
+					
+				} catch (DocumentException de) {
+					de.printStackTrace();
+					
+					JOptionPane.showMessageDialog(MenuMakerGUI.this,
+							"Can't create PDF file", "Failure",
+							JOptionPane.ERROR_MESSAGE);
+					
+				} catch (IOException ioe) {
+					ioe.printStackTrace();
+					
+					JOptionPane.showMessageDialog(MenuMakerGUI.this,
+							"Can't create PDF file", "Failure",
+							JOptionPane.ERROR_MESSAGE);
+				}
+
 			}
 		};
-		
+
 		printButton.addMouseListener(printAdapter);
-		
+
 		// Tool bar
 		toolBar = new JToolBar();
 		toolBar.add(bookButton);
@@ -377,20 +407,20 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 	public void removeBook(MMBook book) {
 		this.data.removeBook(book);
 	}
-	
+
 	public void addShopPoint(MMShopPoint shopPoint) {
 		this.data.addShopPoint(shopPoint);
 	}
-	
-	public void removeShopPoint(MMShopPoint shopPoint){
+
+	public void removeShopPoint(MMShopPoint shopPoint) {
 		this.data.removeShopPoint(shopPoint);
 	}
-	
+
 	public void addUnit(MMUnit unit) {
 		this.data.addUnit(unit);
 	}
-	
-	public void removeUnit(MMUnit unit){
+
+	public void removeUnit(MMUnit unit) {
 		this.data.removeUnit(unit);
 	}
 
@@ -423,7 +453,7 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 
 		return true;
 	}
-	
+
 	public MMWeekMenuTable getWeekMenuTable() {
 		return weekMenuTable;
 	}

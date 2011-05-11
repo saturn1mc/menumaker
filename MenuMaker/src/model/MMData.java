@@ -50,7 +50,7 @@ public class MMData {
 		recipes = new Hashtable<Integer, MMRecipe>();
 	}
 
-	public String getConfigFile() throws IOException {
+	private String getConfigFile() throws IOException {
 		File configDir = new File("." + FOLDER_CONF);
 
 		if (!configDir.exists()) {
@@ -124,7 +124,7 @@ public class MMData {
 	public void loadData() throws JDOMException, IOException {
 		SAXBuilder saxBuilder = new SAXBuilder();
 		Document document = saxBuilder.build(new File(getConfigFile()));
-
+		
 		Element rootNode = document.getRootElement();
 
 		// Books

@@ -18,8 +18,8 @@ public class MMWeekMenuTableModel extends AbstractTableModel {
 	 */
 	private static final long serialVersionUID = 833954043151307708L;
 
-	private static final int ROW_COUNT = 14;
-	private static final int COLUMN_COUNT = 5;
+	public static final int ROW_COUNT = 14;
+	public static final int COLUMN_COUNT = 5;
 
 	public static int COL_DAY = 0; 
 	public static int COL_MEAL = 1;
