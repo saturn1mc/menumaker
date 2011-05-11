@@ -6,8 +6,8 @@ package view.table;
 import javax.swing.JTable;
 
 import model.MMRecipe;
-import view.MMComboBoxCellEditor;
 import view.MenuMakerGUI;
+import view.combobox.MMComboBoxCellEditor;
 import view.table.model.MMWeekMenuTableModel;
 import view.table.renderer.MMTableCellRenderer;
 
@@ -48,15 +48,17 @@ public class MMWeekMenuTable extends JTable {
 
 	@Override
 	public void setValueAt(Object aValue, int row, int column) {
-		super.setValueAt(aValue, row, column);
+		if (aValue != null) {
+			super.setValueAt(aValue, row, column);
 
-		if (column == MMWeekMenuTableModel.COL_MEAL) {
-			recipes[row] = (MMRecipe) aValue;
-			setValueAt(((MMRecipe) aValue).getBook(), row,
-					MMWeekMenuTableModel.COL_BOOK);
-			setValueAt(((MMRecipe) aValue).getPage(), row,
-					MMWeekMenuTableModel.COL_PAGE);
-			repaint();
+			if (aValue instanceof MMRecipe) {
+				recipes[row] = (MMRecipe) aValue;
+				setValueAt(((MMRecipe) aValue).getBook(), row,
+						MMWeekMenuTableModel.COL_BOOK);
+				setValueAt(((MMRecipe) aValue).getPage(), row,
+						MMWeekMenuTableModel.COL_PAGE);
+				repaint();
+			}
 		}
 	}
 }

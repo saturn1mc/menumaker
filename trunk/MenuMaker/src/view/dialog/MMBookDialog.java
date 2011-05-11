@@ -3,7 +3,6 @@
  */
 package view.dialog;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -138,7 +137,7 @@ public class MMBookDialog extends JDialog {
 		buttonPanel.add(buttonEdit);
 		buttonPanel.add(buttonRemove);
 
-		this.getContentPane().add(buttonPanel, BorderLayout.SOUTH);
+		this.getContentPane().add(buttonPanel);
 	}
 
 	public Collection<MMBook> getBookList() {

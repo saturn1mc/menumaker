@@ -8,8 +8,8 @@ package view.table;
 import javax.swing.JTable;
 
 import model.MMIngredient;
-import view.MMComboBoxCellEditor;
 import view.MenuMakerGUI;
+import view.combobox.MMComboBoxCellEditor;
 import view.table.model.MMExtrasTableModel;
 import view.table.renderer.MMTableCellRenderer;
 

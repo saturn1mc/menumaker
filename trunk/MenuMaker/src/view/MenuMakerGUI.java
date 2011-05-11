@@ -41,14 +41,12 @@ import model.MMUnit;
 
 import org.jdom.JDOMException;
 
-import pdf.MMWeekMenuPdf;
 import view.dialog.MMBookDialog;
+import view.dialog.MMShopListDialog;
 import view.dialog.MMShopPointDialog;
 import view.dialog.MMUnitDialog;
 import view.table.MMExtrasTable;
 import view.table.MMWeekMenuTable;
-
-import com.itextpdf.text.DocumentException;
 
 /**
  * @author cmaurice2
@@ -88,11 +86,10 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 	private MMWeekMenuTable weekMenuTable;
 	private MMExtrasTable extrasTable;
 
-	private MMWeekMenuPdf weekMenuPdf;
-
 	private MMBookDialog bookManageDialog;
 	private MMShopPointDialog shopManageDialog;
 	private MMUnitDialog unitManageDialog;
+	private MMShopListDialog shopListDialog;
 
 	public MenuMakerGUI() {
 		super("Menu Maker - Powered by MC");
@@ -264,33 +261,8 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 		MouseAdapter printAdapter = new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				weekMenuPdf = new MMWeekMenuPdf(weekMenuTable);
-
-				try {
-					weekMenuPdf.writePdf();
-					JOptionPane.showMessageDialog(MenuMakerGUI.this, "Pdf successfully created", "Success", JOptionPane.INFORMATION_MESSAGE);
-				} catch (FileNotFoundException fnfe) {
-					fnfe.printStackTrace();
-					
-					JOptionPane.showMessageDialog(MenuMakerGUI.this,
-							"Can't create PDF file", "Failure",
-							JOptionPane.ERROR_MESSAGE);
-					
-				} catch (DocumentException de) {
-					de.printStackTrace();
-					
-					JOptionPane.showMessageDialog(MenuMakerGUI.this,
-							"Can't create PDF file", "Failure",
-							JOptionPane.ERROR_MESSAGE);
-					
-				} catch (IOException ioe) {
-					ioe.printStackTrace();
-					
-					JOptionPane.showMessageDialog(MenuMakerGUI.this,
-							"Can't create PDF file", "Failure",
-							JOptionPane.ERROR_MESSAGE);
-				}
-
+				shopListDialog = new MMShopListDialog(MenuMakerGUI.this);
+				shopListDialog.setVisible(true);
 			}
 		};
 
