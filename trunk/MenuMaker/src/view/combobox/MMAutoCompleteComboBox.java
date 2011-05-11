@@ -36,6 +36,7 @@ public class MMAutoCompleteComboBox extends PlainDocument {
         model = comboBox.getModel();
         editor = (JTextComponent) comboBox.getEditor().getEditorComponent();
         editor.setDocument(this);
+        
         // Bug 5100422 on Java 1.5: Editable JComboBox won't hide popup when tabbing out
         hidePopupOnFocusLoss = System.getProperty("java.version").startsWith("1.5");
         // Highlight whole text when focus gets lost
@@ -65,7 +66,15 @@ public class MMAutoCompleteComboBox extends PlainDocument {
         Object selected = comboBox.getSelectedItem();
         if (selected != null) editor.setText(selected.toString());
     }
+    
+    public JComboBox getComboBox() {
+		return comboBox;
+	}
  
+    public JTextComponent getEditor() {
+		return editor;
+	}
+    
     @Override
     public void insertString(int offs, String str, AttributeSet a) throws BadLocationException {
         // construct the resulting string
@@ -122,7 +131,7 @@ public class MMAutoCompleteComboBox extends PlainDocument {
                 }
             }
         }
-        // no item starts with the pattern =&gt; return null
+        // no item starts with the pattern => return null
         return null;
     }
  

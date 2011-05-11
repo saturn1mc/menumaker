@@ -14,6 +14,8 @@ import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.table.TableCellEditor;
 
+import view.combobox.MMAutoCompleteComboBox;
+
 /**
  * @author cmaurice2
  * 
@@ -21,7 +23,7 @@ import javax.swing.table.TableCellEditor;
 public class MMComboBoxCellEditor extends AbstractCellEditor implements
 		TableCellEditor, ActionListener, Serializable {
 
-	private JComboBox comboBox;
+	private MMAutoCompleteComboBox autoComboBox;
 
 	/**
 	 * Auto-generated SVUID
@@ -31,36 +33,38 @@ public class MMComboBoxCellEditor extends AbstractCellEditor implements
 	public MMComboBoxCellEditor(Object[] items) {
 		Arrays.sort(items);
 
-		comboBox = new JComboBox(items);
-		comboBox.addActionListener(this);
-		comboBox.setEditable(true);
+		JComboBox jcomboBox = new JComboBox(items);
+		jcomboBox.addActionListener(this);
+		jcomboBox.setEditable(true);
+		
+		this.autoComboBox = new MMAutoCompleteComboBox(jcomboBox);
 	}
 
 	private void findClosestMatch() {
-		String inputStr = comboBox.getSelectedItem().toString();
-
-		for (int i = 0; i < comboBox.getItemCount(); i++) {
-			Object obj = comboBox.getItemAt(i);
-			comboBox.setSelectedItem(obj);
-
-			if (obj.toString().toLowerCase().compareTo(inputStr.toLowerCase()) >= 0) {
-				break;
-			}
-		}
+//		String inputStr = comboBox.getSelectedItem().toString();
+//
+//		for (int i = 0; i < comboBox.getItemCount(); i++) {
+//			Object obj = comboBox.getItemAt(i);
+//			comboBox.setSelectedItem(obj);
+//
+//			if (obj.toString().toLowerCase().compareTo(inputStr.toLowerCase()) >= 0) {
+//				break;
+//			}
+//		}
 	}
 
 	@Override
 	public Object getCellEditorValue() {
-		return comboBox.getSelectedItem();
+		return autoComboBox.getComboBox().getSelectedItem();
 	}
 
 	@Override
 	public Component getTableCellEditorComponent(JTable table, Object value,
 			boolean isSelected, int row, int column) {
 
-		comboBox.setSelectedItem(value);
+		autoComboBox.getComboBox().setSelectedItem(value);
 
-		return comboBox;
+		return autoComboBox.getComboBox();
 	}
 
 	@Override
