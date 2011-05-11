@@ -133,7 +133,7 @@ public class MMUnitEditor extends JDialog {
 		buttonPanel.add(buttonOK);
 		buttonPanel.add(buttonCancel);
 
-		this.add(buttonPanel);
+		this.getContentPane().add(buttonPanel);
 	}
 
 	public boolean areInputsValid() {

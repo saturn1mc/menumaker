@@ -1,11 +1,9 @@
 /**
  * 
  */
-package view;
+package view.combobox;
 
 import java.awt.Component;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.Serializable;
 import java.util.Arrays;
 
@@ -14,14 +12,13 @@ import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.table.TableCellEditor;
 
-import view.combobox.MMAutoCompleteComboBox;
 
 /**
  * @author cmaurice2
  * 
  */
 public class MMComboBoxCellEditor extends AbstractCellEditor implements
-		TableCellEditor, ActionListener, Serializable {
+		TableCellEditor, Serializable {
 
 	private MMAutoCompleteComboBox autoComboBox;
 
@@ -32,27 +29,16 @@ public class MMComboBoxCellEditor extends AbstractCellEditor implements
 
 	public MMComboBoxCellEditor(Object[] items) {
 		Arrays.sort(items);
-
-		JComboBox jcomboBox = new JComboBox(items);
-		jcomboBox.addActionListener(this);
-		jcomboBox.setEditable(true);
 		
-		this.autoComboBox = new MMAutoCompleteComboBox(jcomboBox);
+		JComboBox jcomboBox = new JComboBox(items);
+		this.autoComboBox = new MMAutoCompleteComboBox(this, jcomboBox);
 	}
-
-	private void findClosestMatch() {
-//		String inputStr = comboBox.getSelectedItem().toString();
-//
-//		for (int i = 0; i < comboBox.getItemCount(); i++) {
-//			Object obj = comboBox.getItemAt(i);
-//			comboBox.setSelectedItem(obj);
-//
-//			if (obj.toString().toLowerCase().compareTo(inputStr.toLowerCase()) >= 0) {
-//				break;
-//			}
-//		}
+	
+	@Override
+	public boolean stopCellEditing() {
+		return super.stopCellEditing();
 	}
-
+	
 	@Override
 	public Object getCellEditorValue() {
 		return autoComboBox.getComboBox().getSelectedItem();
@@ -65,10 +51,5 @@ public class MMComboBoxCellEditor extends AbstractCellEditor implements
 		autoComboBox.getComboBox().setSelectedItem(value);
 
 		return autoComboBox.getComboBox();
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		findClosestMatch();
 	}
 }

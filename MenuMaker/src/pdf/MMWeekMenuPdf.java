@@ -9,12 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
-import java.util.Hashtable;
-import java.util.Map.Entry;
 
-import model.MMIngredient;
-import model.MMRecipe;
-import model.MMRecipeElement;
 import view.table.MMWeekMenuTable;
 
 import com.itextpdf.text.BaseColor;
@@ -138,32 +133,9 @@ public class MMWeekMenuPdf extends Document {
 		shopListParagraph = new Paragraph("Shop list", PARAGRAPH_TITLE_FONT);
 
 		// Shop list table
-		Hashtable<MMIngredient, Float> quantities = new Hashtable<MMIngredient, Float>();
-
-		for (MMRecipe recipe : weekMenuTable.getRecipes()) {
-			if (recipe != null) {
-				for (MMRecipeElement element : recipe.getElements()) {
-
-					Float quantity = quantities.get(element.getIngredient());
-
-					if (quantity == null) {
-						quantity = new Float(0);
-					}
-
-					quantity += element.getQuantity();
-					quantities.put(element.getIngredient(), quantity);
-				}
-			}
-		}
-
 		shopTable = new PdfPTable(SHOP_LIST_COL_COUNT);
 
-		for (Entry<MMIngredient, Float> entry : quantities.entrySet()) {
-			shopTable.addCell(entry.getKey().getShopPoint().getName());
-			shopTable.addCell(entry.getValue().toString());
-			shopTable.addCell(entry.getKey().getUnit().toString());
-			shopTable.addCell(entry.getKey().getName());
-		}
+		//TODO load data into shop table
 	}
 
 	public void writePdf() throws FileNotFoundException, DocumentException,

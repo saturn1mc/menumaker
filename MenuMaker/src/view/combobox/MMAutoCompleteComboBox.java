@@ -15,6 +15,7 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.JTextComponent;
 import javax.swing.text.PlainDocument;
 
+
 /**
  * @author cmaurice2
  *
@@ -29,9 +30,13 @@ public class MMAutoCompleteComboBox extends PlainDocument {
     private ComboBoxModel model;
     private JTextComponent editor;
     private boolean hidePopupOnFocusLoss;
- 
-    public MMAutoCompleteComboBox(JComboBox comboBox) {
-        this.comboBox = comboBox;
+    private MMComboBoxCellEditor cellEditor;
+    
+    public MMAutoCompleteComboBox(MMComboBoxCellEditor cellEditor, JComboBox comboBox) {
+        
+    	this.cellEditor = cellEditor;
+    	
+    	this.comboBox = comboBox;
         comboBox.setEditable(true);
         model = comboBox.getModel();
         editor = (JTextComponent) comboBox.getEditor().getEditorComponent();
@@ -54,6 +59,8 @@ public class MMAutoCompleteComboBox extends PlainDocument {
             public void keyPressed(java.awt.event.KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     highlightCompletedText(0);
+                    MMAutoCompleteComboBox.this.cellEditor.stopCellEditing();
+                    
                 } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
                     MMAutoCompleteComboBox.this.comboBox.setSelectedIndex(0);
                     MMAutoCompleteComboBox.this.editor.setText(MMAutoCompleteComboBox.this.comboBox.getSelectedItem().toString());

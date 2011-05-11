@@ -21,11 +21,11 @@ public class MMWeekMenuTableModel extends AbstractTableModel {
 	public static final int ROW_COUNT = 14;
 	public static final int COLUMN_COUNT = 5;
 
-	public static int COL_DAY = 0; 
-	public static int COL_MEAL = 1;
-	public static int COL_BOOK = 2;
-	public static int COL_PAGE = 3;
-	public static int COL_COMMENTS = 4;
+	public static final int COL_DAY = 0; 
+	public static final int COL_MEAL = 1;
+	public static final int COL_BOOK = 2;
+	public static final int COL_PAGE = 3;
+	public static final int COL_COMMENTS = 4;
 	
 	private String[] columnNames = { "Day", "Meal", "Book", "Page", "Comments" };
 	private String[][] data = { { "Sat. lunch", "", "", "", "" },
