@@ -12,9 +12,8 @@ import org.jdom.Element;
  * @author cmaurice2
  * 
  */
-public class MMExtra extends MMRecipeElement {
+public class MMExtra extends MMRecipeElement{
 
-	public static final String NODE_NAME_EXTRA = "extra";
 	public static final String ATTR_NAME_COMMENT = "comment";
 
 	private String comment;
@@ -28,7 +27,7 @@ public class MMExtra extends MMRecipeElement {
 			Hashtable<Integer, MMIngredient> ingredients) {
 		super(extraElement, ingredients);
 
-		this.comment = extraElement.getAttributeValue(ATTR_NAME_INGREDIENT);
+		this.comment = extraElement.getAttributeValue(ATTR_NAME_COMMENT);
 	}
 	
 	public String getComment() {

@@ -122,7 +122,7 @@ public class MMRecipeDialog extends JDialog {
 												MMRecipeDialog.this,
 												"Recipe \""
 														+ recipe.getName()
-														+ "\" is used for one or more recipes.",
+														+ "\" is planned for the week.",
 												"Can't delete",
 												JOptionPane.ERROR_MESSAGE);
 							}

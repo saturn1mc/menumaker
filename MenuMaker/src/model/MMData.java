@@ -34,15 +34,19 @@ public class MMData {
 	public static final String NODE_NAME_UNITS = "units";
 	public static final String NODE_NAME_INGREDIENTS = "ingredients";
 	public static final String NODE_NAME_RECIPES = "recipes";
+	public static final String NODE_NAME_LAST_MENU = "lastmenu";
 	public static final String NODE_NAME_EXTRAS = "extras";
 
 	public static final String ATTR_NAME_CURR_ID = "currentid";
+
+	public static final int PERIODS_TO_PLAN = 14;
 
 	private Hashtable<Integer, MMBook> books;
 	private Hashtable<Integer, MMShopPoint> shopPoints;
 	private Hashtable<Integer, MMUnit> units;
 	private Hashtable<Integer, MMIngredient> ingredients;
 	private Hashtable<Integer, MMRecipe> recipes;
+	private MMMenuElement[] menu;
 	private ArrayList<MMExtra> extras;
 
 	public MMData() {
@@ -51,6 +55,12 @@ public class MMData {
 		units = new Hashtable<Integer, MMUnit>();
 		ingredients = new Hashtable<Integer, MMIngredient>();
 		recipes = new Hashtable<Integer, MMRecipe>();
+
+		menu = new MMMenuElement[PERIODS_TO_PLAN];
+		for (int i = 0; i < PERIODS_TO_PLAN; i++) {
+			menu[i] = new MMMenuElement(i, null, "");
+		}
+
 		extras = new ArrayList<MMExtra>();
 	}
 
@@ -122,6 +132,10 @@ public class MMData {
 
 	public void removeRecipe(MMRecipe recipe) {
 		recipes.remove(recipe);
+	}
+
+	public MMMenuElement[] getMenu() {
+		return menu;
 	}
 
 	public ArrayList<MMExtra> getExtras() {
@@ -220,12 +234,33 @@ public class MMData {
 				}
 			}
 
+			// Last menu
+			Element menuElement = rootNode.getChild(NODE_NAME_LAST_MENU);
+
+			if (menuElement != null) {
+				List<Element> recipesList = menuElement
+						.getChildren(MMRecipe.NODE_NAME_RECIPE);
+
+				for (Element recipeElement : recipesList) {
+					int period = Integer.parseInt(recipeElement
+							.getAttributeValue(MMMenuElement.ATTR_NAME_PERIOD));
+
+					if (!recipeElement.getAttributeValue(MMRecipe.ATTR_NAME_ID)
+							.equals(MMMenuElement.ATTR_VALUE_NO_RECIPE)) {
+						MMRecipe recipe = recipes
+								.get(Integer.parseInt(recipeElement
+										.getAttributeValue(MMRecipe.ATTR_NAME_ID)));
+						menu[period].setRecipe(recipe);
+					}
+				}
+			}
+
 			// Extras
 			Element extrasElement = rootNode.getChild(NODE_NAME_EXTRAS);
 
 			if (extrasElement != null) {
 				List<Element> extrasList = extrasElement
-						.getChildren(MMExtra.NODE_NAME_EXTRA);
+						.getChildren(MMExtra.NODE_NAME_ELEMENT);
 				for (Element extraElement : extrasList) {
 					addExtra(new MMExtra(extraElement, ingredients));
 				}
@@ -292,6 +327,15 @@ public class MMData {
 		}
 
 		rootNode.addContent(recipesNode);
+
+		// Last menu
+		Element lastMenuElement = new Element(NODE_NAME_LAST_MENU);
+
+		for (MMMenuElement menuElement : menu) {
+			lastMenuElement.addContent(menuElement.toXML());
+		}
+
+		rootNode.addContent(lastMenuElement);
 
 		// Extras
 		Element extrasNode = new Element(NODE_NAME_EXTRAS);

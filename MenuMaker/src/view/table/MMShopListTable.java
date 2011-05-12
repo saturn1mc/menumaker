@@ -10,6 +10,7 @@ import java.util.Hashtable;
 import javax.swing.JTable;
 
 import model.MMIngredient;
+import model.MMMenuElement;
 import model.MMRecipe;
 import model.MMRecipeElement;
 import view.table.model.MMShopListTableModel;
@@ -27,12 +28,15 @@ public class MMShopListTable extends JTable {
 
 	private ArrayList<MMRecipeElement> shopList;
 
-	public MMShopListTable(MMRecipe[] recipes) {
+	public MMShopListTable(MMMenuElement[] menuElements) {
 		super();
 
 		Hashtable<MMIngredient, MMRecipeElement> quantities = new Hashtable<MMIngredient, MMRecipeElement>();
 
-		for (MMRecipe recipe : recipes) {
+		for (MMMenuElement menuElement : menuElements) {
+			
+			MMRecipe recipe = menuElement.getRecipe();
+			
 			if (recipe != null) {
 				for (MMRecipeElement element : recipe.getElements()) {
 

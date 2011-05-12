@@ -60,7 +60,7 @@ public class MMShopListDialog extends JDialog {
 
 	private void buildTable() {
 
-		this.table = new MMShopListTable(parent.getWeekMenuTable().getRecipes());
+		this.table = new MMShopListTable(parent.getData().getMenu());
 
 		JScrollPane scrollPane = new JScrollPane(table);
 

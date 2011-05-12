@@ -37,6 +37,7 @@ import model.MMBook;
 import model.MMData;
 import model.MMExtra;
 import model.MMIngredient;
+import model.MMMenuElement;
 import model.MMRecipe;
 import model.MMRecipeElement;
 import model.MMShopPoint;
@@ -338,7 +339,7 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 		JScrollPane scrollpane = new JScrollPane(extrasTable);
 		scrollpane.setPreferredSize(new Dimension(DEFAULT_TABLE_WIDTH,
 				DEFAULT_TABLE_HEIGHT));
-		
+
 		tablePanel.add(extrasTable.getTableHeader(), BorderLayout.PAGE_START);
 		tablePanel.add(scrollpane, BorderLayout.CENTER);
 
@@ -494,10 +495,25 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 			}
 		}
 
+		for (MMExtra extra : data.getExtras()) {
+			if (extra.getIngredient().equals(ingredient)) {
+				return false;
+			}
+		}
+
 		return true;
 	}
 
 	public boolean canDelete(MMRecipe recipe) {
+		for (MMMenuElement menuElement : data.getMenu()) {
+
+			MMRecipe weekRecipe = menuElement.getRecipe();
+
+			if (recipe != null && recipe.equals(weekRecipe)) {
+				return false;
+			}
+		}
+
 		return true;
 	}
 

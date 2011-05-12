@@ -22,13 +22,11 @@ public class MMWeekMenuTable extends JTable {
 	private static final long serialVersionUID = 6404860223050257081L;
 
 	private MenuMakerGUI parent;
-	private MMRecipe[] recipes;
 
 	public MMWeekMenuTable(MenuMakerGUI parent) {
-		super(new MMWeekMenuTableModel());
+		super(new MMWeekMenuTableModel(parent.getData().getMenu()));
 
 		this.parent = parent;
-		this.recipes = new MMRecipe[MMWeekMenuTableModel.ROW_COUNT];
 
 		this.setDefaultRenderer(Object.class, new MMTableCellRenderer());
 		refreshCellEditor();
@@ -38,27 +36,12 @@ public class MMWeekMenuTable extends JTable {
 		MMRecipe[] items = new MMRecipe[parent.getData().getRecipes().size()];
 		parent.getData().getRecipes().values().toArray(items);
 
-		this.getColumnModel().getColumn(MMWeekMenuTableModel.COL_MEAL)
+		this.getColumnModel().getColumn(MMWeekMenuTableModel.COL_RECIPE)
 				.setCellEditor(new MMComboBoxCellEditor(items));
-	}
-
-	public MMRecipe[] getRecipes() {
-		return recipes;
 	}
 
 	@Override
 	public void setValueAt(Object aValue, int row, int column) {
-		if (aValue != null) {
-			super.setValueAt(aValue, row, column);
-
-			if (aValue instanceof MMRecipe) {
-				recipes[row] = (MMRecipe) aValue;
-				setValueAt(((MMRecipe) aValue).getBook(), row,
-						MMWeekMenuTableModel.COL_BOOK);
-				setValueAt(((MMRecipe) aValue).getPage(), row,
-						MMWeekMenuTableModel.COL_PAGE);
-				repaint();
-			}
-		}
+		super.setValueAt(aValue, row, column);
 	}
 }
