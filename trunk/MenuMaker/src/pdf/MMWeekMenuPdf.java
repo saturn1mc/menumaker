@@ -77,7 +77,7 @@ public class MMWeekMenuPdf extends Document {
 		Calendar today = Calendar.getInstance();
 
 		return configDir.getPath() + File.separator + PREFIX_PDF
-				+ today.get(Calendar.MONTH) + "-"
+				+ (today.get(Calendar.MONTH)+1) + "-"
 				+ today.get(Calendar.DAY_OF_MONTH) + "-"
 				+ today.get(Calendar.YEAR) + EXT_PDF;
 	}
