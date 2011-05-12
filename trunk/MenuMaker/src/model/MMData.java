@@ -55,11 +55,8 @@ public class MMData {
 		units = new Hashtable<Integer, MMUnit>();
 		ingredients = new Hashtable<Integer, MMIngredient>();
 		recipes = new Hashtable<Integer, MMRecipe>();
-
-		menu = new MMMenuElement[PERIODS_TO_PLAN];
-		for (int i = 0; i < PERIODS_TO_PLAN; i++) {
-			menu[i] = new MMMenuElement(i, null, "");
-		}
+		
+		refreshMenu();
 
 		extras = new ArrayList<MMExtra>();
 	}
@@ -136,6 +133,16 @@ public class MMData {
 
 	public MMMenuElement[] getMenu() {
 		return menu;
+	}
+	
+	public void refreshMenu(){
+		if(menu == null){
+			menu = new MMMenuElement[PERIODS_TO_PLAN];
+		}
+		
+		for (int i = 0; i < PERIODS_TO_PLAN; i++) {
+			menu[i] = new MMMenuElement(i, null, "");
+		}
 	}
 
 	public ArrayList<MMExtra> getExtras() {
@@ -238,18 +245,18 @@ public class MMData {
 			Element menuElement = rootNode.getChild(NODE_NAME_LAST_MENU);
 
 			if (menuElement != null) {
-				List<Element> recipesList = menuElement
-						.getChildren(MMRecipe.NODE_NAME_RECIPE);
+				List<Element> menuElementsList = menuElement
+						.getChildren(MMMenuElement.NODE_NAME_MENU_ELEMENT);
 
-				for (Element recipeElement : recipesList) {
-					int period = Integer.parseInt(recipeElement
+				for (Element menuElementElement : menuElementsList) {
+					int period = Integer.parseInt(menuElementElement
 							.getAttributeValue(MMMenuElement.ATTR_NAME_PERIOD));
 
-					if (!recipeElement.getAttributeValue(MMRecipe.ATTR_NAME_ID)
+					if (!menuElementElement.getAttributeValue(MMMenuElement.ATTR_NAME_RECIPE)
 							.equals(MMMenuElement.ATTR_VALUE_NO_RECIPE)) {
 						MMRecipe recipe = recipes
-								.get(Integer.parseInt(recipeElement
-										.getAttributeValue(MMRecipe.ATTR_NAME_ID)));
+								.get(Integer.parseInt(menuElementElement
+										.getAttributeValue(MMMenuElement.ATTR_NAME_RECIPE)));
 						menu[period].setRecipe(recipe);
 					}
 				}

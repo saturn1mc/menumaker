@@ -3,6 +3,7 @@
  */
 package view.table.model;
 
+import javax.swing.event.TableModelEvent;
 import javax.swing.table.AbstractTableModel;
 
 import model.MMBook;
@@ -101,24 +102,21 @@ public class MMWeekMenuTableModel extends AbstractTableModel {
 			case COL_RECIPE:
 				if (recipe != null) {
 					return recipe;
-				}
-				else{
+				} else {
 					return "";
 				}
 
 			case COL_BOOK:
 				if (recipe != null) {
 					return recipe.getBook();
-				}
-				else{
+				} else {
 					return "";
 				}
 
 			case COL_PAGE:
 				if (recipe != null) {
 					return recipe.getPage();
-				}
-				else{
+				} else {
 					return "";
 				}
 
@@ -140,8 +138,13 @@ public class MMWeekMenuTableModel extends AbstractTableModel {
 
 			if (aValue instanceof MMRecipe) {
 				data[rowIndex].setRecipe((MMRecipe) aValue);
+				fireTableChanged(new TableModelEvent(this));
 			} else if (aValue instanceof String) {
 				data[rowIndex].setComment((String) aValue);
+				fireTableChanged(new TableModelEvent(this));
+			} else if (aValue == null) {
+				data[rowIndex].setRecipe(null);
+				fireTableChanged(new TableModelEvent(this));
 			}
 
 		}

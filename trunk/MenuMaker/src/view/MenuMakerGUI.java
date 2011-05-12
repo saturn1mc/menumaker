@@ -75,7 +75,7 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 	public static final int DEFAULT_FIELD_HEIGHT = 25;
 
 	public static final int DEFAULT_TABLE_WIDTH = 550;
-	public static final int DEFAULT_TABLE_HEIGHT = 300;
+	public static final int DEFAULT_TABLE_HEIGHT = 250;
 
 	public static ImageIcon ICON_PLUS;
 	public static ImageIcon ICON_MINUS;
@@ -88,6 +88,7 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 	public static ImageIcon ICON_PRINT;
 	public static ImageIcon ICON_OK;
 	public static ImageIcon ICON_CANCEL;
+	public static ImageIcon ICON_CLEAR_LIST;
 
 	private JMenuBar menuBar;
 	private JToolBar toolBar;
@@ -149,6 +150,8 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 				FOLDER_IMG + "ok-icon.png"));
 		ICON_CANCEL = new ImageIcon(getClass().getResource(
 				FOLDER_IMG + "cancel-icon.png"));
+		ICON_CLEAR_LIST = new ImageIcon(getClass().getResource(
+				FOLDER_IMG + "clear-list-icon.png"));
 	}
 
 	private void buildMenu() {
@@ -307,13 +310,10 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 	}
 
 	private JPanel buildWeekMenuPanel() {
-		JPanel weekMenuPanel = new JPanel();
-
-		weekMenuPanel.setLayout(new BorderLayout());
-
-		weekMenuPanel.setBorder(BorderFactory.createTitledBorder(
-				BorderFactory.createEtchedBorder(EtchedBorder.LOWERED),
-				"WeekMenu", TitledBorder.LEFT, TitledBorder.TOP));
+		
+		//Table panel
+		JPanel tablePanel = new JPanel();
+		tablePanel.setLayout(new BorderLayout());
 
 		weekMenuTable = new MMWeekMenuTable(this);
 
@@ -321,10 +321,40 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 		scrollpane.setPreferredSize(new Dimension(DEFAULT_TABLE_WIDTH,
 				DEFAULT_TABLE_HEIGHT));
 
-		weekMenuPanel.add(weekMenuTable.getTableHeader(),
+		tablePanel.add(weekMenuTable.getTableHeader(),
 				BorderLayout.PAGE_START);
-		weekMenuPanel.add(scrollpane, BorderLayout.CENTER);
-
+		tablePanel.add(scrollpane, BorderLayout.CENTER);
+		
+		//Button panel
+		JPanel buttonPanel = new JPanel();
+		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.LINE_AXIS));
+		
+		JButton clearButton = new JButton();
+		clearButton.setIcon(ICON_CLEAR_LIST);
+		clearButton.setToolTipText("Clear menu");
+		
+		MouseAdapter clearAdapter = new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				data.refreshMenu();
+				weekMenuTable.repaint();
+			}
+		};
+		
+		clearButton.addMouseListener(clearAdapter);
+		
+		buttonPanel.add(clearButton);
+		
+		//Week menu panel
+		JPanel weekMenuPanel = new JPanel();
+		weekMenuPanel.setLayout(new BoxLayout(weekMenuPanel, BoxLayout.PAGE_AXIS));
+		weekMenuPanel.setBorder(BorderFactory.createTitledBorder(
+				BorderFactory.createEtchedBorder(EtchedBorder.LOWERED),
+				"WeekMenu", TitledBorder.LEFT, TitledBorder.TOP));
+		
+		weekMenuPanel.add(tablePanel);
+		weekMenuPanel.add(buttonPanel);
+		
 		return weekMenuPanel;
 	}
 
