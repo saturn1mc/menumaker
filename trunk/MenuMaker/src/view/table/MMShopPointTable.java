@@ -25,6 +25,7 @@ public class MMShopPointTable extends JTable {
 
 	public MMShopPointTable(MMShopPointDialog parent) {
 		this.setDefaultRenderer(Object.class, new MMTableCellRenderer());
+		this.setDefaultRenderer(Integer.class, new MMTableCellRenderer());
 		this.setModel(new MMShopPointTableModel(parent.getShopPointList()));
 	}
 

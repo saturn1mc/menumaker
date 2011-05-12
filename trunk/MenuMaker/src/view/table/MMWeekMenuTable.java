@@ -29,6 +29,8 @@ public class MMWeekMenuTable extends JTable {
 		this.parent = parent;
 
 		this.setDefaultRenderer(Object.class, new MMTableCellRenderer());
+		this.setDefaultRenderer(Integer.class, new MMTableCellRenderer());
+		
 		refreshCellEditor();
 	}
 
