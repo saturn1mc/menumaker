@@ -19,9 +19,9 @@ public class MMRecipeElement implements Comparable<MMRecipeElement> {
 	public static final String ATTR_NAME_QTY = "quantity";
 
 	private MMIngredient ingredient;
-	private float quantity;
+	private double quantity;
 
-	public MMRecipeElement(MMIngredient ingredient, float quantity) {
+	public MMRecipeElement(MMIngredient ingredient, double quantity) {
 		this.ingredient = ingredient;
 		this.quantity = quantity;
 	}
@@ -31,7 +31,7 @@ public class MMRecipeElement implements Comparable<MMRecipeElement> {
 
 		this.ingredient = ingredients.get(Integer.parseInt(elementElement
 				.getAttributeValue(ATTR_NAME_INGREDIENT)));
-		this.quantity = Float.parseFloat(elementElement
+		this.quantity = Double.parseDouble(elementElement
 				.getAttributeValue(ATTR_NAME_QTY));
 	}
 
@@ -43,11 +43,11 @@ public class MMRecipeElement implements Comparable<MMRecipeElement> {
 		this.ingredient = ingredient;
 	}
 
-	public float getQuantity() {
+	public double getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(float quantity) {
+	public void setQuantity(double quantity) {
 		this.quantity = quantity;
 	}
 
@@ -68,7 +68,7 @@ public class MMRecipeElement implements Comparable<MMRecipeElement> {
 
 		ingredientElement.setAttribute(new Attribute(ATTR_NAME_INGREDIENT,
 				Integer.toString(ingredient.getID())));
-		ingredientElement.setAttribute(new Attribute(ATTR_NAME_QTY, Float
+		ingredientElement.setAttribute(new Attribute(ATTR_NAME_QTY, Double
 				.toString(quantity)));
 
 		return ingredientElement;

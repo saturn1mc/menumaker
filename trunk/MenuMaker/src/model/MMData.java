@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -33,6 +34,7 @@ public class MMData {
 	public static final String NODE_NAME_UNITS = "units";
 	public static final String NODE_NAME_INGREDIENTS = "ingredients";
 	public static final String NODE_NAME_RECIPES = "recipes";
+	public static final String NODE_NAME_EXTRAS = "extras";
 
 	public static final String ATTR_NAME_CURR_ID = "currentid";
 
@@ -41,6 +43,7 @@ public class MMData {
 	private Hashtable<Integer, MMUnit> units;
 	private Hashtable<Integer, MMIngredient> ingredients;
 	private Hashtable<Integer, MMRecipe> recipes;
+	private ArrayList<MMExtra> extras;
 
 	public MMData() {
 		books = new Hashtable<Integer, MMBook>();
@@ -48,6 +51,7 @@ public class MMData {
 		units = new Hashtable<Integer, MMUnit>();
 		ingredients = new Hashtable<Integer, MMIngredient>();
 		recipes = new Hashtable<Integer, MMRecipe>();
+		extras = new ArrayList<MMExtra>();
 	}
 
 	private String getConfigFile() throws IOException {
@@ -120,66 +124,112 @@ public class MMData {
 		recipes.remove(recipe);
 	}
 
+	public ArrayList<MMExtra> getExtras() {
+		return extras;
+	}
+
+	public void addExtra(MMExtra extra) {
+		extras.add(extra);
+	}
+
+	public void removeExtra(MMExtra extra) {
+		extras.remove(extra);
+	}
+
 	@SuppressWarnings("unchecked")
 	public void loadData() throws JDOMException, IOException {
-		SAXBuilder saxBuilder = new SAXBuilder();
-		Document document = saxBuilder.build(new File(getConfigFile()));
-		
-		Element rootNode = document.getRootElement();
 
-		// Books
-		Element booksElement = rootNode.getChild(NODE_NAME_BOOKS);
-		MMBook.setCurrentID(Integer.parseInt(booksElement
-				.getAttributeValue(ATTR_NAME_CURR_ID)));
+		File configFile = new File(getConfigFile());
 
-		List<Element> booksList = booksElement
-				.getChildren(MMBook.NODE_NAME_BOOK);
-		for (Element bookElement : booksList) {
-			addBook(new MMBook(bookElement));
-		}
+		if (configFile.exists()) {
 
-		// Shops
-		Element shopsElement = rootNode.getChild(NODE_NAME_SHOPS);
-		MMShopPoint.setCurrentID(Integer.parseInt(shopsElement
-				.getAttributeValue(ATTR_NAME_CURR_ID)));
+			SAXBuilder saxBuilder = new SAXBuilder();
+			Document document = saxBuilder.build(configFile);
 
-		List<Element> shopsList = shopsElement
-				.getChildren(MMShopPoint.NODE_NAME_SHOP);
-		for (Element shopElement : shopsList) {
-			addShopPoint(new MMShopPoint(shopElement));
-		}
+			Element rootNode = document.getRootElement();
 
-		// Units
-		Element unitsElement = rootNode.getChild(NODE_NAME_UNITS);
-		MMUnit.setCurrentID(Integer.parseInt(unitsElement
-				.getAttributeValue(ATTR_NAME_CURR_ID)));
+			// Books
+			Element booksElement = rootNode.getChild(NODE_NAME_BOOKS);
 
-		List<Element> unitsList = unitsElement
-				.getChildren(MMUnit.NODE_NAME_UNIT);
-		for (Element unitElement : unitsList) {
-			addUnit(new MMUnit(unitElement));
-		}
+			if (booksElement != null) {
+				MMBook.setCurrentID(Integer.parseInt(booksElement
+						.getAttributeValue(ATTR_NAME_CURR_ID)));
 
-		// Ingredients
-		Element ingredientsElement = rootNode.getChild(NODE_NAME_INGREDIENTS);
-		MMIngredient.setCurrentID(Integer.parseInt(ingredientsElement
-				.getAttributeValue(ATTR_NAME_CURR_ID)));
+				List<Element> booksList = booksElement
+						.getChildren(MMBook.NODE_NAME_BOOK);
+				for (Element bookElement : booksList) {
+					addBook(new MMBook(bookElement));
+				}
+			}
 
-		List<Element> ingredientsList = ingredientsElement
-				.getChildren(MMIngredient.NODE_NAME_INGREDIENT);
-		for (Element ingredientElement : ingredientsList) {
-			addIngredient(new MMIngredient(ingredientElement, units, shopPoints));
-		}
+			// Shops
+			Element shopsElement = rootNode.getChild(NODE_NAME_SHOPS);
 
-		// Recipes
-		Element recipesElement = rootNode.getChild(NODE_NAME_RECIPES);
-		MMRecipe.setCurrentID(Integer.parseInt(recipesElement
-				.getAttributeValue(ATTR_NAME_CURR_ID)));
+			if (shopsElement != null) {
+				MMShopPoint.setCurrentID(Integer.parseInt(shopsElement
+						.getAttributeValue(ATTR_NAME_CURR_ID)));
 
-		List<Element> recipesList = recipesElement
-				.getChildren(MMRecipe.NODE_NAME_RECIPE);
-		for (Element recipeElement : recipesList) {
-			addRecipe(new MMRecipe(recipeElement, books, ingredients));
+				List<Element> shopsList = shopsElement
+						.getChildren(MMShopPoint.NODE_NAME_SHOP);
+				for (Element shopElement : shopsList) {
+					addShopPoint(new MMShopPoint(shopElement));
+				}
+			}
+
+			// Units
+			Element unitsElement = rootNode.getChild(NODE_NAME_UNITS);
+
+			if (unitsElement != null) {
+				MMUnit.setCurrentID(Integer.parseInt(unitsElement
+						.getAttributeValue(ATTR_NAME_CURR_ID)));
+
+				List<Element> unitsList = unitsElement
+						.getChildren(MMUnit.NODE_NAME_UNIT);
+				for (Element unitElement : unitsList) {
+					addUnit(new MMUnit(unitElement));
+				}
+			}
+
+			// Ingredients
+			Element ingredientsElement = rootNode
+					.getChild(NODE_NAME_INGREDIENTS);
+
+			if (ingredientsElement != null) {
+				MMIngredient.setCurrentID(Integer.parseInt(ingredientsElement
+						.getAttributeValue(ATTR_NAME_CURR_ID)));
+
+				List<Element> ingredientsList = ingredientsElement
+						.getChildren(MMIngredient.NODE_NAME_INGREDIENT);
+				for (Element ingredientElement : ingredientsList) {
+					addIngredient(new MMIngredient(ingredientElement, units,
+							shopPoints));
+				}
+			}
+
+			// Recipes
+			Element recipesElement = rootNode.getChild(NODE_NAME_RECIPES);
+
+			if (recipesElement != null) {
+				MMRecipe.setCurrentID(Integer.parseInt(recipesElement
+						.getAttributeValue(ATTR_NAME_CURR_ID)));
+
+				List<Element> recipesList = recipesElement
+						.getChildren(MMRecipe.NODE_NAME_RECIPE);
+				for (Element recipeElement : recipesList) {
+					addRecipe(new MMRecipe(recipeElement, books, ingredients));
+				}
+			}
+
+			// Extras
+			Element extrasElement = rootNode.getChild(NODE_NAME_EXTRAS);
+
+			if (extrasElement != null) {
+				List<Element> extrasList = extrasElement
+						.getChildren(MMExtra.NODE_NAME_EXTRA);
+				for (Element extraElement : extrasList) {
+					addExtra(new MMExtra(extraElement, ingredients));
+				}
+			}
 		}
 	}
 
@@ -242,6 +292,15 @@ public class MMData {
 		}
 
 		rootNode.addContent(recipesNode);
+
+		// Extras
+		Element extrasNode = new Element(NODE_NAME_EXTRAS);
+
+		for (MMExtra extra : extras) {
+			extrasNode.addContent(extra.toXML());
+		}
+
+		rootNode.addContent(extrasNode);
 
 		XMLOutputter xmlOutputter = new XMLOutputter(Format.getPrettyFormat());
 		xmlOutputter.output(xmlDoc, new FileOutputStream(getConfigFile()));

@@ -1088,5 +1088,8 @@
       </elements>
     </recipe>
   </recipes>
+  <extras>
+    <element ingredient="12" quantity="1.0" comment="" />
+  </extras>
 </menumaker>
 

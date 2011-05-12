@@ -48,7 +48,7 @@ public class MMRecipeElementTableModel extends AbstractTableModel {
 	public Class<?> getColumnClass(int columnIndex) {
 		switch (columnIndex) {
 		case COL_QUANTITY:
-			return Float.class;
+			return Double.class;
 
 		case COL_UNIT:
 			return MMUnit.class;
@@ -141,9 +141,9 @@ public class MMRecipeElementTableModel extends AbstractTableModel {
 	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
 		if ((rowIndex >= 0 && rowIndex < data.size())
 				&& (columnIndex >= 0 && columnIndex < COLUMN_COUNT)) {
-			if (aValue instanceof Float) {
+			if (aValue instanceof Double) {
 				data.get(rowIndex).setQuantity(
-						Float.parseFloat(aValue.toString()));
+						Double.parseDouble(aValue.toString()));
 			} else if (aValue instanceof MMIngredient) {
 				data.get(rowIndex).setIngredient((MMIngredient) aValue);
 			}

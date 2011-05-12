@@ -35,6 +35,9 @@ public class MMRecipeElementTable extends JTable {
 		if (recipe != null) {
 			this.setModel(new MMRecipeElementTableModel(recipe.getElements()));
 		}
+		else{
+			this.setModel(new MMRecipeElementTableModel(null));
+		}
 
 		this.setDefaultRenderer(Object.class, new MMTableCellRenderer());
 		refreshCellEditor();
@@ -61,8 +64,19 @@ public class MMRecipeElementTable extends JTable {
 		}
 	}
 
+	public void sortData(){
+		((MMRecipeElementTableModel) getModel()).sortData();
+	}
+	
+	public void setFocusOn(MMRecipeElement element) {
+		this.changeSelection(((MMRecipeElementTableModel) getModel()).getRowOf(element), 0, false, false);
+		this.requestFocus();
+	}
+	
 	public void addRow(MMRecipeElement element) {
 		((MMRecipeElementTableModel) getModel()).addRow(element);
+		sortData();
+		setFocusOn(element);
 	}
 
 	public void removeRow(MMRecipeElement element) {
