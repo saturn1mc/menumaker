@@ -24,13 +24,18 @@ public class MMWeekMenuTable extends JTable {
 	private MenuMakerGUI parent;
 
 	public MMWeekMenuTable(MenuMakerGUI parent) {
-		super(new MMWeekMenuTableModel(parent.getData().getMenu()));
+		super();
 
 		this.parent = parent;
 
 		this.setDefaultRenderer(Object.class, new MMTableCellRenderer());
 		this.setDefaultRenderer(Integer.class, new MMTableCellRenderer());
 		
+		refreshTableModel();
+	}
+	
+	public void refreshTableModel(){
+		this.setModel(new MMWeekMenuTableModel(parent.getData().getMenu()));
 		refreshCellEditor();
 	}
 
