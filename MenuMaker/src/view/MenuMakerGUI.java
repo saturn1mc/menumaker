@@ -581,11 +581,11 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 		try {
 			data.saveData();
 		} catch (FileNotFoundException fnfe) {
-			JOptionPane.showMessageDialog(this, "Sauvegarde impossible : "
-					+ fnfe.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Impossible to save data : "
+					+ fnfe.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 		} catch (IOException ioe) {
-			JOptionPane.showMessageDialog(this, "Sauvegarde impossible : "
-					+ ioe.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Impossible to save data : "
+					+ ioe.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -636,6 +636,7 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 			public void run() {
 				MenuMakerGUI gui = new MenuMakerGUI();
 				gui.setVisible(true);
+				gui.toFront();
 			}
 		});
 	}
