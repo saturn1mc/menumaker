@@ -161,6 +161,6 @@ public class MMExtrasTableModel extends AbstractTableModel {
 
 	@Override
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
-		return columnIndex == COL_INGREDIENT || columnIndex == COL_QUANTITY;
+		return columnIndex == COL_INGREDIENT || columnIndex == COL_QUANTITY || columnIndex == COL_COMMENT;
 	}
 }

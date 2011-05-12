@@ -521,6 +521,7 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 			data.loadData();
 			weekMenuTable.refreshCellEditor();
 			extrasTable.refreshTableModel();
+			extrasTable.repaint();
 		} catch (JDOMException jde) {
 			jde.printStackTrace();
 		} catch (IOException ioe) {
