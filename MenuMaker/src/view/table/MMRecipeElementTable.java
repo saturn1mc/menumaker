@@ -25,7 +25,7 @@ public class MMRecipeElementTable extends JTable {
 	 */
 	private static final long serialVersionUID = 6404860223050257081L;
 
-	MMRecipeEditor parent;
+	private MMRecipeEditor parent;
 
 	public MMRecipeElementTable(MMRecipeEditor parent, MMRecipe recipe) {
 		super();
@@ -59,5 +59,29 @@ public class MMRecipeElementTable extends JTable {
 		if (aValue != null) {
 			super.setValueAt(aValue, row, column);
 		}
+	}
+
+	public void addRow(MMRecipeElement element) {
+		((MMRecipeElementTableModel) getModel()).addRow(element);
+	}
+
+	public void removeRow(MMRecipeElement element) {
+		((MMRecipeElementTableModel) getModel()).removeRow(element);
+	}
+	
+	public MMRecipeElement getFirstSelectedItem() {
+		return ((MMRecipeElementTableModel) getModel()).getRowElement(getSelectedRow());
+	}
+
+	public ArrayList<MMRecipeElement> getSelectedItems() {
+		ArrayList<MMRecipeElement> selectedElements = new ArrayList<MMRecipeElement>();
+		int[] rows = getSelectedRows();
+
+		for (int row : rows) {
+			selectedElements.add(((MMRecipeElementTableModel) getModel())
+					.getRowElement(row));
+		}
+
+		return selectedElements;
 	}
 }
