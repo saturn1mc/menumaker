@@ -8,6 +8,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -29,6 +30,7 @@ import javax.swing.border.TitledBorder;
 import model.MMBook;
 import model.MMIngredient;
 import model.MMRecipe;
+import model.MMRecipeElement;
 import view.MenuMakerGUI;
 import view.combobox.MMAutoCompleteComboBox;
 import view.dialog.MMRecipeDialog;
@@ -45,8 +47,8 @@ public class MMRecipeEditor extends JDialog {
 	 */
 	private static final long serialVersionUID = 4070524773506940562L;
 
-	public static final int DEFAULT_WIDTH = 250;
-	public static final int DEFAULT_HEIGHT = 135;
+	public static final int DEFAULT_WIDTH = 500;
+	public static final int DEFAULT_HEIGHT = 400;
 
 	private MMRecipeDialog parent;
 	private MMRecipe recipe;
@@ -54,7 +56,9 @@ public class MMRecipeEditor extends JDialog {
 	private JTextField nameField;
 	private MMAutoCompleteComboBox bookComboBox;
 	private JSpinner pageSpinner;
+
 	private MMRecipeElementTable recipeElementsTable;
+	private MMRecipeElementEditor recipeElementEditor;
 
 	public MMRecipeEditor(MMRecipeDialog parent, MMRecipe recipe) {
 		super(parent, "Edit recipe");
@@ -120,8 +124,8 @@ public class MMRecipeEditor extends JDialog {
 		bookPanel.add(Box.createHorizontalGlue());
 		bookPanel.add(bookComboBox.getComboBox());
 
-		// Priority input
-		JLabel pageLabel = new JLabel("Author");
+		// Page input
+		JLabel pageLabel = new JLabel("Page");
 		pageLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 		pageSpinner = new JSpinner(new SpinnerNumberModel(0, 0,
 				Integer.MAX_VALUE, 1));
@@ -142,11 +146,51 @@ public class MMRecipeEditor extends JDialog {
 		// Elements input
 		recipeElementsTable = new MMRecipeElementTable(this, recipe);
 		JScrollPane scrollPane = new JScrollPane(recipeElementsTable);
-
-		JPanel elementsPanel = new JPanel();
-		elementsPanel.setBorder(BorderFactory.createTitledBorder(
+		scrollPane.setBorder(BorderFactory.createTitledBorder(
 				BorderFactory.createEtchedBorder(EtchedBorder.LOWERED),
 				"Recipe elements", TitledBorder.LEFT, TitledBorder.TOP));
+
+		JButton addElement = new JButton();
+		addElement.setIcon(MenuMakerGUI.ICON_PLUS);
+		addElement.setToolTipText("Add an element");
+		MouseAdapter addAdapter = new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				recipeElementEditor = new MMRecipeElementEditor(
+						MMRecipeEditor.this);
+				recipeElementEditor.setVisible(true);
+			}
+		};
+		addElement.addMouseListener(addAdapter);
+
+		JButton removeElement = new JButton();
+		removeElement.setIcon(MenuMakerGUI.ICON_MINUS);
+		removeElement.setToolTipText("Remove selected element(s)");
+		MouseAdapter removeAdapter = new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				ArrayList<MMRecipeElement> elements = recipeElementsTable
+						.getSelectedItems();
+
+				if (!elements.isEmpty()) {
+					int retVal = JOptionPane
+							.showConfirmDialog(
+									MMRecipeEditor.this,
+									"All selected elements will be removed form recipe. Confirm ?",
+									"Confirm deletion",
+									JOptionPane.YES_NO_OPTION);
+
+					if (retVal == JOptionPane.OK_OPTION) {
+						for (MMRecipeElement element : elements) {
+							recipeElementsTable.removeRow(element);
+						}
+					}
+				}
+			}
+		};
+		removeElement.addMouseListener(removeAdapter);
+
+		JPanel elementsPanel = new JPanel();
 		elementsPanel.add(scrollPane);
 
 		// Inputs panel
@@ -223,6 +267,9 @@ public class MMRecipeEditor extends JDialog {
 					JOptionPane.ERROR_MESSAGE);
 			return false;
 		} else if (bookComboBox.getComboBox().getSelectedItem() == null) {
+			JOptionPane.showMessageDialog(MMRecipeEditor.this,
+					"Please select a book", "Inputs invalid",
+					JOptionPane.ERROR_MESSAGE);
 			return false;
 		} else if (recipeElementsTable.getRecipeElements().isEmpty()) {
 			JOptionPane.showMessageDialog(MMRecipeEditor.this,
@@ -237,5 +284,9 @@ public class MMRecipeEditor extends JDialog {
 
 	public Collection<MMIngredient> getIngredientList() {
 		return parent.getIngredientList();
+	}
+
+	public void addElement(MMRecipeElement element) {
+		recipeElementsTable.addRow(element);
 	}
 }

@@ -44,6 +44,7 @@ import org.jdom.JDOMException;
 
 import view.dialog.MMBookDialog;
 import view.dialog.MMIngredientDialog;
+import view.dialog.MMRecipeDialog;
 import view.dialog.MMShopListDialog;
 import view.dialog.MMShopPointDialog;
 import view.dialog.MMUnitDialog;
@@ -92,6 +93,7 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 	private MMShopPointDialog shopManageDialog;
 	private MMUnitDialog unitManageDialog;
 	private MMIngredientDialog ingredientManageDialog;
+	private MMRecipeDialog recipeManageDialog;
 	private MMShopListDialog shopListDialog;
 
 	public MenuMakerGUI() {
@@ -249,8 +251,8 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 		MouseAdapter recipeAdapter = new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				super.mousePressed(e);
+				recipeManageDialog = new MMRecipeDialog(MenuMakerGUI.this);
+				recipeManageDialog.setVisible(true);
 			}
 		};
 
