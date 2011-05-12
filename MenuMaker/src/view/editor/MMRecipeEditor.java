@@ -3,6 +3,7 @@
  */
 package view.editor;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -147,9 +148,16 @@ public class MMRecipeEditor extends JDialog {
 		pagePanel.add(pageSpinner);
 
 		// Elements input
+		JPanel tablePanel = new JPanel();
+		tablePanel.setLayout(new BorderLayout());
+		
 		recipeElementsTable = new MMRecipeElementTable(this, recipe);
 		JScrollPane scrollPane = new JScrollPane(recipeElementsTable);
 
+		tablePanel.add(recipeElementsTable.getTableHeader(),
+				BorderLayout.PAGE_START);
+		tablePanel.add(scrollPane, BorderLayout.CENTER);
+		
 		JButton addElementButton = new JButton();
 		addElementButton.setIcon(MenuMakerGUI.ICON_PLUS);
 		addElementButton.setToolTipText("Add an element");
@@ -202,7 +210,7 @@ public class MMRecipeEditor extends JDialog {
 		elementsPanel.setBorder(BorderFactory.createTitledBorder(
 				BorderFactory.createEtchedBorder(EtchedBorder.LOWERED),
 				"Recipe elements", TitledBorder.LEFT, TitledBorder.TOP));
-		elementsPanel.add(scrollPane);
+		elementsPanel.add(tablePanel);
 		elementsPanel.add(elementsButtonPanel);
 
 		// Inputs panel

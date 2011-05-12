@@ -1089,14 +1089,14 @@
     </recipe>
   </recipes>
   <lastmenu>
-    <element period="0" recipe="0" comment="" />
+    <element period="0" recipe="N/A" comment="" />
     <element period="1" recipe="N/A" comment="" />
     <element period="2" recipe="N/A" comment="" />
-    <element period="3" recipe="1" comment="" />
+    <element period="3" recipe="N/A" comment="" />
     <element period="4" recipe="N/A" comment="" />
     <element period="5" recipe="N/A" comment="" />
     <element period="6" recipe="N/A" comment="" />
-    <element period="7" recipe="2" comment="" />
+    <element period="7" recipe="N/A" comment="" />
     <element period="8" recipe="N/A" comment="" />
     <element period="9" recipe="N/A" comment="" />
     <element period="10" recipe="N/A" comment="" />
@@ -1105,8 +1105,8 @@
     <element period="13" recipe="N/A" comment="" />
   </lastmenu>
   <extras>
-    <element ingredient="34" quantity="4.0" comment="Test" />
-    <element ingredient="52" quantity="3.0" comment="" />
+    <element ingredient="34" quantity="3.0" comment="Test" />
+    <element ingredient="52" quantity="3.0" comment="Comment2" />
   </extras>
 </menumaker>
 
