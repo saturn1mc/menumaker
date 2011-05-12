@@ -535,7 +535,8 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 		// TODO handle case no config file
 		try {
 			data.loadData();
-			weekMenuTable.refreshCellEditor();
+			weekMenuTable.refreshTableModel();
+			weekMenuTable.repaint();
 			extrasTable.refreshTableModel();
 			extrasTable.repaint();
 		} catch (JDOMException jde) {
