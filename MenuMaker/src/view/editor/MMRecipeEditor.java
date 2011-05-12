@@ -50,6 +50,9 @@ public class MMRecipeEditor extends JDialog {
 	public static final int DEFAULT_WIDTH = 500;
 	public static final int DEFAULT_HEIGHT = 400;
 
+	public static final int DEFAULT_TABLE_PANEL_WIDTH = 450;
+	public static final int DEFAULT_TABLE_PANEL_HEIGHT = 200;
+
 	private MMRecipeDialog parent;
 	private MMRecipe recipe;
 
@@ -146,13 +149,10 @@ public class MMRecipeEditor extends JDialog {
 		// Elements input
 		recipeElementsTable = new MMRecipeElementTable(this, recipe);
 		JScrollPane scrollPane = new JScrollPane(recipeElementsTable);
-		scrollPane.setBorder(BorderFactory.createTitledBorder(
-				BorderFactory.createEtchedBorder(EtchedBorder.LOWERED),
-				"Recipe elements", TitledBorder.LEFT, TitledBorder.TOP));
 
-		JButton addElement = new JButton();
-		addElement.setIcon(MenuMakerGUI.ICON_PLUS);
-		addElement.setToolTipText("Add an element");
+		JButton addElementButton = new JButton();
+		addElementButton.setIcon(MenuMakerGUI.ICON_PLUS);
+		addElementButton.setToolTipText("Add an element");
 		MouseAdapter addAdapter = new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -161,11 +161,11 @@ public class MMRecipeEditor extends JDialog {
 				recipeElementEditor.setVisible(true);
 			}
 		};
-		addElement.addMouseListener(addAdapter);
+		addElementButton.addMouseListener(addAdapter);
 
-		JButton removeElement = new JButton();
-		removeElement.setIcon(MenuMakerGUI.ICON_MINUS);
-		removeElement.setToolTipText("Remove selected element(s)");
+		JButton removeElementButton = new JButton();
+		removeElementButton.setIcon(MenuMakerGUI.ICON_MINUS);
+		removeElementButton.setToolTipText("Remove selected element(s)");
 		MouseAdapter removeAdapter = new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -188,10 +188,22 @@ public class MMRecipeEditor extends JDialog {
 				}
 			}
 		};
-		removeElement.addMouseListener(removeAdapter);
+		removeElementButton.addMouseListener(removeAdapter);
+
+		JPanel elementsButtonPanel = new JPanel();
+		elementsButtonPanel.setLayout(new BoxLayout(elementsButtonPanel,
+				BoxLayout.LINE_AXIS));
+		elementsButtonPanel.add(addElementButton);
+		elementsButtonPanel.add(removeElementButton);
 
 		JPanel elementsPanel = new JPanel();
+		scrollPane.setPreferredSize(new Dimension(DEFAULT_TABLE_PANEL_WIDTH,
+				DEFAULT_TABLE_PANEL_HEIGHT));
+		elementsPanel.setBorder(BorderFactory.createTitledBorder(
+				BorderFactory.createEtchedBorder(EtchedBorder.LOWERED),
+				"Recipe elements", TitledBorder.LEFT, TitledBorder.TOP));
 		elementsPanel.add(scrollPane);
+		elementsPanel.add(elementsButtonPanel);
 
 		// Inputs panel
 		JPanel inputsPanel = new JPanel();

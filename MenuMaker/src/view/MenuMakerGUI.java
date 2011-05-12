@@ -12,6 +12,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -34,6 +35,7 @@ import javax.swing.border.TitledBorder;
 import legacy.MMLegacyParser;
 import model.MMBook;
 import model.MMData;
+import model.MMExtra;
 import model.MMIngredient;
 import model.MMRecipe;
 import model.MMRecipeElement;
@@ -48,6 +50,7 @@ import view.dialog.MMRecipeDialog;
 import view.dialog.MMShopListDialog;
 import view.dialog.MMShopPointDialog;
 import view.dialog.MMUnitDialog;
+import view.editor.MMExtraEditor;
 import view.table.MMExtrasTable;
 import view.table.MMWeekMenuTable;
 
@@ -70,6 +73,9 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 	public static final int DEFAULT_FIELD_WIDTH = 190;
 	public static final int DEFAULT_FIELD_HEIGHT = 25;
 
+	public static final int DEFAULT_TABLE_WIDTH = 550;
+	public static final int DEFAULT_TABLE_HEIGHT = 300;
+
 	public static ImageIcon ICON_PLUS;
 	public static ImageIcon ICON_MINUS;
 	public static ImageIcon ICON_EDIT;
@@ -86,8 +92,11 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 	private JToolBar toolBar;
 
 	private MMData data;
+
 	private MMWeekMenuTable weekMenuTable;
+
 	private MMExtrasTable extrasTable;
+	private MMExtraEditor extraEditor;
 
 	private MMBookDialog bookManageDialog;
 	private MMShopPointDialog shopManageDialog;
@@ -236,7 +245,8 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 		MouseAdapter ingredientAdapter = new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				ingredientManageDialog = new MMIngredientDialog(MenuMakerGUI.this);
+				ingredientManageDialog = new MMIngredientDialog(
+						MenuMakerGUI.this);
 				ingredientManageDialog.setVisible(true);
 			}
 		};
@@ -307,6 +317,8 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 		weekMenuTable = new MMWeekMenuTable(this);
 
 		JScrollPane scrollpane = new JScrollPane(weekMenuTable);
+		scrollpane.setPreferredSize(new Dimension(DEFAULT_TABLE_WIDTH,
+				DEFAULT_TABLE_HEIGHT));
 
 		weekMenuPanel.add(weekMenuTable.getTableHeader(),
 				BorderLayout.PAGE_START);
@@ -317,13 +329,16 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 
 	private JPanel buildExtrasPanel() {
 
+		// Table panel
 		JPanel tablePanel = new JPanel();
 		tablePanel.setLayout(new BorderLayout());
 
 		extrasTable = new MMExtrasTable(this);
 
 		JScrollPane scrollpane = new JScrollPane(extrasTable);
-
+		scrollpane.setPreferredSize(new Dimension(DEFAULT_TABLE_WIDTH,
+				DEFAULT_TABLE_HEIGHT));
+		
 		tablePanel.add(extrasTable.getTableHeader(), BorderLayout.PAGE_START);
 		tablePanel.add(scrollpane, BorderLayout.CENTER);
 
@@ -337,7 +352,8 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 		MouseAdapter addAdapter = new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				extrasTable.addRow();
+				extraEditor = new MMExtraEditor(MenuMakerGUI.this);
+				extraEditor.setVisible(true);
 			}
 		};
 		addExtra.addMouseListener(addAdapter);
@@ -348,7 +364,20 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 		MouseAdapter removeAdapter = new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				// TODO
+				ArrayList<MMExtra> extras = extrasTable.getSelectedItems();
+
+				if (!extras.isEmpty()) {
+					int retVal = JOptionPane.showConfirmDialog(
+							MenuMakerGUI.this,
+							"All selected extras will be removed. Confirm ?",
+							"Confirm deletion", JOptionPane.YES_NO_OPTION);
+
+					if (retVal == JOptionPane.OK_OPTION) {
+						for (MMExtra extra : extras) {
+							extrasTable.removeRow(extra);
+						}
+					}
+				}
 			}
 		};
 		removeExtra.addMouseListener(removeAdapter);
@@ -400,21 +429,30 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 	public void removeUnit(MMUnit unit) {
 		this.data.removeUnit(unit);
 	}
-	
+
 	public void addIngredient(MMIngredient ingredient) {
 		this.data.addIngredient(ingredient);
 	}
-	
+
 	public void removeIngredient(MMIngredient ingredient) {
 		this.data.removeIngredient(ingredient);
 	}
-	
-	public void addRecipe(MMRecipe recipe){
+
+	public void addRecipe(MMRecipe recipe) {
 		this.data.addRecipe(recipe);
 	}
-	
-	public void removeRecipe(MMRecipe recipe){
+
+	public void removeRecipe(MMRecipe recipe) {
 		this.data.removeRecipe(recipe);
+	}
+
+	public void addExtra(MMExtra extra) {
+		this.data.addExtra(extra);
+		extrasTable.addRow(extra);
+	}
+
+	public void removeExtra(MMExtra extra) {
+		this.data.removeExtra(extra);
 	}
 
 	public boolean canDelete(MMBook book) {
@@ -446,11 +484,11 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 
 		return true;
 	}
-	
+
 	public boolean canDelete(MMIngredient ingredient) {
 		for (MMRecipe recipe : data.getRecipes().values()) {
-			for(MMRecipeElement element : recipe.getElements()){
-				if(element.getIngredient().equals(ingredient)){
+			for (MMRecipeElement element : recipe.getElements()) {
+				if (element.getIngredient().equals(ingredient)) {
 					return false;
 				}
 			}
@@ -458,8 +496,12 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 
 		return true;
 	}
-	
-	public boolean canDelete(MMRecipe recipe){
+
+	public boolean canDelete(MMRecipe recipe) {
+		return true;
+	}
+
+	public boolean canDelete(MMExtra extra) {
 		return true;
 	}
 
@@ -478,6 +520,7 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 		try {
 			data.loadData();
 			weekMenuTable.refreshCellEditor();
+			extrasTable.refreshTableModel();
 		} catch (JDOMException jde) {
 			jde.printStackTrace();
 		} catch (IOException ioe) {

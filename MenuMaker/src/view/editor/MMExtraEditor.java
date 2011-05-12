@@ -19,8 +19,8 @@ import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
+import model.MMExtra;
 import model.MMIngredient;
-import model.MMRecipeElement;
 import view.MenuMakerGUI;
 import view.combobox.MMAutoCompleteComboBox;
 
@@ -28,7 +28,7 @@ import view.combobox.MMAutoCompleteComboBox;
  * @author cmaurice2
  * 
  */
-public class MMRecipeElementEditor extends JDialog {
+public class MMExtraEditor extends JDialog {
 
 	/**
 	 * Auto-generated SVUID
@@ -38,13 +38,13 @@ public class MMRecipeElementEditor extends JDialog {
 	public static final int DEFAULT_WIDTH = 270;
 	public static final int DEFAULT_HEIGHT = 125;
 
-	private MMRecipeEditor parent;
+	private MenuMakerGUI parent;
 
 	private MMAutoCompleteComboBox ingredientComboBox;
 	private JSpinner quantitySpinner;
 
-	public MMRecipeElementEditor(MMRecipeEditor parent) {
-		super(parent, "Edit recipe element");
+	public MMExtraEditor(MenuMakerGUI parent) {
+		super(parent, "Edit extra");
 		this.parent = parent;
 		this.setModal(true);
 
@@ -69,9 +69,8 @@ public class MMRecipeElementEditor extends JDialog {
 		JLabel ingredientLabel = new JLabel("Ingredient");
 		ingredientLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-		MMIngredient[] ingredients = new MMIngredient[parent
-				.getIngredientList().size()];
-		parent.getIngredientList().toArray(ingredients);
+		MMIngredient[] ingredients = new MMIngredient[parent.getData().getIngredients().size()];
+		parent.getData().getIngredients().values().toArray(ingredients);
 		Arrays.sort(ingredients);
 
 		ingredientComboBox = new MMAutoCompleteComboBox(ingredients);
@@ -120,11 +119,12 @@ public class MMRecipeElementEditor extends JDialog {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				if (areInputsValid()) {
-					MMRecipeElement element = new MMRecipeElement(
+					MMExtra element = new MMExtra(
 							(MMIngredient) ingredientComboBox.getComboBox()
 									.getSelectedItem(),
-							(Double) quantitySpinner.getValue());
-					parent.addElement(element);
+							(Double) quantitySpinner.getValue(),
+							new String(""));
+					parent.addExtra(element);
 					setVisible(false);
 				}
 			}
@@ -154,12 +154,12 @@ public class MMRecipeElementEditor extends JDialog {
 
 	public boolean areInputsValid() {
 		if (ingredientComboBox.getComboBox().getSelectedItem() == null) {
-			JOptionPane.showMessageDialog(MMRecipeElementEditor.this,
+			JOptionPane.showMessageDialog(MMExtraEditor.this,
 					"Please select an ingredient", "Inputs invalid",
 					JOptionPane.ERROR_MESSAGE);
 			return false;
 		} else if (((Double) quantitySpinner.getValue()) <= 0) {
-			JOptionPane.showMessageDialog(MMRecipeElementEditor.this,
+			JOptionPane.showMessageDialog(MMExtraEditor.this,
 					"Please set a quantity", "Inputs invalid",
 					JOptionPane.ERROR_MESSAGE);
 			return false;
