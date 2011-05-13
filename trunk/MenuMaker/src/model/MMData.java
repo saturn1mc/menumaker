@@ -157,6 +157,8 @@ public class MMData {
 		for (int i = 0; i < PERIODS_TO_PLAN; i++) {
 			menu[i] = new MMMenuElement(i, null, "");
 		}
+
+		modificationsSaved = false;
 	}
 
 	public ArrayList<MMExtra> getExtras() {
@@ -298,7 +300,7 @@ public class MMData {
 				}
 			}
 		}
-		
+
 		modificationsSaved = true;
 	}
 
