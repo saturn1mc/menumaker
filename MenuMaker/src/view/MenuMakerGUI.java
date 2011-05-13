@@ -427,6 +427,7 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 					if (retVal == JOptionPane.OK_OPTION) {
 						for (MMExtra extra : extras) {
 							extrasTable.removeRow(extra);
+							data.removeExtra(extra);
 						}
 					}
 				}
