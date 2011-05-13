@@ -80,7 +80,7 @@ public class MMData {
 	}
 
 	public void removeBook(MMBook book) {
-		books.remove(book);
+		books.remove(book.getID());
 	}
 
 	public Hashtable<Integer, MMShopPoint> getShopPoints() {
@@ -92,7 +92,7 @@ public class MMData {
 	}
 
 	public void removeShopPoint(MMShopPoint shopPoint) {
-		shopPoints.remove(shopPoint);
+		shopPoints.remove(shopPoint.getID());
 	}
 
 	public Hashtable<Integer, MMUnit> getUnits() {
@@ -104,7 +104,7 @@ public class MMData {
 	}
 
 	public void removeUnit(MMUnit unit) {
-		units.remove(unit);
+		units.remove(unit.getID());
 	}
 
 	public Hashtable<Integer, MMIngredient> getIngredients() {
@@ -116,7 +116,7 @@ public class MMData {
 	}
 
 	public void removeIngredient(MMIngredient ingredient) {
-		ingredients.remove(ingredient);
+		ingredients.remove(ingredient.getID());
 	}
 
 	public Hashtable<Integer, MMRecipe> getRecipes() {
@@ -128,7 +128,7 @@ public class MMData {
 	}
 
 	public void removeRecipe(MMRecipe recipe) {
-		recipes.remove(recipe);
+		recipes.remove(recipe.getID());
 	}
 
 	public MMMenuElement[] getMenu() {
