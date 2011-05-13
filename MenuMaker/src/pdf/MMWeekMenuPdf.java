@@ -7,8 +7,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Hashtable;
 
+import model.MMRecipeElement;
+import model.MMShopPoint;
 import view.table.MMShopListTable;
 import view.table.MMWeekMenuTable;
 import view.table.model.MMShopListTableModel;
@@ -118,11 +123,11 @@ public class MMWeekMenuPdf extends Document {
 				}
 			}
 		}
-		
+
 		weekTable.setWidthPercentage(100);
-		
+
 		try {
-			weekTable.setWidths(new float[] {2,4,4,1,4});
+			weekTable.setWidths(new float[] { 2, 4, 4, 1, 4 });
 		} catch (DocumentException e) {
 			e.printStackTrace();
 		}
@@ -143,51 +148,80 @@ public class MMWeekMenuPdf extends Document {
 			shopTable.addCell(cell);
 		}
 
-		for (int row = 0; row < shopListTable.getRowCount(); row++) {
-			for (int col = 0; col < shopListTable.getColumnCount(); col++) {
+		Hashtable<MMShopPoint, ArrayList<MMRecipeElement>> shopListByShopPoint = new Hashtable<MMShopPoint, ArrayList<MMRecipeElement>>();
 
-				if (col == 0) {
+		for (MMRecipeElement element : shopListTable.getShopList()) {
+			ArrayList<MMRecipeElement> shopList = shopListByShopPoint
+					.get(element.getIngredient().getShopPoint());
 
-					Paragraph content = new Paragraph(shopListTable.getValueAt(
-							row, col).toString(), TABLE_HEADER_FONT);
-					PdfPCell cell = new PdfPCell(content);
+			if (shopList == null) {
+				shopList = new ArrayList<MMRecipeElement>();
+			}
 
-					shopTable.addCell(cell);
-				} else {
+			shopList.add(element);
+			shopListByShopPoint.put(element.getIngredient().getShopPoint(), shopList);
+		}
 
-					Paragraph content;
+		ArrayList<MMShopPoint> sortedKeySet = new ArrayList<MMShopPoint>(
+				shopListByShopPoint.keySet());
+		Collections.sort(sortedKeySet);
 
-					if (col == MMShopListTableModel.COL_TOTAL) {
-						Double total = new Double((Double)shopListTable.getValueAt(row,
-								col));
-						
+		for (MMShopPoint shopPoint : sortedKeySet) {
+
+			ArrayList<MMRecipeElement> shopList = shopListByShopPoint
+					.get(shopPoint);
+
+			Paragraph content = new Paragraph(shopPoint.toString(),
+					TABLE_HEADER_FONT);
+			PdfPCell cell = new PdfPCell(content);
+			cell.setRowspan(shopList.size());
+
+			shopTable.addCell(cell);
+
+			for (MMRecipeElement element : shopList) {
+				for (int col = 0; col < shopListTable.getColumnCount(); col++) {
+
+					content = null;
+
+					switch (col) {
+					case MMShopListTableModel.COL_SHOPPOINT:
+						// Nohing to do
+						break;
+					case MMShopListTableModel.COL_TOTAL:
+						Double total = element.getQuantity();
+
 						String formattedTotal;
-						
-						if((total - total.intValue()) == 0){
+
+						if ((total - total.intValue()) == 0) {
 							formattedTotal = Integer.toString(total.intValue());
-						}
-						else{
+						} else {
 							formattedTotal = total.toString();
 						}
-						
+
 						content = new Paragraph(formattedTotal, NORMAL_FONT);
-						
-					} else {
-						content = new Paragraph(shopListTable.getValueAt(row,
-								col).toString(), NORMAL_FONT);
+						break;
+					case MMShopListTableModel.COL_UNIT:
+						content = new Paragraph(element.getIngredient()
+								.getUnit().toString(), NORMAL_FONT);
+						break;
+					case MMShopListTableModel.COL_INGREDIENT:
+						content = new Paragraph(element.getIngredient()
+								.toString(), NORMAL_FONT);
+						break;
 					}
 
-					PdfPCell cell = new PdfPCell(content);
-
-					shopTable.addCell(cell);
+					if (content != null) {
+						cell = new PdfPCell(content);
+						shopTable.addCell(cell);
+					}
 				}
 			}
 		}
-		
+
 		shopTable.setWidthPercentage(100);
-		
+
 		try {
-			shopTable.setWidths(new float[] {2,1,1,4});
+			shopTable.setWidths(new float[] { 2, 1, 1, 4 });
 		} catch (DocumentException e) {
 			e.printStackTrace();
 		}

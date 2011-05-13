@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <menumaker>
-  <books currentid="25">
+  <books currentid="26">
     <book id="24" name="Harumi Kurihara" author="?" />
     <book id="23" name="Cuisine Rapide" author="?" />
     <book id="22" name="Diner Thai" author="?" />
@@ -1089,20 +1089,20 @@
     </recipe>
   </recipes>
   <lastmenu>
-    <element period="0" recipe="N/A" comment="" />
-    <element period="1" recipe="N/A" comment="" />
-    <element period="2" recipe="N/A" comment="" />
-    <element period="3" recipe="N/A" comment="" />
-    <element period="4" recipe="N/A" comment="" />
-    <element period="5" recipe="N/A" comment="" />
-    <element period="6" recipe="N/A" comment="" />
-    <element period="7" recipe="N/A" comment="" />
-    <element period="8" recipe="N/A" comment="" />
-    <element period="9" recipe="N/A" comment="" />
-    <element period="10" recipe="N/A" comment="" />
-    <element period="11" recipe="N/A" comment="" />
-    <element period="12" recipe="N/A" comment="" />
-    <element period="13" recipe="N/A" comment="" />
+    <element period="0" recipe="81" comment="" />
+    <element period="1" recipe="1" comment="" />
+    <element period="2" recipe="5" comment="" />
+    <element period="3" recipe="9" comment="" />
+    <element period="4" recipe="10" comment="" />
+    <element period="5" recipe="11" comment="" />
+    <element period="6" recipe="16" comment="" />
+    <element period="7" recipe="97" comment="" />
+    <element period="8" recipe="19" comment="" />
+    <element period="9" recipe="22" comment="" />
+    <element period="10" recipe="22" comment="" />
+    <element period="11" recipe="23" comment="" />
+    <element period="12" recipe="92" comment="" />
+    <element period="13" recipe="25" comment="" />
   </lastmenu>
   <extras>
     <element ingredient="34" quantity="3.0" comment="Test" />

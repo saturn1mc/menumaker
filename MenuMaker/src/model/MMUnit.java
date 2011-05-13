@@ -48,6 +48,7 @@ public class MMUnit implements Comparable<MMUnit>{
 	}
 
 	public void setName(String name) {
+		MMData.setModificationsSaved(false);
 		this.name = name;
 	}
 

@@ -41,6 +41,8 @@ public class MMData {
 
 	public static final int PERIODS_TO_PLAN = 14;
 
+	private static boolean modificationsSaved;
+
 	private Hashtable<Integer, MMBook> books;
 	private Hashtable<Integer, MMShopPoint> shopPoints;
 	private Hashtable<Integer, MMUnit> units;
@@ -50,12 +52,14 @@ public class MMData {
 	private ArrayList<MMExtra> extras;
 
 	public MMData() {
+		modificationsSaved = true;
+
 		books = new Hashtable<Integer, MMBook>();
 		shopPoints = new Hashtable<Integer, MMShopPoint>();
 		units = new Hashtable<Integer, MMUnit>();
 		ingredients = new Hashtable<Integer, MMIngredient>();
 		recipes = new Hashtable<Integer, MMRecipe>();
-		
+
 		refreshMenu();
 
 		extras = new ArrayList<MMExtra>();
@@ -77,10 +81,12 @@ public class MMData {
 
 	public void addBook(MMBook book) {
 		books.put(book.getID(), book);
+		modificationsSaved = false;
 	}
 
 	public void removeBook(MMBook book) {
 		books.remove(book.getID());
+		modificationsSaved = false;
 	}
 
 	public Hashtable<Integer, MMShopPoint> getShopPoints() {
@@ -89,10 +95,12 @@ public class MMData {
 
 	public void addShopPoint(MMShopPoint shopPoint) {
 		shopPoints.put(shopPoint.getID(), shopPoint);
+		modificationsSaved = false;
 	}
 
 	public void removeShopPoint(MMShopPoint shopPoint) {
 		shopPoints.remove(shopPoint.getID());
+		modificationsSaved = false;
 	}
 
 	public Hashtable<Integer, MMUnit> getUnits() {
@@ -101,10 +109,12 @@ public class MMData {
 
 	public void addUnit(MMUnit unit) {
 		units.put(unit.getID(), unit);
+		modificationsSaved = false;
 	}
 
 	public void removeUnit(MMUnit unit) {
 		units.remove(unit.getID());
+		modificationsSaved = false;
 	}
 
 	public Hashtable<Integer, MMIngredient> getIngredients() {
@@ -113,10 +123,12 @@ public class MMData {
 
 	public void addIngredient(MMIngredient ingredient) {
 		ingredients.put(ingredient.getID(), ingredient);
+		modificationsSaved = false;
 	}
 
 	public void removeIngredient(MMIngredient ingredient) {
 		ingredients.remove(ingredient.getID());
+		modificationsSaved = false;
 	}
 
 	public Hashtable<Integer, MMRecipe> getRecipes() {
@@ -125,21 +137,23 @@ public class MMData {
 
 	public void addRecipe(MMRecipe recipe) {
 		recipes.put(recipe.getID(), recipe);
+		modificationsSaved = false;
 	}
 
 	public void removeRecipe(MMRecipe recipe) {
 		recipes.remove(recipe.getID());
+		modificationsSaved = false;
 	}
 
 	public MMMenuElement[] getMenu() {
 		return menu;
 	}
-	
-	public void refreshMenu(){
-		if(menu == null){
+
+	public void refreshMenu() {
+		if (menu == null) {
 			menu = new MMMenuElement[PERIODS_TO_PLAN];
 		}
-		
+
 		for (int i = 0; i < PERIODS_TO_PLAN; i++) {
 			menu[i] = new MMMenuElement(i, null, "");
 		}
@@ -151,10 +165,20 @@ public class MMData {
 
 	public void addExtra(MMExtra extra) {
 		extras.add(extra);
+		modificationsSaved = false;
 	}
 
 	public void removeExtra(MMExtra extra) {
 		extras.remove(extra);
+		modificationsSaved = false;
+	}
+
+	public static boolean isModificationsSaved() {
+		return modificationsSaved;
+	}
+
+	public static void setModificationsSaved(boolean modificationsSaved) {
+		MMData.modificationsSaved = modificationsSaved;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -252,8 +276,9 @@ public class MMData {
 					int period = Integer.parseInt(menuElementElement
 							.getAttributeValue(MMMenuElement.ATTR_NAME_PERIOD));
 
-					if (!menuElementElement.getAttributeValue(MMMenuElement.ATTR_NAME_RECIPE)
-							.equals(MMMenuElement.ATTR_VALUE_NO_RECIPE)) {
+					if (!menuElementElement.getAttributeValue(
+							MMMenuElement.ATTR_NAME_RECIPE).equals(
+							MMMenuElement.ATTR_VALUE_NO_RECIPE)) {
 						MMRecipe recipe = recipes
 								.get(Integer.parseInt(menuElementElement
 										.getAttributeValue(MMMenuElement.ATTR_NAME_RECIPE)));
@@ -273,6 +298,8 @@ public class MMData {
 				}
 			}
 		}
+		
+		modificationsSaved = true;
 	}
 
 	public void saveData() throws FileNotFoundException, IOException {
@@ -355,5 +382,7 @@ public class MMData {
 
 		XMLOutputter xmlOutputter = new XMLOutputter(Format.getPrettyFormat());
 		xmlOutputter.output(xmlDoc, new FileOutputStream(getConfigFile()));
+
+		modificationsSaved = true;
 	}
 }

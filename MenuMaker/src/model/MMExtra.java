@@ -35,6 +35,7 @@ public class MMExtra extends MMRecipeElement{
 	}
 	
 	public void setComment(String comment) {
+		MMData.setModificationsSaved(false);
 		this.comment = comment;
 	}
 	
