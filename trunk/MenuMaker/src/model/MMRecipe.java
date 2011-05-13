@@ -78,6 +78,7 @@ public class MMRecipe implements Comparable<MMRecipe>{
 	}
 
 	public void setName(String name) {
+		MMData.setModificationsSaved(false);
 		this.name = name;
 	}
 
@@ -86,6 +87,7 @@ public class MMRecipe implements Comparable<MMRecipe>{
 	}
 
 	public void setBook(MMBook book) {
+		MMData.setModificationsSaved(false);
 		this.book = book;
 	}
 
@@ -94,6 +96,7 @@ public class MMRecipe implements Comparable<MMRecipe>{
 	}
 
 	public void setPage(int page) {
+		MMData.setModificationsSaved(false);
 		this.page = page;
 	}
 
@@ -102,6 +105,7 @@ public class MMRecipe implements Comparable<MMRecipe>{
 	}
 
 	public void addElement(MMRecipeElement element){
+		MMData.setModificationsSaved(false);
 		elements.add(element);
 	}
 	
@@ -110,6 +114,7 @@ public class MMRecipe implements Comparable<MMRecipe>{
 	}
 	
 	public void removeElement(MMRecipeElement element){
+		MMData.setModificationsSaved(false);
 		elements.remove(element);
 	}
 	

@@ -64,6 +64,7 @@ public class MMMenuElement {
 	}
 
 	public void setPeriod(int period) {
+		MMData.setModificationsSaved(false);
 		this.period = period;
 	}
 
@@ -72,6 +73,7 @@ public class MMMenuElement {
 	}
 
 	public void setRecipe(MMRecipe recipe) {
+		MMData.setModificationsSaved(false);
 		this.recipe = recipe;
 	}
 

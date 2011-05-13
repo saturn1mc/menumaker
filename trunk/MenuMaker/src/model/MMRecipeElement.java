@@ -40,6 +40,7 @@ public class MMRecipeElement implements Comparable<MMRecipeElement> {
 	}
 
 	public void setIngredient(MMIngredient ingredient) {
+		MMData.setModificationsSaved(false);
 		this.ingredient = ingredient;
 	}
 
@@ -48,6 +49,7 @@ public class MMRecipeElement implements Comparable<MMRecipeElement> {
 	}
 
 	public void setQuantity(double quantity) {
+		MMData.setModificationsSaved(false);
 		this.quantity = quantity;
 	}
 

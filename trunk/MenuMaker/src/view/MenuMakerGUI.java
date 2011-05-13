@@ -76,7 +76,7 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 
 	public static final int DEFAULT_WEEK_TABLE_WIDTH = 550;
 	public static final int DEFAULT_WEEK_TABLE_HEIGHT = 280;
-	
+
 	public static final int DEFAULT_EXTRA_TABLE_WIDTH = 550;
 	public static final int DEFAULT_EXTRA_TABLE_HEIGHT = 150;
 
@@ -92,6 +92,7 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 	public static ImageIcon ICON_OK;
 	public static ImageIcon ICON_CANCEL;
 	public static ImageIcon ICON_CLEAR_LIST;
+	public static ImageIcon ICON_SAVE;
 
 	private JMenuBar menuBar;
 	private JToolBar toolBar;
@@ -155,6 +156,8 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 				FOLDER_IMG + "cancel-icon.png"));
 		ICON_CLEAR_LIST = new ImageIcon(getClass().getResource(
 				FOLDER_IMG + "clear-list-icon.png"));
+		ICON_SAVE = new ImageIcon(getClass().getResource(
+				FOLDER_IMG + "save-icon.png"));
 	}
 
 	private void buildMenu() {
@@ -290,6 +293,20 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 
 		printButton.addMouseListener(printAdapter);
 
+		// Save button
+		JButton saveButton = new JButton();
+		saveButton.setIcon(ICON_SAVE);
+		saveButton.setToolTipText("Save data");
+
+		MouseAdapter saveAdapter = new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				MenuMakerGUI.this.saveData();
+			}
+		};
+
+		saveButton.addMouseListener(saveAdapter);
+
 		// Tool bar
 		toolBar = new JToolBar();
 		toolBar.add(bookButton);
@@ -297,7 +314,7 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 		toolBar.add(unitButton);
 		toolBar.add(ingredientButton);
 		toolBar.add(recipeButton);
-		toolBar.add(printButton);
+		toolBar.add(saveButton);
 
 		this.add(toolBar, BorderLayout.PAGE_START);
 	}
@@ -313,8 +330,8 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 	}
 
 	private JPanel buildWeekMenuPanel() {
-		
-		//Table panel
+
+		// Table panel
 		JPanel tablePanel = new JPanel();
 		tablePanel.setLayout(new BorderLayout());
 
@@ -324,18 +341,17 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 		scrollpane.setPreferredSize(new Dimension(DEFAULT_WEEK_TABLE_WIDTH,
 				DEFAULT_WEEK_TABLE_HEIGHT));
 
-		tablePanel.add(weekMenuTable.getTableHeader(),
-				BorderLayout.PAGE_START);
+		tablePanel.add(weekMenuTable.getTableHeader(), BorderLayout.PAGE_START);
 		tablePanel.add(scrollpane, BorderLayout.CENTER);
-		
-		//Button panel
+
+		// Button panel
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.LINE_AXIS));
-		
+
 		JButton clearButton = new JButton();
 		clearButton.setIcon(ICON_CLEAR_LIST);
 		clearButton.setToolTipText("Clear menu");
-		
+
 		MouseAdapter clearAdapter = new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -343,21 +359,22 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 				weekMenuTable.repaint();
 			}
 		};
-		
+
 		clearButton.addMouseListener(clearAdapter);
-		
+
 		buttonPanel.add(clearButton);
-		
-		//Week menu panel
+
+		// Week menu panel
 		JPanel weekMenuPanel = new JPanel();
-		weekMenuPanel.setLayout(new BoxLayout(weekMenuPanel, BoxLayout.PAGE_AXIS));
+		weekMenuPanel.setLayout(new BoxLayout(weekMenuPanel,
+				BoxLayout.PAGE_AXIS));
 		weekMenuPanel.setBorder(BorderFactory.createTitledBorder(
 				BorderFactory.createEtchedBorder(EtchedBorder.LOWERED),
 				"WeekMenu", TitledBorder.LEFT, TitledBorder.TOP));
-		
+
 		weekMenuPanel.add(tablePanel);
 		weekMenuPanel.add(buttonPanel);
-		
+
 		return weekMenuPanel;
 	}
 
@@ -438,6 +455,18 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 
 	public void setData(MMData data) {
 		this.data = data;
+	}
+
+	public void saveData() {
+		try {
+			data.saveData();
+		} catch (FileNotFoundException fnfe) {
+			JOptionPane.showMessageDialog(this, "Impossible to save data : "
+					+ fnfe.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+		} catch (IOException ioe) {
+			JOptionPane.showMessageDialog(this, "Impossible to save data : "
+					+ ioe.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 
 	public void addBook(MMBook book) {
@@ -581,14 +610,15 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 
 	@Override
 	public void windowClosing(WindowEvent e) {
-		try {
-			data.saveData();
-		} catch (FileNotFoundException fnfe) {
-			JOptionPane.showMessageDialog(this, "Impossible to save data : "
-					+ fnfe.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-		} catch (IOException ioe) {
-			JOptionPane.showMessageDialog(this, "Impossible to save data : "
-					+ ioe.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+
+		if (!MMData.isModificationsSaved()) {
+			int retVal = JOptionPane.showConfirmDialog(this,
+					"You didn't save all modifications. Save modifications ?",
+					"Save data", JOptionPane.YES_NO_OPTION);
+
+			if (retVal == JOptionPane.OK_OPTION) {
+				saveData();
+			}
 		}
 	}
 

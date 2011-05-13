@@ -63,6 +63,7 @@ public class MMIngredient implements Comparable<MMIngredient>{
 	}
 
 	public void setName(String name) {
+		MMData.setModificationsSaved(false);
 		this.name = name;
 	}
 
@@ -71,6 +72,7 @@ public class MMIngredient implements Comparable<MMIngredient>{
 	}
 
 	public void setUnit(MMUnit unit) {
+		MMData.setModificationsSaved(false);
 		this.unit = unit;
 	}
 
@@ -79,6 +81,7 @@ public class MMIngredient implements Comparable<MMIngredient>{
 	}
 
 	public void setShopPoint(MMShopPoint shopPoint) {
+		MMData.setModificationsSaved(false);
 		this.shopPoint = shopPoint;
 	}
 

@@ -53,6 +53,7 @@ public class MMBook implements Comparable<MMBook>{
 	}
 	
 	public void setName(String name) {
+		MMData.setModificationsSaved(false);
 		this.name = name;
 	}
 	
@@ -61,6 +62,7 @@ public class MMBook implements Comparable<MMBook>{
 	}
 	
 	public void setAuthor(String author) {
+		MMData.setModificationsSaved(false);
 		this.author = author;
 	}
 	
