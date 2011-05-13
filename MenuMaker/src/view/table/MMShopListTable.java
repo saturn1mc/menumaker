@@ -9,6 +9,8 @@ import java.util.Hashtable;
 
 import javax.swing.JTable;
 
+import model.MMData;
+import model.MMExtra;
 import model.MMIngredient;
 import model.MMMenuElement;
 import model.MMRecipe;
@@ -28,12 +30,12 @@ public class MMShopListTable extends JTable {
 
 	private ArrayList<MMRecipeElement> shopList;
 
-	public MMShopListTable(MMMenuElement[] menuElements) {
+	public MMShopListTable(MMData data) {
 		super();
 
 		Hashtable<MMIngredient, MMRecipeElement> quantities = new Hashtable<MMIngredient, MMRecipeElement>();
 
-		for (MMMenuElement menuElement : menuElements) {
+		for (MMMenuElement menuElement : data.getMenu()) {
 			
 			MMRecipe recipe = menuElement.getRecipe();
 			
@@ -53,6 +55,20 @@ public class MMShopListTable extends JTable {
 					quantities.put(element.getIngredient(), quantity);
 				}
 			}
+		}
+		
+		for(MMExtra extra : data.getExtras()){
+			MMRecipeElement quantity = quantities.get(extra
+					.getIngredient());
+
+			if (quantity == null) {
+				quantity = new MMRecipeElement(extra.getIngredient(),
+						0);
+			}
+
+			quantity.setQuantity(quantity.getQuantity()
+					+ extra.getQuantity());
+			quantities.put(extra.getIngredient(), quantity);
 		}
 
 		this.shopList = new ArrayList<MMRecipeElement>(quantities.values());

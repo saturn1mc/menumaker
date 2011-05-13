@@ -239,8 +239,6 @@ public class MMWeekMenuPdf extends Document {
 		weekMenuParagraph.add(weekTable);
 		this.add(weekMenuParagraph);
 
-		this.newPage();
-
 		shopListParagraph.add(shopTable);
 		this.add(shopListParagraph);
 

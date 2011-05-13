@@ -314,6 +314,7 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 		toolBar.add(unitButton);
 		toolBar.add(ingredientButton);
 		toolBar.add(recipeButton);
+		toolBar.add(printButton);
 		toolBar.add(saveButton);
 
 		this.add(toolBar, BorderLayout.PAGE_START);
