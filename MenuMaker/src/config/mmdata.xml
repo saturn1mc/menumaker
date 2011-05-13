@@ -209,7 +209,7 @@
     <ingredient id="1" name="Tomates" unit="0" shop="0" />
     <ingredient id="0" name="Pommes" unit="0" shop="0" />
   </ingredients>
-  <recipes currentid="99">
+  <recipes currentid="100">
     <recipe id="98" name="Bœuf sauté à la sauce d'huître" book="7" page="83">
       <elements>
         <element ingredient="33" quantity="1.0" />
