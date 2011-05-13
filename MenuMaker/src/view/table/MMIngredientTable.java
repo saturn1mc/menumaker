@@ -3,6 +3,8 @@
  */
 package view.table;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.JTable;
@@ -23,9 +25,28 @@ public class MMIngredientTable extends JTable {
 	 */
 	private static final long serialVersionUID = -2250924647556136366L;
 
+	private MMIngredientDialog parent;
+	
 	public MMIngredientTable(MMIngredientDialog parent) {
 		this.setDefaultRenderer(Object.class, new MMTableCellRenderer());
 		this.setModel(new MMIngredientTableModel(parent.getIngredientList()));
+		
+		this.parent = parent;
+		
+		MouseAdapter mouseAdapter = new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(e.getClickCount() == 2){
+					getDialog().editIngredient();
+				}
+			}
+		};
+		
+		this.addMouseListener(mouseAdapter);
+	}
+	
+	public MMIngredientDialog getDialog(){
+		return parent;
 	}
 
 	public void sortData(){

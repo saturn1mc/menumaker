@@ -86,9 +86,7 @@ public class MMUnitDialog extends JDialog {
 		MouseAdapter editAdapter = new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				unitEditor = new MMUnitEditor(MMUnitDialog.this,
-						table.getFirstSelectedItem());
-				unitEditor.setVisible(true);
+				editUnit();
 			}
 		};
 		buttonEdit.addMouseListener(editAdapter);
@@ -147,6 +145,12 @@ public class MMUnitDialog extends JDialog {
 	public void addUnit(MMUnit unit) {
 		parent.addUnit(unit);
 		table.addRow(unit);
+	}
+	
+	public void editUnit(){
+		unitEditor = new MMUnitEditor(MMUnitDialog.this,
+				table.getFirstSelectedItem());
+		unitEditor.setVisible(true);
 	}
 
 	public void removeUnit(MMUnit unit) {

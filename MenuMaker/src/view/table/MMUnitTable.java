@@ -3,6 +3,8 @@
  */
 package view.table;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.JTable;
@@ -23,9 +25,28 @@ public class MMUnitTable extends JTable {
 	 */
 	private static final long serialVersionUID = -2250924647556136366L;
 
+	private MMUnitDialog parent;
+	
 	public MMUnitTable(MMUnitDialog parent) {
 		this.setDefaultRenderer(Object.class, new MMTableCellRenderer());
 		this.setModel(new MMUnitTableModel(parent.getUnitList()));
+		
+		this.parent = parent;
+
+		MouseAdapter mouseAdapter = new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() == 2) {
+					getDialog().editUnit();
+				}
+			}
+		};
+
+		this.addMouseListener(mouseAdapter);
+	}
+	
+	public MMUnitDialog getDialog(){
+		return parent;
 	}
 
 	public void sortData(){

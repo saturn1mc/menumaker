@@ -5,6 +5,8 @@ package view.editor;
 
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Arrays;
@@ -37,6 +39,9 @@ public class MMRecipeElementEditor extends JDialog {
 
 	public static final int DEFAULT_WIDTH = 270;
 	public static final int DEFAULT_HEIGHT = 125;
+
+	public static final int DEFAULT_UNIT_LABEL_WIDTH = 50;
+	public static final int DEFAULT_UNIT_LABEL_HEIGHT = MenuMakerGUI.DEFAULT_FIELD_HEIGHT;
 
 	private MMRecipeEditor parent;
 
@@ -91,10 +96,37 @@ public class MMRecipeElementEditor extends JDialog {
 		JLabel quantityLabel = new JLabel("Quantity");
 		quantityLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 		quantitySpinner = new JSpinner(new SpinnerNumberModel(0.0d, 0.0d,
-				Double.MAX_VALUE, 0.5d));
+				Double.MAX_VALUE, 1.0d));
 		quantitySpinner.setAlignmentX(Component.RIGHT_ALIGNMENT);
-		quantitySpinner.setPreferredSize(fieldsDim);
-		quantitySpinner.setMaximumSize(fieldsDim);
+		Dimension spinnerDim = new Dimension(MenuMakerGUI.DEFAULT_FIELD_WIDTH
+				- DEFAULT_UNIT_LABEL_WIDTH, MenuMakerGUI.DEFAULT_FIELD_HEIGHT);
+		quantitySpinner.setPreferredSize(spinnerDim);
+		quantitySpinner.setMaximumSize(spinnerDim);
+
+		final JLabel unitLabel = new JLabel("  ");
+		if (ingredientComboBox.getComboBox().getSelectedItem() != null) {
+			MMIngredient ingredient = (MMIngredient) ingredientComboBox
+					.getComboBox().getSelectedItem();
+			unitLabel.setText(ingredient.getUnit().toString());
+		}
+
+		unitLabel.setHorizontalAlignment(JLabel.CENTER);
+		ItemListener ingredientListener = new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if (ingredientComboBox.getComboBox().getSelectedItem() != null) {
+					MMIngredient ingredient = (MMIngredient) ingredientComboBox
+							.getComboBox().getSelectedItem();
+					unitLabel.setText(ingredient.getUnit().toString());
+				}
+			}
+
+		};
+		ingredientComboBox.getComboBox().addItemListener(ingredientListener);
+		Dimension unitDim = new Dimension(DEFAULT_UNIT_LABEL_WIDTH,
+				DEFAULT_UNIT_LABEL_HEIGHT);
+		unitLabel.setPreferredSize(unitDim);
+		unitLabel.setMaximumSize(unitDim);
 
 		JPanel quantityPanel = new JPanel();
 		quantityPanel.setLayout(new BoxLayout(quantityPanel,
@@ -102,6 +134,7 @@ public class MMRecipeElementEditor extends JDialog {
 		quantityPanel.add(quantityLabel);
 		quantityPanel.add(Box.createHorizontalGlue());
 		quantityPanel.add(quantitySpinner);
+		quantityPanel.add(unitLabel);
 
 		// Inputs panel
 		JPanel inputsPanel = new JPanel();

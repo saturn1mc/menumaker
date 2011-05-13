@@ -86,9 +86,7 @@ public class MMBookDialog extends JDialog {
 		MouseAdapter editAdapter = new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				bookEditor = new MMBookEditor(MMBookDialog.this,
-						table.getFirstSelectedItem());
-				bookEditor.setVisible(true);
+				editBook();
 			}
 		};
 		buttonEdit.addMouseListener(editAdapter);
@@ -139,7 +137,7 @@ public class MMBookDialog extends JDialog {
 
 		this.getContentPane().add(buttonPanel);
 	}
-
+	
 	public Collection<MMBook> getBookList() {
 		return parent.getData().getBooks().values();
 	}
@@ -147,6 +145,12 @@ public class MMBookDialog extends JDialog {
 	public void addBook(MMBook book) {
 		parent.addBook(book);
 		table.addRow(book);
+	}
+	
+	public void editBook(){
+		bookEditor = new MMBookEditor(MMBookDialog.this,
+				table.getFirstSelectedItem());
+		bookEditor.setVisible(true);
 	}
 
 	public void removeBook(MMBook book) {

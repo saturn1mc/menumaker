@@ -3,6 +3,8 @@
  */
 package view.table;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.JTable;
@@ -23,20 +25,42 @@ public class MMRecipeTable extends JTable {
 	 */
 	private static final long serialVersionUID = -2250924647556136366L;
 
+	private MMRecipeDialog parent;
+
 	public MMRecipeTable(MMRecipeDialog parent) {
 		this.setDefaultRenderer(Object.class, new MMTableCellRenderer());
+		this.setDefaultRenderer(Integer.class, new MMTableCellRenderer());
 		this.setModel(new MMRecipeTableModel(parent.getRecipeList()));
+
+		this.parent = parent;
+
+		MouseAdapter mouseAdapter = new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() == 2) {
+					getDialog().editRecipe();
+				}
+			}
+		};
+
+		this.addMouseListener(mouseAdapter);
+	}
+	
+	public MMRecipeDialog getDialog(){
+		return parent;
 	}
 
-	public void sortData(){
+	public void sortData() {
 		((MMRecipeTableModel) getModel()).sortData();
 	}
-	
+
 	public void setFocusOn(MMRecipe recipe) {
-		this.changeSelection(((MMRecipeTableModel) getModel()).getRowOf(recipe), 0, false, false);
+		this.changeSelection(
+				((MMRecipeTableModel) getModel()).getRowOf(recipe), 0, false,
+				false);
 		this.requestFocus();
 	}
-	
+
 	public void addRow(MMRecipe recipe) {
 		((MMRecipeTableModel) getModel()).addRow(recipe);
 		sortData();
@@ -48,7 +72,8 @@ public class MMRecipeTable extends JTable {
 	}
 
 	public MMRecipe getFirstSelectedItem() {
-		return ((MMRecipeTableModel) getModel()).getRowElement(getSelectedRow());
+		return ((MMRecipeTableModel) getModel())
+				.getRowElement(getSelectedRow());
 	}
 
 	public ArrayList<MMRecipe> getSelectedItems() {

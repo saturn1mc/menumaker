@@ -3,6 +3,8 @@
  */
 package view.table;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.JTable;
@@ -23,21 +25,42 @@ public class MMShopPointTable extends JTable {
 	 */
 	private static final long serialVersionUID = -2250924647556136366L;
 
+	private MMShopPointDialog parent;
+
 	public MMShopPointTable(MMShopPointDialog parent) {
 		this.setDefaultRenderer(Object.class, new MMTableCellRenderer());
 		this.setDefaultRenderer(Integer.class, new MMTableCellRenderer());
 		this.setModel(new MMShopPointTableModel(parent.getShopPointList()));
+
+		this.parent = parent;
+
+		MouseAdapter mouseAdapter = new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() == 2) {
+					getDialog().editShopPoint();
+				}
+			}
+		};
+
+		this.addMouseListener(mouseAdapter);
 	}
 
-	public void sortData(){
+	public MMShopPointDialog getDialog() {
+		return parent;
+	}
+
+	public void sortData() {
 		((MMShopPointTableModel) getModel()).sortData();
 	}
-	
+
 	public void setFocusOn(MMShopPoint shopPoint) {
-		this.changeSelection(((MMShopPointTableModel) getModel()).getRowOf(shopPoint), 0, false, false);
+		this.changeSelection(
+				((MMShopPointTableModel) getModel()).getRowOf(shopPoint), 0,
+				false, false);
 		this.requestFocus();
 	}
-	
+
 	public void addRow(MMShopPoint shopPoint) {
 		((MMShopPointTableModel) getModel()).addRow(shopPoint);
 		sortData();
@@ -49,7 +72,8 @@ public class MMShopPointTable extends JTable {
 	}
 
 	public MMShopPoint getFirstSelectedItem() {
-		return ((MMShopPointTableModel) getModel()).getRowElement(getSelectedRow());
+		return ((MMShopPointTableModel) getModel())
+				.getRowElement(getSelectedRow());
 	}
 
 	public ArrayList<MMShopPoint> getSelectedItems() {

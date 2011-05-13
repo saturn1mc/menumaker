@@ -89,9 +89,7 @@ public class MMIngredientDialog extends JDialog {
 		MouseAdapter editAdapter = new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				ingredientEditor = new MMIngredientEditor(MMIngredientDialog.this,
-						table.getFirstSelectedItem());
-				ingredientEditor.setVisible(true);
+				editIngredient();
 			}
 		};
 		buttonEdit.addMouseListener(editAdapter);
@@ -158,6 +156,12 @@ public class MMIngredientDialog extends JDialog {
 	public void addIngredient(MMIngredient ingredient) {
 		parent.addIngredient(ingredient);
 		table.addRow(ingredient);
+	}
+	
+	public void editIngredient(){
+		ingredientEditor = new MMIngredientEditor(MMIngredientDialog.this,
+				table.getFirstSelectedItem());
+		ingredientEditor.setVisible(true);
 	}
 
 	public void removeIngredient(MMIngredient ingredient) {
