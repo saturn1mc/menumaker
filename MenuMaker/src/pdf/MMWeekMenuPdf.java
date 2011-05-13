@@ -159,60 +159,81 @@ public class MMWeekMenuPdf extends Document {
 			}
 
 			shopList.add(element);
-			shopListByShopPoint.put(element.getIngredient().getShopPoint(), shopList);
+			shopListByShopPoint.put(element.getIngredient().getShopPoint(),
+					shopList);
 		}
 
 		ArrayList<MMShopPoint> sortedKeySet = new ArrayList<MMShopPoint>(
 				shopListByShopPoint.keySet());
 		Collections.sort(sortedKeySet);
 
+		Hashtable<String, ArrayList<MMRecipeElement>> shopListByShopPointName = new Hashtable<String, ArrayList<MMRecipeElement>>();
+
+		for (MMShopPoint shopPoint : sortedKeySet) {
+			ArrayList<MMRecipeElement> shopList = shopListByShopPointName
+					.get(shopPoint.getName());
+
+			if (shopList == null) {
+				shopList = new ArrayList<MMRecipeElement>();
+			}
+
+			shopList.addAll(shopListByShopPoint.get(shopPoint));
+			shopListByShopPointName.put(shopPoint.getName(), shopList);
+		}
+
 		for (MMShopPoint shopPoint : sortedKeySet) {
 
-			ArrayList<MMRecipeElement> shopList = shopListByShopPoint
-					.get(shopPoint);
+			ArrayList<MMRecipeElement> shopList = shopListByShopPointName
+					.get(shopPoint.getName());
 
-			Paragraph content = new Paragraph(shopPoint.toString(),
-					TABLE_HEADER_FONT);
-			PdfPCell cell = new PdfPCell(content);
-			cell.setRowspan(shopList.size());
+			if (shopList != null) {
 
-			shopTable.addCell(cell);
+				shopListByShopPointName.remove(shopPoint.getName());
 
-			for (MMRecipeElement element : shopList) {
-				for (int col = 0; col < shopListTable.getColumnCount(); col++) {
+				Paragraph content = new Paragraph(shopPoint.getName(),
+						TABLE_HEADER_FONT);
+				PdfPCell cell = new PdfPCell(content);
+				cell.setRowspan(shopList.size());
 
-					content = null;
+				shopTable.addCell(cell);
 
-					switch (col) {
-					case MMShopListTableModel.COL_SHOPPOINT:
-						// Nohing to do
-						break;
-					case MMShopListTableModel.COL_TOTAL:
-						Double total = element.getQuantity();
+				for (MMRecipeElement element : shopList) {
+					for (int col = 0; col < shopListTable.getColumnCount(); col++) {
 
-						String formattedTotal;
+						content = null;
 
-						if ((total - total.intValue()) == 0) {
-							formattedTotal = Integer.toString(total.intValue());
-						} else {
-							formattedTotal = total.toString();
+						switch (col) {
+						case MMShopListTableModel.COL_SHOPPOINT:
+							// Nohing to do
+							break;
+						case MMShopListTableModel.COL_TOTAL:
+							Double total = element.getQuantity();
+
+							String formattedTotal;
+
+							if ((total - total.intValue()) == 0) {
+								formattedTotal = Integer.toString(total
+										.intValue());
+							} else {
+								formattedTotal = total.toString();
+							}
+
+							content = new Paragraph(formattedTotal, NORMAL_FONT);
+							break;
+						case MMShopListTableModel.COL_UNIT:
+							content = new Paragraph(element.getIngredient()
+									.getUnit().toString(), NORMAL_FONT);
+							break;
+						case MMShopListTableModel.COL_INGREDIENT:
+							content = new Paragraph(element.getIngredient()
+									.toString(), NORMAL_FONT);
+							break;
 						}
 
-						content = new Paragraph(formattedTotal, NORMAL_FONT);
-						break;
-					case MMShopListTableModel.COL_UNIT:
-						content = new Paragraph(element.getIngredient()
-								.getUnit().toString(), NORMAL_FONT);
-						break;
-					case MMShopListTableModel.COL_INGREDIENT:
-						content = new Paragraph(element.getIngredient()
-								.toString(), NORMAL_FONT);
-						break;
-					}
-
-					if (content != null) {
-						cell = new PdfPCell(content);
-						shopTable.addCell(cell);
+						if (content != null) {
+							cell = new PdfPCell(content);
+							shopTable.addCell(cell);
+						}
 					}
 				}
 			}
