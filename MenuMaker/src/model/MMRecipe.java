@@ -125,7 +125,7 @@ public class MMRecipe implements Comparable<MMRecipe>{
 	
 	@Override
 	public int compareTo(MMRecipe o) {
-		return this.toString().compareTo(o.toString());
+		return this.toString().toLowerCase().compareTo(o.toString().toLowerCase());
 	}
 	
 	@Override

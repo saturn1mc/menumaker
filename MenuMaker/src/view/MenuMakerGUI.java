@@ -505,10 +505,12 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 
 	public void addRecipe(MMRecipe recipe) {
 		this.data.addRecipe(recipe);
+		weekMenuTable.refreshCellEditor();
 	}
 
 	public void removeRecipe(MMRecipe recipe) {
 		this.data.removeRecipe(recipe);
+		weekMenuTable.refreshCellEditor();
 	}
 
 	public void addExtra(MMExtra extra) {
