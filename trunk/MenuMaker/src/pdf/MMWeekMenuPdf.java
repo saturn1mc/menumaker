@@ -3,7 +3,6 @@
  */
 package pdf;
 
-import java.awt.Color;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -12,6 +11,7 @@ import java.util.Calendar;
 
 import view.table.MMShopListTable;
 import view.table.MMWeekMenuTable;
+import view.table.model.MMShopListTableModel;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -33,9 +33,6 @@ public class MMWeekMenuPdf extends Document {
 	public static final String PREFIX_PDF = "Menu_";
 	public static final String EXT_PDF = ".pdf";
 
-	public static final Color LIGHT_GRAY = new Color(170, 170, 170);
-	public static final Color LIGHTER_GRAY = new Color(220, 220, 220);
-
 	public static final Font PARAGRAPH_TITLE_FONT = FontFactory.getFont(
 			FontFactory.HELVETICA, 18, Font.BOLD, BaseColor.DARK_GRAY);
 
@@ -43,12 +40,10 @@ public class MMWeekMenuPdf extends Document {
 			FontFactory.HELVETICA, 8, Font.NORMAL, BaseColor.BLACK);
 
 	public static final Font BOLD_FONT = FontFactory.getFont(
-			FontFactory.HELVETICA, 8, Font.BOLD, BaseColor.BLACK);
+			FontFactory.HELVETICA, 8, Font.BOLD, BaseColor.DARK_GRAY);
 
 	public static final Font TABLE_HEADER_FONT = FontFactory.getFont(
-			FontFactory.HELVETICA, 8, Font.BOLD, BaseColor.WHITE);
-
-	public static final int SHOP_LIST_COL_COUNT = 4;
+			FontFactory.HELVETICA, 8, Font.BOLD, BaseColor.BLACK);
 
 	private MMWeekMenuTable weekMenuTable;
 	private MMShopListTable shopListTable;
@@ -56,7 +51,7 @@ public class MMWeekMenuPdf extends Document {
 	private Paragraph shopListParagraph;
 	private PdfPTable weekTable;
 	private PdfPTable shopTable;
-	
+
 	private File targetFile;
 
 	public MMWeekMenuPdf(MMWeekMenuTable weekMenuTable,
@@ -77,15 +72,15 @@ public class MMWeekMenuPdf extends Document {
 		Calendar today = Calendar.getInstance();
 
 		return configDir.getPath() + File.separator + PREFIX_PDF
-				+ (today.get(Calendar.MONTH)+1) + "-"
+				+ (today.get(Calendar.MONTH) + 1) + "-"
 				+ today.get(Calendar.DAY_OF_MONTH) + "-"
 				+ today.get(Calendar.YEAR) + EXT_PDF;
 	}
-	
+
 	public File getTargetFile() {
 		return targetFile;
 	}
-	
+
 	private void preparePdf() {
 		// Week menu paragraph
 		weekMenuParagraph = new Paragraph("WeekMenu", PARAGRAPH_TITLE_FONT);
@@ -98,7 +93,6 @@ public class MMWeekMenuPdf extends Document {
 					TABLE_HEADER_FONT);
 
 			PdfPCell cell = new PdfPCell(content);
-			cell.setBackgroundColor(new BaseColor(Color.DARK_GRAY));
 			cell.setHorizontalAlignment(PdfPCell.ALIGN_CENTER);
 
 			weekTable.addCell(cell);
@@ -113,12 +107,6 @@ public class MMWeekMenuPdf extends Document {
 							row, col).toString(), TABLE_HEADER_FONT);
 					PdfPCell cell = new PdfPCell(content);
 
-					if (row % 2 == 0) {
-						cell.setBackgroundColor(new BaseColor(LIGHTER_GRAY));
-					} else {
-						cell.setBackgroundColor(new BaseColor(LIGHT_GRAY));
-					}
-
 					weekTable.addCell(cell);
 				} else {
 
@@ -126,15 +114,17 @@ public class MMWeekMenuPdf extends Document {
 							row, col).toString(), NORMAL_FONT);
 					PdfPCell cell = new PdfPCell(content);
 
-					if (row % 2 == 0) {
-						cell.setBackgroundColor(new BaseColor(Color.WHITE));
-					} else {
-						cell.setBackgroundColor(new BaseColor(LIGHT_GRAY));
-					}
-
 					weekTable.addCell(cell);
 				}
 			}
+		}
+		
+		weekTable.setWidthPercentage(100);
+		
+		try {
+			weekTable.setWidths(new float[] {2,4,4,1,4});
+		} catch (DocumentException e) {
+			e.printStackTrace();
 		}
 
 		// Shop list paragraph
@@ -148,7 +138,6 @@ public class MMWeekMenuPdf extends Document {
 					TABLE_HEADER_FONT);
 
 			PdfPCell cell = new PdfPCell(content);
-			cell.setBackgroundColor(new BaseColor(Color.DARK_GRAY));
 			cell.setHorizontalAlignment(PdfPCell.ALIGN_CENTER);
 
 			shopTable.addCell(cell);
@@ -163,46 +152,61 @@ public class MMWeekMenuPdf extends Document {
 							row, col).toString(), TABLE_HEADER_FONT);
 					PdfPCell cell = new PdfPCell(content);
 
-					if (row % 2 == 0) {
-						cell.setBackgroundColor(new BaseColor(LIGHTER_GRAY));
-					} else {
-						cell.setBackgroundColor(new BaseColor(LIGHT_GRAY));
-					}
-
 					shopTable.addCell(cell);
 				} else {
 
-					Paragraph content = new Paragraph(shopListTable.getValueAt(
-							row, col).toString(), NORMAL_FONT);
-					PdfPCell cell = new PdfPCell(content);
+					Paragraph content;
 
-					if (row % 2 == 0) {
-						cell.setBackgroundColor(new BaseColor(Color.WHITE));
+					if (col == MMShopListTableModel.COL_TOTAL) {
+						Double total = new Double((Double)shopListTable.getValueAt(row,
+								col));
+						
+						String formattedTotal;
+						
+						if((total - total.intValue()) == 0){
+							formattedTotal = Integer.toString(total.intValue());
+						}
+						else{
+							formattedTotal = total.toString();
+						}
+						
+						content = new Paragraph(formattedTotal, NORMAL_FONT);
+						
 					} else {
-						cell.setBackgroundColor(new BaseColor(LIGHT_GRAY));
+						content = new Paragraph(shopListTable.getValueAt(row,
+								col).toString(), NORMAL_FONT);
 					}
+
+					PdfPCell cell = new PdfPCell(content);
 
 					shopTable.addCell(cell);
 				}
 			}
 		}
+		
+		shopTable.setWidthPercentage(100);
+		
+		try {
+			shopTable.setWidths(new float[] {2,1,1,4});
+		} catch (DocumentException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void writePdf() throws FileNotFoundException, DocumentException,
 			IOException {
-		
+
 		targetFile = new File(getTarget());
-		
-		PdfWriter
-				.getInstance(this, new FileOutputStream(targetFile));
+
+		PdfWriter.getInstance(this, new FileOutputStream(targetFile));
 
 		this.open();
-		
+
 		weekMenuParagraph.add(weekTable);
 		this.add(weekMenuParagraph);
 
 		this.newPage();
-		
+
 		shopListParagraph.add(shopTable);
 		this.add(shopListParagraph);
 
