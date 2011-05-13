@@ -3,6 +3,8 @@
  */
 package view.table;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.JTable;
@@ -23,9 +25,28 @@ public class MMBookTable extends JTable {
 	 */
 	private static final long serialVersionUID = -2250924647556136366L;
 
+	private MMBookDialog parent;
+	
 	public MMBookTable(MMBookDialog parent) {
 		this.setDefaultRenderer(Object.class, new MMTableCellRenderer());
 		this.setModel(new MMBookTableModel(parent.getBookList()));
+		
+		this.parent = parent;
+		
+		MouseAdapter mouseAdapter = new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(e.getClickCount() == 2){
+					getDialog().editBook();
+				}
+			}
+		};
+		
+		this.addMouseListener(mouseAdapter);
+	}
+	
+	public MMBookDialog getDialog(){
+		return parent;
 	}
 
 	public void sortData(){

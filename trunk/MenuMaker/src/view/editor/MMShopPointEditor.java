@@ -47,7 +47,7 @@ public class MMShopPointEditor extends JDialog {
 	private JSpinner prioritySpinner;
 
 	public MMShopPointEditor(MMShopPointDialog parent, MMShopPoint shopPoint) {
-		super(parent, "Edit book");
+		super(parent, "Edit shop point");
 		this.parent = parent;
 		this.shopPoint = shopPoint;
 		this.setModal(true);
@@ -87,7 +87,7 @@ public class MMShopPointEditor extends JDialog {
 		namePanel.add(nameField);
 		
 		// Priority input
-		JLabel priorityLabel = new JLabel("Author");
+		JLabel priorityLabel = new JLabel("Priority");
 		priorityLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 		prioritySpinner = new JSpinner(new SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1));
 		prioritySpinner.setAlignmentX(Component.RIGHT_ALIGNMENT);

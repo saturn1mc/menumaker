@@ -37,7 +37,7 @@ public class MMIngredientEditor extends JDialog {
 	 */
 	private static final long serialVersionUID = 4070524773506940562L;
 
-	public static final int DEFAULT_WIDTH = 250;
+	public static final int DEFAULT_WIDTH = 270;
 	public static final int DEFAULT_HEIGHT = 135;
 
 	private MMIngredientDialog parent;

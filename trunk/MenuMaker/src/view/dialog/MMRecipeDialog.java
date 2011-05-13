@@ -89,9 +89,7 @@ public class MMRecipeDialog extends JDialog {
 		MouseAdapter editAdapter = new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				recipeEditor = new MMRecipeEditor(MMRecipeDialog.this,
-						table.getFirstSelectedItem());
-				recipeEditor.setVisible(true);
+				editRecipe();
 			}
 		};
 		buttonEdit.addMouseListener(editAdapter);
@@ -158,6 +156,12 @@ public class MMRecipeDialog extends JDialog {
 	public void addRecipe(MMRecipe recipe) {
 		parent.addRecipe(recipe);
 		table.addRow(recipe);
+	}
+	
+	public void editRecipe(){
+		recipeEditor = new MMRecipeEditor(MMRecipeDialog.this,
+				table.getFirstSelectedItem());
+		recipeEditor.setVisible(true);
 	}
 
 	public void removeRecipe(MMRecipe recipe) {

@@ -69,13 +69,16 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 	public static final String FOLDER_IMG = "/img/";
 
 	public static final int DEFAULT_WIDTH = 600;
-	public static final int DEFAULT_HEIGHT = 620;
+	public static final int DEFAULT_HEIGHT = 530;
 
 	public static final int DEFAULT_FIELD_WIDTH = 190;
 	public static final int DEFAULT_FIELD_HEIGHT = 25;
 
-	public static final int DEFAULT_TABLE_WIDTH = 550;
-	public static final int DEFAULT_TABLE_HEIGHT = 250;
+	public static final int DEFAULT_WEEK_TABLE_WIDTH = 550;
+	public static final int DEFAULT_WEEK_TABLE_HEIGHT = 280;
+	
+	public static final int DEFAULT_EXTRA_TABLE_WIDTH = 550;
+	public static final int DEFAULT_EXTRA_TABLE_HEIGHT = 150;
 
 	public static ImageIcon ICON_PLUS;
 	public static ImageIcon ICON_MINUS;
@@ -318,8 +321,8 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 		weekMenuTable = new MMWeekMenuTable(this);
 
 		JScrollPane scrollpane = new JScrollPane(weekMenuTable);
-		scrollpane.setPreferredSize(new Dimension(DEFAULT_TABLE_WIDTH,
-				DEFAULT_TABLE_HEIGHT));
+		scrollpane.setPreferredSize(new Dimension(DEFAULT_WEEK_TABLE_WIDTH,
+				DEFAULT_WEEK_TABLE_HEIGHT));
 
 		tablePanel.add(weekMenuTable.getTableHeader(),
 				BorderLayout.PAGE_START);
@@ -367,8 +370,8 @@ public class MenuMakerGUI extends JFrame implements WindowListener {
 		extrasTable = new MMExtrasTable(this);
 
 		JScrollPane scrollpane = new JScrollPane(extrasTable);
-		scrollpane.setPreferredSize(new Dimension(DEFAULT_TABLE_WIDTH,
-				DEFAULT_TABLE_HEIGHT));
+		scrollpane.setPreferredSize(new Dimension(DEFAULT_EXTRA_TABLE_WIDTH,
+				DEFAULT_EXTRA_TABLE_HEIGHT));
 
 		tablePanel.add(extrasTable.getTableHeader(), BorderLayout.PAGE_START);
 		tablePanel.add(scrollpane, BorderLayout.CENTER);

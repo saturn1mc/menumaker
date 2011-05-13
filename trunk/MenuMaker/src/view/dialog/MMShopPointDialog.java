@@ -85,9 +85,7 @@ public class MMShopPointDialog extends JDialog {
 		MouseAdapter editAdapter = new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				shopPointEditor = new MMShopPointEditor(MMShopPointDialog.this,
-						table.getFirstSelectedItem());
-				shopPointEditor.setVisible(true);
+				editShopPoint();
 			}
 		};
 		buttonEdit.addMouseListener(editAdapter);
@@ -146,6 +144,12 @@ public class MMShopPointDialog extends JDialog {
 	public void addShopPoint(MMShopPoint shopPoint) {
 		parent.addShopPoint(shopPoint);
 		table.addRow(shopPoint);
+	}
+	
+	public void editShopPoint(){
+		shopPointEditor = new MMShopPointEditor(MMShopPointDialog.this,
+				table.getFirstSelectedItem());
+		shopPointEditor.setVisible(true);
 	}
 
 	public void removeBook(MMShopPoint shopPoint) {
