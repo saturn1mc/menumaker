@@ -151,16 +151,18 @@ public class MMWeekMenuPdf extends Document {
 		Hashtable<MMShopPoint, ArrayList<MMRecipeElement>> shopListByShopPoint = new Hashtable<MMShopPoint, ArrayList<MMRecipeElement>>();
 
 		for (MMRecipeElement element : shopListTable.getShopList()) {
-			ArrayList<MMRecipeElement> shopList = shopListByShopPoint
-					.get(element.getIngredient().getShopPoint());
+			if (element.getQuantity() != 0) {
+				ArrayList<MMRecipeElement> shopList = shopListByShopPoint
+						.get(element.getIngredient().getShopPoint());
 
-			if (shopList == null) {
-				shopList = new ArrayList<MMRecipeElement>();
+				if (shopList == null) {
+					shopList = new ArrayList<MMRecipeElement>();
+				}
+
+				shopList.add(element);
+				shopListByShopPoint.put(element.getIngredient().getShopPoint(),
+						shopList);
 			}
-
-			shopList.add(element);
-			shopListByShopPoint.put(element.getIngredient().getShopPoint(),
-					shopList);
 		}
 
 		ArrayList<MMShopPoint> sortedKeySet = new ArrayList<MMShopPoint>(
